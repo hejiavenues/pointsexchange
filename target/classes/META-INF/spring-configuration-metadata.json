@@ -1,0 +1,82 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "cn.cashbang.core.common.config.ApplicationProperties",
+      "name": "application-properties",
+      "type": "cn.cashbang.core.common.config.ApplicationProperties"
+    },
+    {
+      "sourceType": "cn.cashbang.core.common.support.orm.db.DynamicDataSourceConfig",
+      "name": "spring.datasource.druid.masterDataSource",
+      "sourceMethod": "public javax.sql.DataSource defaultDataSource() ",
+      "type": "javax.sql.DataSource"
+    },
+    {
+      "sourceType": "cn.cashbang.core.common.support.orm.db.DynamicDataSourceConfig",
+      "name": "spring.datasource.druid.slaveDataSourceRead",
+      "sourceMethod": "public javax.sql.DataSource slaveDataSourceRead() ",
+      "type": "javax.sql.DataSource"
+    },
+    {
+      "sourceType": "cn.cashbang.core.common.support.orm.db.DynamicDataSourceConfig",
+      "name": "spring.datasource.druid.slaveDataSourceWrite",
+      "sourceMethod": "public javax.sql.DataSource slaveDataSourceWrite() ",
+      "type": "javax.sql.DataSource"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "cn.cashbang.core.common.config.ApplicationProperties",
+      "name": "application-properties.cs",
+      "description": "cs 自定义配置",
+      "type": "java.util.Map<java.lang.String,java.lang.String>"
+    },
+    {
+      "sourceType": "cn.cashbang.core.common.config.ApplicationProperties",
+      "name": "application-properties.ins",
+      "description": "ins",
+      "type": "java.util.Map<java.lang.String,java.lang.String>"
+    },
+    {
+      "sourceType": "cn.cashbang.core.common.config.ApplicationProperties",
+      "name": "application-properties.mq-info",
+      "type": "java.util.Map<java.lang.String,java.lang.String>"
+    },
+    {
+      "sourceType": "cn.cashbang.core.common.config.ApplicationProperties",
+      "name": "application-properties.oss",
+      "description": "oss",
+      "type": "java.util.Map<java.lang.String,java.lang.String>"
+    },
+    {
+      "sourceType": "cn.cashbang.core.common.config.ApplicationProperties",
+      "name": "application-properties.oss-url",
+      "description": "oss",
+      "type": "java.util.Map<java.lang.String,java.lang.String>"
+    },
+    {
+      "sourceType": "cn.cashbang.core.common.config.ApplicationProperties",
+      "name": "application-properties.server-url",
+      "description": "server url 自定义配置",
+      "type": "java.util.Map<java.lang.String,java.lang.String>"
+    },
+    {
+      "sourceType": "cn.cashbang.core.common.config.ApplicationProperties",
+      "name": "application-properties.sms",
+      "description": "sms\r\n @return",
+      "type": "java.util.Map<java.lang.String,java.lang.String>"
+    },
+    {
+      "sourceType": "cn.cashbang.core.common.config.ApplicationProperties",
+      "name": "application-properties.sys",
+      "description": "sys\r\n @return",
+      "type": "java.util.Map<java.lang.String,java.lang.String>"
+    },
+    {
+      "sourceType": "cn.cashbang.core.common.config.ApplicationProperties",
+      "name": "application-properties.upload-info",
+      "type": "java.util.Map<java.lang.String,java.lang.String>"
+    }
+  ]
+}

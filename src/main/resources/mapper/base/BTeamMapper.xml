@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.cashbang.core.modules.venuesbook.dao.BTeamMapper">
+	
+	<select id="listForPage" resultType="cn.cashbang.core.modules.venuesbook.entity.BTeamEntity">
+		SELECT
+			`tid`, 
+			`uid`, 
+			 (select uname from b_user bu where bu.uid = bt.uid ) as uname, 
+			`tname`, 
+			`people_count`, 
+			`activity_type`, 
+			(select bd.name from b_dic bd where bd.typecode='activityType' and CONVERT(bd.code USING utf8) COLLATE utf8_unicode_ci = bt.activity_type) as activityTypeDesc, 
+			`activity_content`, 
+			`enter_condition`, 
+			`status`, 
+			`dead_line`, 
+			`create_time`, 
+			`update_time`
+		FROM
+			b_team bt 
+			<where>
+			<if test="tdName != null and tdName != ''">
+				and tname like concat('%',#{tdName},'%')  
+			</if>
+			<if test="tzName != null and tzName != ''">
+				and	exists (select 1 from b_user bu1 where bu1.`uid` = bt.`uid` and bu1.uname like concat('%',#{tzName},'%')) 
+			</if>
+			<if test="acType != null and acType != ''">
+				and	exists (select 1 from b_dic bd where bd.typecode='activityType' and CONVERT(bd.code USING utf8) COLLATE utf8_unicode_ci = bt.activity_type and bd.code = #{acType}) 
+			</if>
+			<if test="aStatus != null and aStatus != ''">
+				and	bt.`status` = #{aStatus} 
+			</if>
+            <if test="queryCount != null and queryCount != ''">
+                <![CDATA[  and	bt.people_count <= #{queryCount}   ]]>
+            </if>
+			</where>
+		ORDER BY
+			tid DESC
+	</select>
+
+	<select id="listTeamByUserId" resultType="cn.cashbang.core.modules.venuesbook.entity.BTeamEntity">
+		SELECT
+		bt.`tid`,
+		bt.`uid`,
+		bt.`tname`,
+		bt.`people_count`,
+		bt.`activity_type`,
+		(select bd.name from b_dic bd where bd.typecode='activityType' and CONVERT(bd.code USING utf8) COLLATE utf8_unicode_ci = bt.activity_type) as activityTypeDesc,
+		bt.`activity_content`,
+		bt.`enter_condition`,
+		bt.`status`,
+		bt.`dead_line`
+		FROM
+		b_team_entry bte left join b_team bt on bte.tid = bt.tid
+		where bte.uid=#{uid}  and  bte.status = 1
+		order by bte.create_time desc
+	</select>
+
+	<select id="listTeamByCreateUserId" resultType="cn.cashbang.core.modules.venuesbook.entity.BTeamEntity">
+		SELECT
+		bt.`tid`,
+		bt.`uid`,
+		bt.`tname`,
+		bt.`people_count`,
+		bt.`activity_type`,
+		(select bd.name from b_dic bd where bd.typecode='activityType' and CONVERT(bd.code USING utf8) COLLATE utf8_unicode_ci = bt.activity_type) as activityTypeDesc,
+		bt.`activity_content`,
+		bt.`enter_condition`,
+		bt.`status`,
+		bt.`dead_line`
+		FROM
+		b_team bt
+		where bt.uid=#{uid}
+		order by bt.create_time desc
+	</select>
+
+	<select id="countTeamByCreateUserId" resultType="int">
+		SELECT
+		count(*)
+		FROM
+		b_team bt
+		where bt.uid=#{uid}
+		and date_format(create_time, '%Y%m') = date_format(now(), '%Y%m')
+	</select>
+	
+	<insert id="save">
+		INSERT INTO b_team (
+			`tid`, 
+			`uid`, 
+			`tname`, 
+			`people_count`, 
+			`activity_type`, 
+			`activity_content`, 
+			`enter_condition`, 
+			`status`, 
+			`dead_line`, 
+			`create_time`, 
+			`update_time`
+		)
+		VALUES (
+			#{tid}, 
+			#{uid}, 
+			#{tname}, 
+			#{peopleCount}, 
+			#{activityType}, 
+			#{activityContent}, 
+			#{enterCondition}, 
+			#{status}, 
+			#{deadLine}, 
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+	
+	<select id="getObjectById" resultType="cn.cashbang.core.modules.venuesbook.entity.BTeamEntity">
+		SELECT
+			`tid`, 
+			`uid`, 
+			`tname`,
+			(select bd.name from b_dic bd where bd.typecode='activityType' and CONVERT(bd.code USING utf8)
+			COLLATE utf8_unicode_ci = bt.activity_type) as activityTypeDesc,
+			`people_count`, 
+			`activity_type`, 
+			`activity_content`, 
+			`enter_condition`, 
+			`status`, 
+			`dead_line`, 
+			`create_time`, 
+			`update_time`
+		FROM
+			b_team   bt
+		WHERE
+			tid = #{tid}
+	</select>
+	
+	<update id="update">
+		UPDATE b_team
+	 	<set>
+			<if test="uid != null">`uid` = #{uid}, </if>
+			<if test="tname != null">`tname` = #{tname}, </if>
+			<if test="peopleCount != null">`people_count` = #{peopleCount}, </if>
+			<if test="activityType != null">`activity_type` = #{activityType}, </if>
+			<if test="activityContent != null">`activity_content` = #{activityContent}, </if>
+			<if test="enterCondition != null">`enter_condition` = #{enterCondition}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="deadLine != null">`dead_line` = #{deadLine}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		WHERE
+			tid = #{tid}
+	</update>
+	
+	<delete id="batchRemove">
+		DELETE
+		FROM
+			b_team
+		WHERE
+			tid IN
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

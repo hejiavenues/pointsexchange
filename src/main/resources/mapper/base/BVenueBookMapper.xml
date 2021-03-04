@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.cashbang.core.modules.venuesbook.dao.BVenueBookMapper">
+	
+	<select id="listForPage" resultType="cn.cashbang.core.modules.venuesbook.entity.BVenueBookEntity">
+		SELECT
+			`id`, 
+			`user_id`, 
+			`venue_id`, 
+			`book_date`, 
+			`book_time`, 
+			`book_status`, 
+			`create_time`, 
+			`update_time`
+		FROM
+			b_venue_book
+		ORDER BY
+			id DESC
+	</select>
+	
+	<select id="getVenueBookById" resultType="cn.cashbang.core.modules.venuesbook.entity.BVenueBookEntity">
+		SELECT
+		`id`,
+		`user_id`,
+		`venue_id`,
+		`activity_id`,
+		`activity_content`,
+		`book_date`,
+		`book_time`,
+		`book_status`,
+		`create_time`,
+		`update_time`
+		FROM
+		b_venue_book where venue_id = #{venueId} 
+		ORDER BY
+		id DESC
+	</select>
+
+	<select id="countUserBookTime" resultType="cn.cashbang.core.modules.venuesbook.entity.BVenueBookEntity">
+		SELECT
+		*
+		FROM
+			b_venue_book
+		WHERE
+			user_id = #{userId}
+    	and date_format(create_time, '%Y%m%d') = date_format(now(), '%Y%m%d')
+	</select>
+	
+	<select id="queryBookByUserId" resultType="cn.cashbang.core.modules.venuesbook.entity.BVenueBookEntity">
+
+		select
+		b.`venue_id`,
+		i.icon_url as iconUrl,
+		i.venue_name as venueName,
+		i.address as address,
+		i.support_active_type as supportActiveType,
+		i.max_people as maxPeople,
+		b.book_date,
+		b.book_time,
+		b.activity_id,
+		b.activity_content,
+		b.user_id,
+		b.create_time
+		from
+		b_venue_book b
+		left join b_venue_info i on i.venue_id = b.venue_id
+		<where>
+			<if test="userId != null">
+				and b.user_id = #{userId}
+			</if>
+			<if test="activityId != null">
+				and b.activity_id = #{activityId}
+			</if>
+
+			<!--<if test="createTime != null">-->
+				<!--<![CDATA[  and b.create_time>#{createTime} ]]>-->
+			<!--</if>-->
+		</where>
+		order by b.create_time asc
+	</select>
+	
+	<insert id="save">
+		INSERT INTO b_venue_book (
+			`id`, 
+			`user_id`, 
+			`venue_id`,
+			`book_date`, 
+			`book_time`, 
+			`book_status`,
+			activity_id,
+		    activity_content,
+			`create_time`, 
+			`update_time`
+		)
+		VALUES (
+			#{id}, 
+			#{userId}, 
+			#{venueId},
+			#{bookDate}, 
+			#{bookTime}, 
+			#{bookStatus},
+			#{activityId},
+			#{activityContent},
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+	
+	<select id="getObjectById" resultType="cn.cashbang.core.modules.venuesbook.entity.BVenueBookEntity">
+		SELECT
+			`id`, 
+			`user_id`, 
+			`venue_id`, 
+			`book_date`, 
+			`book_time`, 
+			`book_status`, 
+			`create_time`, 
+			`update_time`
+		FROM
+			b_venue_book
+		WHERE
+			id = #{id}
+	</select>
+	
+	<update id="update">
+		UPDATE b_venue_book
+	 	<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="venueId != null">`venue_id` = #{venueId}, </if>
+			<if test="bookDate != null">`book_date` = #{bookDate}, </if>
+			<if test="bookTime != null">`book_time` = #{bookTime}, </if>
+			<if test="bookStatus != null">`book_status` = #{bookStatus}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		WHERE
+			id = #{id}
+	</update>
+	
+	<delete id="batchRemove">
+		DELETE
+		FROM
+			b_venue_book
+		WHERE
+			id IN
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<delete id="deleteByVenueId">
+		DELETE
+		FROM
+			b_venue_book
+		WHERE
+			venue_id = #{venueId}
+	</delete>
+
+	<select id="getBookStatusById" resultType="cn.cashbang.core.modules.venuesbook.entity.BVenueBookEntity">
+		select book_status from b_venue_book where venue_id=#{arg0}
+		and book_date = #{arg1} and book_time = #{arg2}
+	</select>
+
+    <delete id="deleteByActivityId">
+        DELETE
+        FROM
+        b_venue_book
+        WHERE
+        `activity_id` = #{activityId}
+    </delete>
+
+</mapper>
