@@ -133,7 +133,7 @@ spring:
         driverClassName: com.mysql.jdbc.Driver
         druid:
             masterDataSource:  #主库数据源
-              url: jdbc:mysql://182.92.148.30:3306/venuesbooking?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+              url: jdbc:mysql://182.92.148.30:3306/pointsexchange?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
               username: root
               password: g2q8PDCwzPmTlg9uWpPkzD5kw15Dk+XdAQYg4H7E7To0FymA6EHzXsjnVpjZjHaX
             slaveDataSourceRead:  #从库数据源读

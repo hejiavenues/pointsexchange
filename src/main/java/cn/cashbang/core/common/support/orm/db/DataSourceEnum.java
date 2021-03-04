@@ -9,7 +9,7 @@ public enum DataSourceEnum {
 
     MASTER("masterDataSource", true),
 
-    SLAVEREAD("slaveDataSourceRead", false),
+    SLAVEREAD("slaveDataSourceRead", true),
 	
 	SLAVEWRITE("slaveDataSourceWrite", false);
 
