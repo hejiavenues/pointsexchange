@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.cashbang.core.modules.venuesbook.dao.BExchangeRecordMapper">
+	
+	<select id="listForPage" resultType="cn.cashbang.core.modules.venuesbook.entity.BExchangeRecordEntity">
+		SELECT
+			ber.`id`, 
+			ber.`uid`, 
+			(select bc.uname from b_user bc where bc.uid = ber.uid) as uname,
+			(select bc.mobile from b_user bc where bc.uid = ber.uid) as umobile,
+			(select bc.company_name from b_user bc where bc.uid = ber.uid) as companyName,
+			(select bc.user_role from b_user bc where bc.uid = ber.uid) as userRole,
+			ber.`gid`, 
+			(select bc.goods_name from b_goods_info bc where bc.gid = ber.gid) as gname,
+			(select bc.points from b_goods_info bc where bc.gid = ber.gid) as gpoints,
+			ber.`points`, 
+			ber.`ex_status`, 
+			ber.`create_time`, 
+			ber.`update_time`
+		FROM
+			b_exchange_record ber 
+			<where>
+			<if test="username != null and username != ''">
+				and	exists (select 1 from b_user bc where bc.`uid` = ber.`uid` and bc.uname like concat('%',#{username},'%')) 
+			</if>
+			<if test="usermobile != null and usermobile != ''">
+				and	exists (select 1 from b_user bc where bc.`uid` = ber.`uid` and bc.mobile like concat('%',#{usermobile},'%')) 
+			</if>
+			<if test="ucomponyName != null and ucomponyName != ''">
+				and	exists (select 1 from b_user bc where bc.`uid` = ber.`uid` and bc.company_name like concat('%',#{ucomponyName},'%')) 
+			</if>
+			<if test="gdname != null and gdname != ''">
+				and	exists (select 1 from b_goods_info bc where bc.`gid` = ber.`gid` and bc.goods_name like concat('%',#{gdname},'%')) 
+			</if>
+			<if test="goodsStatus != null and goodsStatus != ''">
+				and	exists (select 1 from b_user bc where bc.`uid` = ber.`uid` and bc.user_role = #{goodsStatus}) 
+			</if>
+				
+			</where>
+		ORDER BY
+			ber.id DESC
+	</select>
+	
+	<insert id="save">
+		INSERT INTO b_exchange_record (
+			`id`, 
+			`uid`, 
+			`gid`, 
+			`points`, 
+			`ex_status`, 
+			`create_time`, 
+			`update_time`
+		)
+		VALUES (
+			#{id}, 
+			#{uid}, 
+			#{gid}, 
+			#{points}, 
+			#{exStatus}, 
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+	
+	<select id="getObjectById" resultType="cn.cashbang.core.modules.venuesbook.entity.BExchangeRecordEntity">
+		SELECT
+			`id`, 
+			`uid`, 
+			`gid`, 
+			`points`, 
+			`ex_status`, 
+			`create_time`, 
+			`update_time`
+		FROM
+			b_exchange_record
+		WHERE
+			id = #{id}
+	</select>
+	
+	<update id="update">
+		UPDATE b_exchange_record
+	 	<set>
+			<if test="uid != null">`uid` = #{uid}, </if>
+			<if test="gid != null">`gid` = #{gid}, </if>
+			<if test="points != null">`points` = #{points}, </if>
+			<if test="exStatus != null">`ex_status` = #{exStatus}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		WHERE
+			id = #{id}
+	</update>
+	
+	<delete id="batchRemove">
+		DELETE
+		FROM
+			b_exchange_record
+		WHERE
+			id IN
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

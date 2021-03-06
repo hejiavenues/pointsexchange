@@ -1,5 +1,5 @@
 server:
-    port: 9010
+    port: 9050
 
 application-properties:
     server-url:
@@ -73,7 +73,8 @@ application-properties:
         userMobileInfoEncryptFlag: true #案件详情关于用户联系人和通话记录手机号是否加密标识
         
     uploadInfo: 
-        imageurl: /root/deploy/piture/
+        imageurl: /root/deploy/pointsexchange/picture/
+        venuesimageurl: /root/deploy/piture/
         
     ins:
         ytUrl: http://218.17.200.232:66/NetPersonServlet
@@ -164,7 +165,7 @@ spring:
                         multi-statement-allow: true
     redis:
         open: true  # 是否开启redis缓存  true开启   false关闭
-        database: 2
+        database: 4
         host: 182.92.148.30
         port: 6379
         password: 123456  
@@ -176,4 +177,4 @@ spring:
             min-idle: 5       # 连接池中的最小空闲连接
 
 logback:
-    file: /root/deploy/logs/venuesbook-api-dev
+    file: /root/deploy/pointsexchange/logs

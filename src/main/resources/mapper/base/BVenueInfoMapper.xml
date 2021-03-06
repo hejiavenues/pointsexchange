@@ -17,7 +17,7 @@
 			bvi.`create_time`, 
 			bvi.`update_time`
 		FROM
-			b_venue_info bvi
+			venuesbooking.b_venue_info bvi
 			<where>
 			<if test="queryCGName != null and queryCGName != ''">
 				and	bvi.venue_name like concat('%',#{queryCGName},'%') 
@@ -41,7 +41,7 @@
 	</select>
 	
 	<insert id="save">
-		INSERT INTO b_venue_info (
+		INSERT INTO venuesbooking.b_venue_info (
 			`venue_id`, 
 			`venue_name`, 
 			`max_people`, 
@@ -80,7 +80,7 @@
 			`create_time`, 
 			`update_time`
 		FROM
-			b_venue_info
+			venuesbooking.b_venue_info
 		WHERE
 			venue_id = #{venueId}
 	</select>
@@ -98,13 +98,13 @@
 			`create_time`, 
 			`update_time`
 		FROM
-			b_venue_info 
+			venuesbooking.b_venue_info 
 		WHERE
 			venue_name = #{venueName} order by create_time desc limit 1 
 	</select>
 	
 	<update id="update">
-		UPDATE b_venue_info
+		UPDATE venuesbooking.b_venue_info
 	 	<set>
 			<if test="venueName != null">`venue_name` = #{venueName}, </if>
 			<if test="maxPeople != null">`max_people` = #{maxPeople}, </if>
@@ -123,7 +123,7 @@
 	<delete id="batchRemove">
 		DELETE
 		FROM
-			b_venue_info
+			venuesbooking.b_venue_info
 		WHERE
 			venue_id IN
 		<foreach item="id" collection="array" open="(" separator="," close=")">

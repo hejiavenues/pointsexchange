@@ -56,7 +56,7 @@ public class BVenueInfoManagerImpl implements BVenueInfoManager {
 					}
 				}
 			}
-
+			venue.setIconUrl("https://www.jindingjieorg.cn:9020/"+venue.getIconUrl());
 			venue.setSupportActiveTypeDes(atsdes);
 			listnew.add(venue);
 		}
@@ -72,6 +72,7 @@ public class BVenueInfoManagerImpl implements BVenueInfoManager {
 	@Override
 	public BVenueInfoEntity getBVenueInfoById(String id) {
 		BVenueInfoEntity bVenueInfo = bVenueInfoMapper.getObjectById(id);
+		bVenueInfo.setIconUrl("https://www.jindingjieorg.cn:9020/"+bVenueInfo.getIconUrl());
 		return bVenueInfo;
 	}
 

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.cashbang.core.modules.venuesbook.dao.BGoodsInfoMapper">
+	
+	<select id="listForPage" resultType="cn.cashbang.core.modules.venuesbook.entity.BGoodsInfoEntity">
+		SELECT
+			`gid`, 
+			`goods_name`, 
+			`goods_picurl`, 
+			`points`, 
+			`price`, 
+			`goods_status`, 
+			`create_time`, 
+			`update_time`
+		FROM
+			b_goods_info
+			<where>
+			<if test="goodsName != null and goodsName != ''">
+				and	goods_name like concat('%',#{goodsName},'%')
+			</if>
+			<if test="goodsStatus != null and goodsStatus != 0">
+				and	goods_status = #{goodsStatus} 
+			</if>
+			</where>
+		ORDER BY
+			gid DESC
+	</select>
+	
+	<insert id="save">
+		INSERT INTO b_goods_info (
+			`gid`, 
+			`goods_name`, 
+			`goods_picurl`, 
+			`points`, 
+			`price`, 
+			`goods_status`, 
+			`create_time`, 
+			`update_time`
+		)
+		VALUES (
+			#{gid}, 
+			#{goodsName}, 
+			#{goodsPicurl}, 
+			#{points}, 
+			#{price}, 
+			#{goodsStatus}, 
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+	
+	<select id="getObjectById" resultType="cn.cashbang.core.modules.venuesbook.entity.BGoodsInfoEntity">
+		SELECT
+			`gid`, 
+			`goods_name`, 
+			`goods_picurl`, 
+			`points`, 
+			`price`, 
+			`goods_status`, 
+			`create_time`, 
+			`update_time`
+		FROM
+			b_goods_info
+		WHERE
+			gid = #{gid}
+	</select>
+	
+	<select id="getObjectByName" resultType="cn.cashbang.core.modules.venuesbook.entity.BGoodsInfoEntity">
+		SELECT
+			`gid`, 
+			`goods_name`, 
+			`goods_picurl`, 
+			`points`, 
+			`price`, 
+			`goods_status`, 
+			`create_time`, 
+			`update_time`
+		FROM
+			b_goods_info
+		WHERE
+			goods_name = #{goodsName} 
+	</select>
+	
+	<update id="update">
+		UPDATE b_goods_info
+	 	<set>
+			<if test="goodsName != null">`goods_name` = #{goodsName}, </if>
+			<if test="goodsPicurl != null">`goods_picurl` = #{goodsPicurl}, </if>
+			<if test="points != null">`points` = #{points}, </if>
+			<if test="price != null">`price` = #{price}, </if>
+			<if test="goodsStatus != null">`goods_status` = #{goodsStatus}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		WHERE
+			gid = #{gid}
+	</update>
+	
+	<delete id="batchRemove">
+		DELETE
+		FROM
+			b_goods_info
+		WHERE
+			gid IN
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

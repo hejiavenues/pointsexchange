@@ -7,7 +7,7 @@
 		SELECT
 			ba.`activity_id`, 
 			ba.`venue_id`, 
-			(select venue_name from b_venue_info bvi where bvi.venue_id = ba.venue_id) as venueName,
+			(select venue_name from venuesbooking.b_venue_info bvi where bvi.venue_id = ba.venue_id) as venueName,
 			ba.`uid`, 
 			(select uname from b_user bu1 where bu1.`uid` = ba.`uid`) as userName,
 			ba.`activity_id_name`, 
@@ -23,7 +23,7 @@
 			b_activities ba 
 			<where>
 			<if test="cgName != null and cgName != ''">
-				and	exists (select 1 from b_venue_info bvi where bvi.`venue_id` = ba.`venue_id` and bvi.venue_name like concat('%',#{cgName},'%')) 
+				and	exists (select 1 from venuesbooking.b_venue_info bvi where bvi.`venue_id` = ba.`venue_id` and bvi.venue_name like concat('%',#{cgName},'%')) 
 			</if>
 			<if test="yyrName != null and yyrName != ''">
 				and	exists (select 1 from b_user bu1 where bu1.`uid` = ba.`uid` and bu1.uname like concat('%',#{yyrName},'%')) 
@@ -41,7 +41,7 @@
                 and	ba.activity_type like concat('%',#{queryActType},'%')
             </if>
             <if test="queryComId != null and queryComId != ''">
-                and	exists (select 1 from b_venue_info bvi where bvi.`venue_id` = ba.`venue_id` and bvi.committee_id = #{queryComId})
+                and	exists (select 1 from venuesbooking.b_venue_info bvi where bvi.`venue_id` = ba.`venue_id` and bvi.committee_id = #{queryComId})
             </if>
             <if test="queryCount != null and queryCount != ''">
                 <![CDATA[  and	ba.activity_count <= #{queryCount}   ]]>
@@ -55,7 +55,7 @@
 		SELECT
 		ba.`activity_id`,
 		ba.`venue_id`,
-		(select venue_name from b_venue_info bvi where bvi.venue_id = ba.venue_id) as venueName,
+		(select venue_name from venuesbooking.b_venue_info bvi where bvi.venue_id = ba.venue_id) as venueName,
 		ba.`uid`,
 		ba.`activity_id_name`,
 		ba.`activity_count`,
@@ -118,7 +118,7 @@
 			a.`create_time`,
 			a.`update_time`
 		FROM
-			b_activities a	    left join b_venue_info i on a.venue_id=i.venue_id
+			b_activities a	    left join venuesbooking.b_venue_info i on a.venue_id=i.venue_id
 		WHERE
 			a.activity_id = #{activityId}
 	</select>

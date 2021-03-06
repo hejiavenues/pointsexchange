@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="include/header_element::header('积分兑换记录表')"></head>
+<style>
+html,body
+{
+    margin: 0;
+    height: 100%;
+}
+</style>
+<body>
+  <dev id="zsvm"  style="height:100%;">
+<el-form :model="bExchangeRecord" size=" small"  status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm"  style="overflow-y:auto;height:95%;
+padding-right:5%" >
+			 <el-form-item label="用户id" prop="uid">
+			    <el-input v-model="bExchangeRecord.uid"></el-input>
+			  </el-form-item>
+			 <el-form-item label="商品id" prop="gid">
+			    <el-input v-model="bExchangeRecord.gid"></el-input>
+			  </el-form-item>
+			 <el-form-item label="消耗的积分" prop="points">
+			    <el-input v-model="bExchangeRecord.points"></el-input>
+			  </el-form-item>
+			 <el-form-item label="兑换状态（1、成功 2、取消），备用字段" prop="exStatus">
+			    <el-input v-model="bExchangeRecord.exStatus"></el-input>
+			  </el-form-item>
+			 <el-form-item label="兑换时间" prop="createTime">
+			    <el-input v-model="bExchangeRecord.createTime"></el-input>
+			  </el-form-item>
+			 <el-form-item label="修改时间" prop="updateTime">
+			    <el-input v-model="bExchangeRecord.updateTime"></el-input>
+			  </el-form-item>
+</el-form>
+</dev>	
+	<div th:include="include/footer_element::footer"></div>
+	<script th:src="@{/js/venue/exchrecord/add.js}"></script>
+</body>
+</html>

@@ -26,7 +26,7 @@
 			`typename`, 
 			`status`
 		FROM
-			b_dic where typecode = #{typeCode} 
+			venuesbooking.b_dic where typecode = #{typeCode} 
 		ORDER BY
 			code 
 	</select>

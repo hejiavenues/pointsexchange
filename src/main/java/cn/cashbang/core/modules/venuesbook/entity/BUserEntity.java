@@ -32,6 +32,8 @@ public class BUserEntity implements Serializable {
 	 */
 	private Integer sex;
 	
+	private String sexStr;
+	
 	/**
 	 * 出生日期
 	 */
@@ -67,6 +69,8 @@ public class BUserEntity implements Serializable {
 	 */
 	private Integer status;
 	
+	private String statusStr;
+	
 	/**
 	 * 头像地址
 	 */
@@ -83,6 +87,12 @@ public class BUserEntity implements Serializable {
 	private Date updateTime;
 
 	private String committeeName;
+	
+	private String companyName;
+	
+	private String address;
+	
+	private Integer points;
 
 
 	public String getCommitteeName() {
@@ -212,6 +222,46 @@ public class BUserEntity implements Serializable {
 	
 	public Date getUpdateTime() {
 		return updateTime;
+	}
+
+	public String getStatusStr() {
+		return statusStr;
+	}
+
+	public void setStatusStr(String statusStr) {
+		this.statusStr = statusStr;
+	}
+
+	public String getSexStr() {
+		return sexStr;
+	}
+
+	public void setSexStr(String sexStr) {
+		this.sexStr = sexStr;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Integer getPoints() {
+		return points;
+	}
+
+	public void setPoints(Integer points) {
+		this.points = points;
 	}
 	
 }

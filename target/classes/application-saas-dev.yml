@@ -1,5 +1,5 @@
 server:
-    port: 9010
+    port: 9050
 
 application-properties:
     server-url:
@@ -99,7 +99,7 @@ application-properties:
         
     uploadInfo: 
         imageurl: E:/piture/
-        
+        venuesimageurl: E:/piture/
     ins:
         ytUrl: http://218.17.200.232:66/NetPersonServlet
         USER_CODE: MA000198 # 保险公司提供的系统对接用户名

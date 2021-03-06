@@ -14,7 +14,7 @@
 			`create_time`, 
 			`update_time`
 		FROM
-			b_venue_book
+			venuesbooking.b_venue_book
 		ORDER BY
 			id DESC
 	</select>
@@ -32,7 +32,7 @@
 		`create_time`,
 		`update_time`
 		FROM
-		b_venue_book where venue_id = #{venueId} 
+		venuesbooking.b_venue_book where venue_id = #{venueId} 
 		ORDER BY
 		id DESC
 	</select>
@@ -41,7 +41,7 @@
 		SELECT
 		*
 		FROM
-			b_venue_book
+			venuesbooking.b_venue_book
 		WHERE
 			user_id = #{userId}
     	and date_format(create_time, '%Y%m%d') = date_format(now(), '%Y%m%d')
@@ -63,8 +63,8 @@
 		b.user_id,
 		b.create_time
 		from
-		b_venue_book b
-		left join b_venue_info i on i.venue_id = b.venue_id
+		venuesbooking.b_venue_book b
+		left join venuesbooking.b_venue_info i on i.venue_id = b.venue_id
 		<where>
 			<if test="userId != null">
 				and b.user_id = #{userId}
@@ -81,7 +81,7 @@
 	</select>
 	
 	<insert id="save">
-		INSERT INTO b_venue_book (
+		INSERT INTO venuesbooking.b_venue_book (
 			`id`, 
 			`user_id`, 
 			`venue_id`,
@@ -118,13 +118,13 @@
 			`create_time`, 
 			`update_time`
 		FROM
-			b_venue_book
+			venuesbooking.b_venue_book
 		WHERE
 			id = #{id}
 	</select>
 	
 	<update id="update">
-		UPDATE b_venue_book
+		UPDATE venuesbooking.b_venue_book
 	 	<set>
 			<if test="userId != null">`user_id` = #{userId}, </if>
 			<if test="venueId != null">`venue_id` = #{venueId}, </if>
@@ -141,7 +141,7 @@
 	<delete id="batchRemove">
 		DELETE
 		FROM
-			b_venue_book
+			venuesbooking.b_venue_book
 		WHERE
 			id IN
 		<foreach item="id" collection="array" open="(" separator="," close=")">
@@ -152,20 +152,20 @@
 	<delete id="deleteByVenueId">
 		DELETE
 		FROM
-			b_venue_book
+			venuesbooking.b_venue_book
 		WHERE
 			venue_id = #{venueId}
 	</delete>
 
 	<select id="getBookStatusById" resultType="cn.cashbang.core.modules.venuesbook.entity.BVenueBookEntity">
-		select book_status from b_venue_book where venue_id=#{arg0}
+		select book_status from venuesbooking.b_venue_book where venue_id=#{arg0}
 		and book_date = #{arg1} and book_time = #{arg2}
 	</select>
 
     <delete id="deleteByActivityId">
         DELETE
         FROM
-        b_venue_book
+        venuesbooking.b_venue_book
         WHERE
         `activity_id` = #{activityId}
     </delete>

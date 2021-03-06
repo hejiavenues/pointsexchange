@@ -16,11 +16,25 @@
 			`password`, 
 			`status`, 
 			`icon_url`,
+			`company_name`,
+			`points`,
+			`address`,
 			openId,
 			`create_time`, 
 			`update_time`
 		FROM
 			b_user
+			<where>
+			<if test="uname != null and uname != ''">
+				and	`uname` like concat('%',#{uname},'%') 
+			</if>
+			<if test="mobile != null and mobile != ''">
+				and	`mobile`like concat('%',#{mobile},'%') 
+			</if>
+			<if test="userrole != null and userrole != '' and userrole != 0">
+				and	`user_role` = #{userrole} 
+			</if>
+			</where>
 		ORDER BY
 			uid DESC
 	</select>

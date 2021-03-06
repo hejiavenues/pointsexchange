@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="include/header_element::header('')"></head>
+<style>
+html,body
+{
+    margin: 0;
+    height: 100%;
+}
+</style>
+<body>
+  <dev id="zsvm"  style="height:100%;">
+<el-form :model="bGoodsInfo" size=" small"  status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm"  style="overflow-y:auto;height:95%;
+padding-right:5%" >
+<br><br>
+			 <el-form-item label="商品名称" prop="goodsName">
+			    <el-input style="width:14em" v-model="bGoodsInfo.goodsName"></el-input>
+			  </el-form-item>
+			<el-form-item label="图片：" prop="goodsPicurl">
+					<el-upload
+						class="avatar-uploader"
+						action="/common/upload.do"
+						:show-file-list="false"
+						:on-success="handleAvatarSuccess"
+						:before-upload="beforeAvatarUpload">
+					<img v-if="imageUrl" :src="imageUrl" class="avatar">
+					<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+					<div slot="tip" class="el-upload__tip">仅支持jpg、png格式的图片</div>
+					</el-upload>
+			</el-form-item>
+			 <el-form-item label="所需积分" prop="points">
+			    <el-input onkeyup="value=value.replace(/[^\d]/g,'');this.dispatchEvent(new Event('input'))" v-model="bGoodsInfo.points"></el-input>
+			  </el-form-item>
+			 <el-form-item label="市场价" prop="price">
+			    <el-input onkeyup="this.value=this.value.match(/\d+\.?\d{0,2}/);this.dispatchEvent(new Event('input'))" v-model="bGoodsInfo.price"></el-input>
+			  </el-form-item>
+			 <el-form-item label="上架状态"  prop="goodsStatus" class="divHeight-54">
+				<el-select style="width:8em" v-model="bGoodsInfo.goodsStatus" placeholder="请选择">
+				<el-option label="上架" value="1"></el-option>
+				<el-option label="下架" value="2"></el-option>
+				</el-select>
+			</el-form-item>
+</el-form>
+</dev>	
+	<div th:include="include/footer_element::footer"></div>
+	<script th:src="@{/js/venue/goods/edit.js}"></script>
+	<script th:src="@{/js/compress.js}"></script>
+	<link th:href="@{../../css/image-avatar.css}" rel="stylesheet"/>
+</body>
+</html>

@@ -80,7 +80,7 @@ public class BVenueInfoServiceImpl implements BVenueInfoService {
             String suffix = myFileName.substring(myFileName.lastIndexOf(".") + 1);
             String middle = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss_SSS").format(new Date());
             //如果名称不为“”,说明该文件存在，否则说明该文件不存在  
-            String uploadUrl = SpringContextUtils.getApplicationProperties().getUploadInfo().get("imageurl");
+            String uploadUrl = SpringContextUtils.getApplicationProperties().getUploadInfo().get("venuesimageurl");
             if(myFileName.trim() !=""){  
                 //重命名上传后的文件名  
                 fileName = uuid.substring(0, 8)+"-"+middle+"."+suffix;
@@ -143,7 +143,7 @@ public class BVenueInfoServiceImpl implements BVenueInfoService {
             String suffix = myFileName.substring(myFileName.lastIndexOf(".") + 1);
             String middle = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss_SSS").format(new Date());
             //如果名称不为“”,说明该文件存在，否则说明该文件不存在  
-            String uploadUrl = SpringContextUtils.getApplicationProperties().getUploadInfo().get("imageurl");
+            String uploadUrl = SpringContextUtils.getApplicationProperties().getUploadInfo().get("venuesimageurl");
             if(myFileName.trim() !=""){  
                 //重命名上传后的文件名  
                 fileName = uuid+"-"+middle+"."+suffix;

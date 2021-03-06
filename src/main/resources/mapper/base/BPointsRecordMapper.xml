@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.cashbang.core.modules.venuesbook.dao.BPointsRecordMapper">
+	
+	<select id="listForPage" resultType="cn.cashbang.core.modules.venuesbook.entity.BPointsRecordEntity">
+		SELECT
+			ber.`pid`, 
+			ber.`uid`, 
+			(select bc.uname from b_user bc where bc.uid = ber.uid) as uname,
+			ber.`points`, 
+			ber.`access_type`, 
+			ber.`create_time`, 
+			ber.`update_time`
+		FROM
+			b_points_record ber 
+			<where>
+			<if test="uid != null and uid != ''">
+				and	ber.`uid` = #{uid} 
+			</if>
+			<if test="accessType != null and accessType != ''">
+				and	ber.`access_type` = #{accessType} 
+			</if>
+			</where>
+		ORDER BY
+			ber.`create_time` desc 
+	</select>
+	
+	<insert id="save">
+		INSERT INTO b_points_record (
+			`pid`, 
+			`uid`, 
+			`points`, 
+			`access_type`, 
+			`create_time`, 
+			`update_time`
+		)
+		VALUES (
+			#{pid}, 
+			#{uid}, 
+			#{points}, 
+			#{accessType}, 
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+	
+	<select id="getObjectById" resultType="cn.cashbang.core.modules.venuesbook.entity.BPointsRecordEntity">
+		SELECT
+			`pid`, 
+			`uid`, 
+			`points`, 
+			`access_type`, 
+			`create_time`, 
+			`update_time`
+		FROM
+			b_points_record
+		WHERE
+			pid = #{pid}
+	</select>
+	
+	<update id="update">
+		UPDATE b_points_record
+	 	<set>
+			<if test="uid != null">`uid` = #{uid}, </if>
+			<if test="points != null">`points` = #{points}, </if>
+			<if test="accessType != null">`access_type` = #{accessType}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		WHERE
+			pid = #{pid}
+	</update>
+	
+	<delete id="batchRemove">
+		DELETE
+		FROM
+			b_points_record
+		WHERE
+			pid IN
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

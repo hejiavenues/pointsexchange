@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="include/header_element::header('积分增减记录表')"></head>
+<style>
+html,body
+{
+    margin: 0;
+    height: 100%;
+}
+</style>
+<body>
+  <dev id="zsvm"  style="height:100%;">
+<el-form :model="bPointsRecord" size=" small"  status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm"  style="overflow-y:auto;height:95%;
+padding-right:5%" >
+			 <el-form-item label="用户id" prop="uid">
+			    <el-input v-model="bPointsRecord.uid"></el-input>
+			  </el-form-item>
+			 <el-form-item label="获得的积分数量" prop="points">
+			    <el-input v-model="bPointsRecord.points"></el-input>
+			  </el-form-item>
+			 <el-form-item label="获取或消耗方式（1、参加活动 2、发布随拍 3、兑换商品）" prop="accessType">
+			    <el-input v-model="bPointsRecord.accessType"></el-input>
+			  </el-form-item>
+			 <el-form-item label="创建时间" prop="createTime">
+			    <el-input v-model="bPointsRecord.createTime"></el-input>
+			  </el-form-item>
+			 <el-form-item label="修改时间" prop="updateTime">
+			    <el-input v-model="bPointsRecord.updateTime"></el-input>
+			  </el-form-item>
+</el-form>
+</dev>	
+	<div th:include="include/footer_element::footer"></div>
+	<script th:src="@{/js/venue/pointsrecord/add.js}"></script>
+</body>
+</html>
