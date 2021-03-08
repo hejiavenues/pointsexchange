@@ -33,8 +33,8 @@
 			<if test="gdname != null and gdname != ''">
 				and	exists (select 1 from b_goods_info bc where bc.`gid` = ber.`gid` and bc.goods_name like concat('%',#{gdname},'%')) 
 			</if>
-			<if test="goodsStatus != null and goodsStatus != ''">
-				and	exists (select 1 from b_user bc where bc.`uid` = ber.`uid` and bc.user_role = #{goodsStatus}) 
+			<if test="exStatus != null and exStatus != ''">
+				and	ber.`ex_status` = #{exStatus} 
 			</if>
 				
 			</where>

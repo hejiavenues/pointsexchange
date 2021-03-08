@@ -15,12 +15,13 @@ var vm = new Vue({
 		table:{//表格数据
 			  "col":[
 					{field : "uname", title : "兑换人", width : ""}, 
-					{field : "userRole", title : "用户性质", width : ""}, 
+					/*{field : "userRole", title : "用户性质", width : ""}, */
 					{field : "umobile", title : "手机号", width : ""}, 
-					{field : "companyName", title : "企业名称", width : ""}, 
+					/*{field : "companyName", title : "企业名称", width : ""}, */
 					{field : "gname", title : "商品名称", width : ""}, 
 					{field : "gpoints", title : "消耗的积分", width : ""}, 
 					/*{field : "exStatus", title : "兑换状态（1、成功 2、取消），备用字段", width : ""}, */
+					{field : "exStatusStr", title : "兑换状态", width : ""},
 					{field : "createTime", title : "兑换时间", width : ""}, 
 					/*{field : "updateTime", title : "修改时间", width : ""}*/
 			  ],

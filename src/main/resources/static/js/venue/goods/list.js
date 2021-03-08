@@ -17,9 +17,9 @@ var vm = new Vue({
 					{field : "goodsName", title : "商品名称", width : ""}, 
 					{field : "points", title : "所需积分", width : ""}, 
 					{field : "price", title : "市场价", width : ""}, 
-					{field : "goodsStatus", title : "上架状态", width : ""}, 
-					{field : "createTime", title : "上架时间", width : "150px"}, 
-					{field : "updateTime", title : "更新时间", width : "150px"}
+					{field : "goodsStatusStr", title : "上架状态", width : ""}, 
+					{field : "createTime", title : "商品创建时间", width : "150px"}, 
+					/*{field : "updateTime", title : "更新时间", width : "150px"}*/
 			  ],
 			  "pagesizes":[1,10, 20, 30, 100],//size选择器
 			  "pagesize ":10,
@@ -41,6 +41,38 @@ var vm = new Vue({
 	         // console.log(`每页 ${val} 条`);
 	    	 this.load(0,val);
 	     },
+		 updateStatus: function(row) {
+            var ck =[row];
+            var msg = '';
+            if(row.goodsStatus == 1){
+                msg = '您确定要下架该商品吗？';
+                ck[0].goodsStatus=2;
+            }else{
+                msg = '您确定要上架该商品吗？';
+                ck[0].goodsStatus=1;
+            }
+            if(checkedRow(ck)){
+                /*$.ConfirmForm({
+                    msg:msg,
+                    url: '../../venuesbook/goods/update?_' + $.now(),
+                    param: ck[0],
+                    success: function(data) {
+                        $.currentIframe().vm.load();
+                    }
+                });*/
+					zs_postFormA(vm,{
+                        url: '../../venuesbook/goods/update?_' + $.now(),
+                        param: ck[0],
+                        success: function(data) {
+                            vm.$message.success('修改成功');
+                            $.currentIframe().vm.load();
+                            setTimeout(function() {
+                                dialogClose();
+                            }, 1000);
+                        }
+                    });
+            }
+        },
 		 load:function(page,size){//查询
 			var th = this;
 			if(page!=undefined&&page!=0){
@@ -54,14 +86,14 @@ var vm = new Vue({
 				param:th.param,
 				success:function(r){
 					console.log(r);
-					for(var i=0;i<r.rows.length;i++){
+					/*for(var i=0;i<r.rows.length;i++){
 						if(r.rows[i].goodsStatus == 1){
                         r.rows[i].goodsStatus = '上架';
 						}
                     	else if(r.rows[i].goodsStatus == 2){
                         r.rows[i].goodsStatus = '下架';
                     	}
-					}
+					}*/
 					th.table.data=r.rows;
 					th.table.total=r.total;
 				}

@@ -27,16 +27,17 @@ body ,html{
 		 <el-form-item label="" >
 		        <el-input v-model="param.usermobile" placeholder="请输入兑换人手机号" @keyup.enter.native="load(0,0)"></el-input>
 		  </el-form-item>
-		 <el-form-item label="" >
+		 <!-- <el-form-item label="" >
 		        <el-input v-model="param.ucomponyName" placeholder="请输入企业名称" @keyup.enter.native="load(0,0)"></el-input>
-		  </el-form-item>
+		  </el-form-item> -->
 		 <el-form-item label="" >
 		        <el-input v-model="param.gdname" placeholder="请输入商品名称" @keyup.enter.native="load(0,0)"></el-input>
 		  </el-form-item>
 		  <el-form-item label="" >
-		    <el-select v-model="param.goodsStatus" placeholder="用户性质"  style="width:150px;">
-				<el-option label="普通用户" value=1></el-option>
-				<el-option label="企业用户" value=2></el-option>
+		    <el-select v-model="param.exStatus" placeholder="兑换状态"  style="width:150px;">
+				<el-option label="兑换成功未领取" value=1></el-option>
+				<el-option label="兑换成功已领取" value=2></el-option>
+				<el-option label="取消兑换" value=3></el-option>
 		    </el-select>
 		  </el-form-item>
 		 <el-form-item>

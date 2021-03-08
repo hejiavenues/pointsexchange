@@ -61,6 +61,10 @@ public class BExchangeRecordEntity implements Serializable {
 	 * 兑换状态（1、成功 2、取消），备用字段
 	 */
 	private Integer exStatus;
+	/**
+	 * 兑换状态（1、成功 2、取消），备用字段
+	 */
+	private String exStatusStr;
 	
 	/**
 	 * 兑换时间
@@ -179,6 +183,14 @@ public class BExchangeRecordEntity implements Serializable {
 
 	public void setGpoints(Integer gpoints) {
 		this.gpoints = gpoints;
+	}
+
+	public String getExStatusStr() {
+		return exStatusStr;
+	}
+
+	public void setExStatusStr(String exStatusStr) {
+		this.exStatusStr = exStatusStr;
 	}
 	
 }

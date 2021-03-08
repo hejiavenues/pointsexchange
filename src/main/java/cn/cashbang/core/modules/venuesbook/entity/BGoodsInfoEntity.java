@@ -48,6 +48,8 @@ public class BGoodsInfoEntity implements Serializable {
 	 */
 	private Integer goodsStatus;
 	
+	private String goodsStatusStr;
+	
 	/**
 	 * 上架时间（创建时间）
 	 */
@@ -125,6 +127,14 @@ public class BGoodsInfoEntity implements Serializable {
 	
 	public Date getUpdateTime() {
 		return updateTime;
+	}
+
+	public String getGoodsStatusStr() {
+		return goodsStatusStr;
+	}
+
+	public void setGoodsStatusStr(String goodsStatusStr) {
+		this.goodsStatusStr = goodsStatusStr;
 	}
 	
 }

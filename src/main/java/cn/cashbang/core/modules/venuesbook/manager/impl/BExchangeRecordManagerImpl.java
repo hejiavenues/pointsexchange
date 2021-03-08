@@ -28,7 +28,17 @@ public class BExchangeRecordManagerImpl implements BExchangeRecordManager {
 
 	@Override
 	public List<BExchangeRecordEntity> listBExchangeRecord(Page<BExchangeRecordEntity> page, Query search) {
-		return bExchangeRecordMapper.listForPage(page, search);
+		List<BExchangeRecordEntity> lists = bExchangeRecordMapper.listForPage(page, search);
+		for(BExchangeRecordEntity entity:lists) {
+			if(entity.getExStatus().intValue() == 1) {
+				entity.setExStatusStr("兑换成功未领取");
+			}else if(entity.getExStatus().intValue() == 2) {
+				entity.setExStatusStr("兑换成功已领取");
+			}else if(entity.getExStatus().intValue() == 3) {
+				entity.setExStatusStr("取消兑换");
+			}
+		}
+		return lists;
 	}
 
 	@Override

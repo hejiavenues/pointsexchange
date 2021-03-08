@@ -28,7 +28,15 @@ public class BGoodsInfoManagerImpl implements BGoodsInfoManager {
 
 	@Override
 	public List<BGoodsInfoEntity> listBGoodsInfo(Page<BGoodsInfoEntity> page, Query search) {
-		return bGoodsInfoMapper.listForPage(page, search);
+		List<BGoodsInfoEntity> lists = bGoodsInfoMapper.listForPage(page, search);
+		for(BGoodsInfoEntity entity:lists) {
+			if(entity.getGoodsStatus().intValue() == 1) {
+				entity.setGoodsStatusStr("已上架");
+			}else if(entity.getGoodsStatus().intValue() == 2) {
+				entity.setGoodsStatusStr("未上架");
+			}
+		}
+		return lists;
 	}
 
 	@Override

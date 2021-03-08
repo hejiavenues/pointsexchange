@@ -76,8 +76,12 @@ body ,html{
 	      </template>
        </el-table-column>
        
-    	<el-table-column   label="操作"  fixed="right"  width="200">
+    	<el-table-column   label="操作"  fixed="right"  width="260">
               <template scope="scope" >
+              	  <el-button :plain="true" type="danger" size="mini"
+                             v-if="scope.row.goodsStatusStr == '已上架'" @click="updateStatus(scope.row)">下架</el-button>
+                  <el-button :plain="true" type="success" size="mini"
+                             v-if="scope.row.goodsStatusStr == '未上架'" @click="updateStatus(scope.row)">上架</el-button>
                   <el-button :plain="true" v-if="true||hasPermission('venuesbook:goods:edit')" type="success" size="mini" 
                   icon="el-icon-edit" @click="edit(scope.row)" ></el-button>修改
                   <el-button :plain="true" type="danger" size="mini" icon="el-icon-delete" @click="remove(scope.row)"
