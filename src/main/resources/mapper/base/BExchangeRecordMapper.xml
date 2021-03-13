@@ -36,6 +36,10 @@
 			<if test="exStatus != null and exStatus != ''">
 				and	ber.`ex_status` = #{exStatus} 
 			</if>
+            <if test="userId != null and userId != ''">
+                and	ber.`uid` = #{userId}
+            </if>
+
 				
 			</where>
 		ORDER BY
