@@ -96,7 +96,7 @@ public class ApiBCommunityActivitiesController extends AbstractController {
         bCommunityActivities.setCreateTime(new Date());
         bCommunityActivities.setAddress(address);
 
-		return bCommunityActivitiesService.saveBCommunityActivities(bCommunityActivities);
+		return bCommunityActivitiesService.saveBCommunityActivities(null,bCommunityActivities);
 	}
 
     /**

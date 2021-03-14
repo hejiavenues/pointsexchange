@@ -12,12 +12,22 @@
 			`activity_count`, 
 			`activity_type`, 
 			`activity_content`, 
+			`pic_url`,
 			`activity_time`,
 			address,
 			`create_time`, 
 			`update_time`
 		FROM
 			b_community_activities  ba
+			<where>
+			<if test="queryFqrName != null and queryFqrName != ''">
+				and	exists (select 1 from b_user bu1 where bu1.`uid` = ba.`uid` and bu1.uname like concat('%',#{queryFqrName},'%')) 
+			</if>
+			<if test="queryAcName != null and queryAcName != ''">
+				and	ba.`activity_name` like concat('%',#{queryAcName},'%') 
+			</if>
+			</where>
+			
 		ORDER BY
 			com_activity_id DESC
 	</select>
@@ -31,6 +41,7 @@
 			`activity_type`, 
 			`activity_content`, 
 			`activity_time`,
+			`pic_url`,
 			address,
 			`create_time`, 
 			`update_time`
@@ -43,6 +54,7 @@
 			#{activityType}, 
 			#{activityContent}, 
 			#{activityTime},
+			#{picUrl},
 			#{address},
 			#{createTime}, 
 			#{updateTime}
@@ -58,6 +70,7 @@
 			`activity_type`, 
 			`activity_content`, 
 			`activity_time`,
+			`pic_url`,
 			address,
 			`create_time`, 
 			`update_time`
@@ -113,6 +126,7 @@
 			<if test="activityType != null">`activity_type` = #{activityType}, </if>
 			<if test="activityContent != null">`activity_content` = #{activityContent}, </if>
 			<if test="activityTime != null">`activity_time` = #{activityTime}, </if>
+			<if test="picUrl != null">`pic_url` = #{picUrl}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
 			<if test="updateTime != null">`update_time` = #{updateTime}</if>
 		</set>

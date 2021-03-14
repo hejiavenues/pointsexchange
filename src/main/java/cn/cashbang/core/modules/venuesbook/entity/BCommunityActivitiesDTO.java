@@ -13,7 +13,7 @@ import java.util.Date;
  * @url www.daibangzhu.cn
  * @date 2021年2月27日 PM9:46:01
  */
-public class BCommunityActivitiesEntity implements Serializable {
+public class BCommunityActivitiesDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -52,15 +52,6 @@ public class BCommunityActivitiesEntity implements Serializable {
 	 */
 	private String activityTime;
 	
-	/**
-	 * 创建时间
-	 */
-	private Date createTime;
-	
-	/**
-	 * 更新时间
-	 */
-	private Date updateTime;
 
 	private String address;
 	
@@ -87,7 +78,7 @@ public class BCommunityActivitiesEntity implements Serializable {
         this.address = address;
     }
 
-    public BCommunityActivitiesEntity() {
+    public BCommunityActivitiesDTO() {
 		super();
 	}
 
@@ -147,22 +138,6 @@ public class BCommunityActivitiesEntity implements Serializable {
 		return activityTime;
 	}
 	
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-	
-	public Date getCreateTime() {
-		return createTime;
-	}
-	
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
-	}
-	
-	public Date getUpdateTime() {
-		return updateTime;
-	}
-
 	public String getPicUrl() {
 		return picUrl;
 	}

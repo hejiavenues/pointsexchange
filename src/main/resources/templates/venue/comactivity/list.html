@@ -22,9 +22,11 @@ body ,html{
      
 	   <el-form ref="form"  :inline="true" label-width="80px" size="mini"><!-- 搜索框 -->
 		 <el-form-item label="" >
-		        <el-input v-model="param.keyword" placeholder="请输入查询关键字" @keyup.enter.native="load(0,0)"></el-input>
+		        <el-input v-model="param.queryAcName" placeholder="请输入活动名称" @keyup.enter.native="load(0,0)"></el-input>
 		  </el-form-item>
-		  
+		  <el-form-item label="" >
+		        <el-input v-model="param.queryFqrName" placeholder="请输入发起人昵称" @keyup.enter.native="load(0,0)"></el-input>
+		  </el-form-item>
 		 <el-form-item>
 		  <el-button onclick="reload();"   icon="el-icon-refresh"   ></el-button>
 		  <el-button  icon="el-icon-search"   @click="load(1,10)" ></el-button>
@@ -40,7 +42,22 @@ body ,html{
        <el-table-column   type="index"  width="50" label = "序号"></el-table-column>
       <!-- <el-table-column type="selection"  width="40"> </el-table-column>  -->
        <!-- <el-table-column type="selection"  width="40"> </el-table-column> --> <!-- 选择框 -->
-      
+      <el-table-column
+                prop="picture"
+                header-align="center"
+                align="center"
+                width="180px"
+                label="图片">
+            <template slot-scope="scope">
+                <el-popover
+                        placement="right"
+                        title=""
+                        trigger="hover">
+                    <img :src="scope.row.picUrl"/>
+                    <img slot="reference" :src="scope.row.picUrl" :alt="scope.row.picUrl" style="max-height: 33px;max-width: 130px">
+                </el-popover>
+            </template>
+        </el-table-column>
       <el-table-column  :label="col.title"      :width="col.width"  v-for="col in table.col"    >
 	       <template slot-scope="scope"  >
 	       		<div v-if="col.formatter==undefined"> {{scope.row[col.field]}}</div>

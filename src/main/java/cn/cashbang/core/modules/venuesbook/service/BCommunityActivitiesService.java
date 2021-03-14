@@ -3,6 +3,8 @@ package cn.cashbang.core.modules.venuesbook.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import cn.cashbang.core.common.entity.Page;
 import cn.cashbang.core.common.entity.Result;
 import cn.cashbang.core.modules.venuesbook.entity.BCommunityActivitiesEntity;
@@ -19,11 +21,11 @@ public interface BCommunityActivitiesService {
 
 	Page<BCommunityActivitiesEntity> listBCommunityActivities(Map<String, Object> params);
 	
-	Result saveBCommunityActivities(BCommunityActivitiesEntity bCommunityActivities);
+	Result saveBCommunityActivities(MultipartFile imgFile,BCommunityActivitiesEntity bCommunityActivities);
 	
 	Result getBCommunityActivitiesById(String id);
 	
-	Result updateBCommunityActivities(BCommunityActivitiesEntity bCommunityActivities);
+	Result updateBCommunityActivities(MultipartFile imgFile,BCommunityActivitiesEntity bCommunityActivities);
 	
 	Result batchRemove(String[] id);
 
