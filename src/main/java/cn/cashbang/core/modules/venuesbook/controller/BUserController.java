@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.druid.util.StringUtils;
+
 import cn.cashbang.core.common.annotation.SysLog;
 import cn.cashbang.core.modules.sys.controller.AbstractController;
 import cn.cashbang.core.common.entity.Page;
@@ -56,6 +58,9 @@ public class BUserController extends AbstractController {
 	 */
 	@RequestMapping("/info")
 	public Result getById(@RequestBody String id) {
+		if(!StringUtils.isEmpty(id)) {
+            id = id.replace("\"", "");
+        }
 		return bUserService.getBUserById(id);
 	}
 	

@@ -55,7 +55,7 @@ var vm = new Vue({
 			var ck =[row];
 			dialogOpen({
 				id: 'layerOrgTree',
-				title: '报名人列表',
+				title: '积分记录列表',
 		        url: 'venue/pointsrecord/list.html?_' + $.now(),
 		        scroll : true,
 		        width: "1000px",
