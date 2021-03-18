@@ -1,7 +1,10 @@
 package cn.cashbang.core.modules.venuesbook.service.impl;
 
+import java.util.Date;
 import java.util.Map;
 
+import cn.cashbang.core.modules.venuesbook.entity.BUserEntity;
+import cn.cashbang.core.modules.venuesbook.manager.BUserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +29,8 @@ public class BExchangeRecordServiceImpl implements BExchangeRecordService {
 
 	@Autowired
 	private BExchangeRecordManager bExchangeRecordManager;
+    @Autowired
+    private BUserManager bUserManager;
 
 	@Override
 	public Page<BExchangeRecordEntity> listBExchangeRecord(Map<String, Object> params) {
@@ -37,7 +42,22 @@ public class BExchangeRecordServiceImpl implements BExchangeRecordService {
 
 	@Override
 	public Result saveBExchangeRecord(BExchangeRecordEntity role) {
+
+        BUserEntity user = bUserManager.getBUserById(role.getUid());
+
+        if(user.getPoints()<Integer.valueOf(role.getPoints())){
+              return Result.error("分数不够不能兑换,快去攒积分吧。");
+        }
+
+        String uuid = CommonUtils.createUUID();
+        role.setId(uuid);
+        role.setCreateTime(new Date());
 		int count = bExchangeRecordManager.saveBExchangeRecord(role);
+
+        // 更新用户的分数
+        user.setPoints(user.getPoints()+Integer.valueOf(role.getPoints()));
+        bUserManager.updateBUser(user);
+
 		return CommonUtils.msg(count);
 	}
 

@@ -62,6 +62,7 @@ public class ApiBUserController extends AbstractController {
 		bUser.setMobile(mobile);
 		bUser.setUserRole(1);
 		bUser.setStatus(1);
+        bUser.setPoints(0);
 		String uuid = CommonUtils.createUUID();
 		bUser.setUid(uuid);
 		bUser.setOpenId(openId);
@@ -82,6 +83,48 @@ public class ApiBUserController extends AbstractController {
 
 		return result;
 	}
+
+    /**
+     * 注册
+     * @param
+     * @return
+     */
+    @RequestMapping("/companyRegister")
+    public Map<String, Object> uerRegister(String uname,String mobile, String openId,String iconUrl,
+                                           String companyName,String address){
+
+        System.out.println("-----------------"+companyName);
+
+        Map<String, Object> result = new HashMap<>();
+
+        BUserEntity bUser = new BUserEntity();
+        bUser.setUname(uname);
+        bUser.setMobile(mobile);
+        bUser.setUserRole(2);
+        bUser.setStatus(1);
+        String uuid = CommonUtils.createUUID();
+        bUser.setUid(uuid);
+        bUser.setOpenId(openId);
+        bUser.setCreateTime(new Date());
+        bUser.setIconUrl(iconUrl);
+        bUser.setPoints(0);
+        bUser.setCompanyName(companyName);
+        bUser.setAddress(address);
+        Result r1 =   bUserService.saveBUser(bUser);
+
+        if(r1.get("code").toString().equals("0")){
+
+            result.put("code",0);
+            result.put("msg","注册成功！");
+            result.put("rows",bUser);
+        }
+        else{
+            result.put("code",-1);
+            result.put("msg","注册失败！");
+        }
+
+        return result;
+    }
 
 	@RequestMapping("/uerLogin")
 	public Result uerLogin(String code){

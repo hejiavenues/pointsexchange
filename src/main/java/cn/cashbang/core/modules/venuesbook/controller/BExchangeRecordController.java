@@ -65,7 +65,7 @@ public class BExchangeRecordController extends AbstractController {
 	 * @param bExchangeRecord
 	 * @return
 	 */
-	@SysLog("修改积分兑换记录表")
+	//@SysLog("修改积分兑换记录表")
 	@RequestMapping("/update")
 	public Result update(@RequestBody BExchangeRecordEntity bExchangeRecord) {
 		return bExchangeRecordService.updateBExchangeRecord(bExchangeRecord);

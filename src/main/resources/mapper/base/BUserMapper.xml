@@ -54,6 +54,9 @@
 			`status`, 
 			`icon_url`,
 			 openId,
+			 `company_name`,
+			`points`,
+			`address`,
 			`create_time`,
 			`update_time`
 		)
@@ -70,6 +73,9 @@
 			#{status}, 
 			#{iconUrl},
 			#{openId},
+			#{companyName},
+			#{points},
+			#{address},
 			#{createTime}, 
 			#{updateTime}
 		)
@@ -90,6 +96,9 @@
 			`status`, 
 			`icon_url`,
 			openId,
+				bu.`company_name`,
+			bu.`points`,
+			bu.`address`,
 			`create_time`, 
 			`update_time`
 		FROM
@@ -112,6 +121,9 @@
 		`status`,
 		`icon_url`,
 		openId,
+			`company_name`,
+			`points`,
+			`address`,
 		`create_time`,
 		`update_time`
 		FROM

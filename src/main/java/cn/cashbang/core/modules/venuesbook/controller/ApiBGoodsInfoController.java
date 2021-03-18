@@ -1,5 +1,6 @@
 package cn.cashbang.core.modules.venuesbook.controller;
 
+import cn.cashbang.core.common.annotation.SysLog;
 import cn.cashbang.core.common.entity.Page;
 import cn.cashbang.core.common.entity.Result;
 import cn.cashbang.core.modules.sys.controller.AbstractController;
@@ -147,6 +148,34 @@ public class ApiBGoodsInfoController extends AbstractController {
 		}
 		return bGoodsInfoService.getBGoodsInfoById(id);
 	}
-	
-	
+
+    /**
+     * 新增
+     * @param point
+     * @return
+     */
+    @SysLog("新增积分兑换记录表")
+    @RequestMapping("/saveExRecord")
+    public Result save(String gid,String uid,String point) {
+        BExchangeRecordEntity bExchangeRecord = new BExchangeRecordEntity();
+        bExchangeRecord.setGid(gid);
+        bExchangeRecord.setUid(uid);
+        bExchangeRecord.setPoints(point);
+        bExchangeRecord.setExStatus(1);
+        return bExchangeRecordService.saveBExchangeRecord(bExchangeRecord);
+    }
+
+    /**
+     * 新增
+     * @param exId
+     * @return
+     */
+    @RequestMapping("/updateExRecordStatus")
+    public Result updateExRecordStatus(String exId) {
+
+        BExchangeRecordEntity bExchangeRecord = new BExchangeRecordEntity();
+        bExchangeRecord.setId(exId);
+        bExchangeRecord.setExStatus(2);
+        return bExchangeRecordService.updateBExchangeRecord(bExchangeRecord);
+    }
 }
