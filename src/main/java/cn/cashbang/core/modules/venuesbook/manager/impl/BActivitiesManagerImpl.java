@@ -1,6 +1,8 @@
 package cn.cashbang.core.modules.venuesbook.manager.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,6 +12,7 @@ import cn.cashbang.core.common.entity.Query;
 import cn.cashbang.core.modules.venuesbook.dao.BActivitiesMapper;
 import cn.cashbang.core.modules.venuesbook.entity.BActivitiesEntity;
 import cn.cashbang.core.modules.venuesbook.manager.BActivitiesManager;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * 活动信息表
@@ -68,4 +71,5 @@ public class BActivitiesManagerImpl implements BActivitiesManager {
 
 		return bActivitiesMapper.listActByUserId(uid);
 	}
+    
 }

@@ -164,5 +164,11 @@ public class ApiBUserController extends AbstractController {
 
 		return bUserService.updateBUser(bUser);
 	}
-	
+
+
+    @RequestMapping("/getUserCount")
+    public Map<String, Object> getUserCount(String userId) {
+
+        return  bUserService.getUserCount(userId);
+    }
 }

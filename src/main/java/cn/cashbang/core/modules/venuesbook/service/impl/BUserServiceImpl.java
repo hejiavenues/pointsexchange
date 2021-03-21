@@ -7,17 +7,15 @@ import cn.cashbang.core.common.utils.CommonUtils;
 import cn.cashbang.core.common.utils.HttpClientUtils;
 import cn.cashbang.core.common.utils.StringUtils;
 import cn.cashbang.core.common.utils.WebUtils;
-import cn.cashbang.core.modules.venuesbook.entity.BAccessTokenEntity;
-import cn.cashbang.core.modules.venuesbook.entity.BConvenerInfoEntity;
-import cn.cashbang.core.modules.venuesbook.entity.BUserEntity;
-import cn.cashbang.core.modules.venuesbook.manager.BAccessTokenManager;
-import cn.cashbang.core.modules.venuesbook.manager.BConvenerInfoManager;
-import cn.cashbang.core.modules.venuesbook.manager.BUserManager;
+import cn.cashbang.core.modules.venuesbook.entity.*;
+import cn.cashbang.core.modules.venuesbook.manager.*;
 import cn.cashbang.core.modules.venuesbook.service.BUserService;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -40,6 +38,12 @@ public class BUserServiceImpl implements BUserService {
 
     @Autowired
     private BAccessTokenManager bAccessTokenManager;
+
+    @Autowired
+    private BCommunityActivitiesManager bCommunityActivitiesManager;
+
+    @Autowired
+    private BExchangeRecordManager bExchangeRecordManager;
 
 	@Override
 	public Page<BUserEntity> listBUser(Map<String, Object> params) {
@@ -150,4 +154,27 @@ public class BUserServiceImpl implements BUserService {
 		}
 	}
 
+    @Override
+    public Result getUserCount(String userId){
+
+        BUserEntity bUser = bUserManager.getBUserById(userId);
+
+        List<BCommunityActivitiesEntity> actList = bCommunityActivitiesManager.listActByUserId(userId);
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("pageNumber",1);
+        params.put("pageSize",1000);
+        params.put("sortOrde","asc");
+        params.put("userId",userId);
+        Query query = new Query(params);
+        Page<BExchangeRecordEntity> page = new Page<>(query);
+        List<BExchangeRecordEntity>  exList = bExchangeRecordManager.listBExchangeRecord(page, query);
+
+        Map<String, Integer> counts = new HashMap<>();
+        counts.put("points",bUser.getPoints());
+        counts.put("actCount",actList.size());
+        counts.put("exCount",exList.size());
+
+        return Result.ok().put("raws", counts);
+    }
 }

@@ -27,5 +27,6 @@ public interface BUserService {
 	Result batchRemove(String[] id);
 
 	Result loginUser(String code);
-	
+
+    Result getUserCount(String userId);
 }
