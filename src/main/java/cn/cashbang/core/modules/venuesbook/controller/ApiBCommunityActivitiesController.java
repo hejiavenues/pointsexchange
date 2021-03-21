@@ -81,7 +81,7 @@ public class ApiBCommunityActivitiesController extends AbstractController {
 	 */
 	@SysLog("新增社区活动信息表")
 	@RequestMapping("/save")
-	public Result save(String userId,String activityTime, String address,
+	public Result save(String userId,String activityTime, String address,String activityIconUrl,
                        String activityName,String activityType,String activityContent,int activityCount) {
 
         BCommunityActivitiesEntity bCommunityActivities = new BCommunityActivitiesEntity();
@@ -95,6 +95,7 @@ public class ApiBCommunityActivitiesController extends AbstractController {
         bCommunityActivities.setComActivityId(uuid);
         bCommunityActivities.setCreateTime(new Date());
         bCommunityActivities.setAddress(address);
+        bCommunityActivities.setPicUrl(activityIconUrl);
 
 		return bCommunityActivitiesService.saveBCommunityActivities(null,bCommunityActivities);
 	}
@@ -131,6 +132,22 @@ public class ApiBCommunityActivitiesController extends AbstractController {
         bActivityEntry.setComActivityId(activityId);
         bActivityEntry.setUid(userId);
         bActivityEntry.setStatus(2);  // 取消
+
+        return bComActivityEntryService.updateBComActivityEntry(bActivityEntry);
+    }
+
+    /**
+     * 活动签到接口
+     * @param activityId
+     * @return
+     */
+    @RequestMapping("/signActById")
+    public Result signActById(String activityId,String userId) {
+
+        BComActivityEntryEntity bActivityEntry = new BComActivityEntryEntity();
+        bActivityEntry.setComActivityId(activityId);
+        bActivityEntry.setUid(userId);
+        bActivityEntry.setIspresent(Integer.valueOf(1));  // 签到
 
         return bComActivityEntryService.updateBComActivityEntry(bActivityEntry);
     }

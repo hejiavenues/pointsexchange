@@ -146,6 +146,9 @@
 			<if test="status != null">`status` = #{status}, </if>
 			<if test="iconUrl != null">`icon_url` = #{iconUrl}, </if>
 			<if test="openId != null">`openId` = #{openId}, </if>
+            <if test="openId != null">`company_name` = #{companyName}, </if>
+            <if test="points != null">`points` = #{points}, </if>
+            <if test="address != null">`address` = #{address}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
 			<if test="updateTime != null">`update_time` = #{updateTime}</if>
 		</set>

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import cn.cashbang.core.modules.venuesbook.entity.BActivityEntryEntity;
+import cn.cashbang.core.modules.venuesbook.entity.BUserEntity;
+import cn.cashbang.core.modules.venuesbook.manager.BUserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,9 @@ public class BComActivityEntryServiceImpl implements BComActivityEntryService {
 	@Autowired
 	private BComActivityEntryManager bComActivityEntryManager;
 
+    @Autowired
+    private BUserManager bUserManager;
+
 	@Override
 	public Page<BComActivityEntryEntity> listBComActivityEntry(Map<String, Object> params) {
 		Query query = new Query(params);
@@ -51,7 +56,22 @@ public class BComActivityEntryServiceImpl implements BComActivityEntryService {
 
 	@Override
 	public Result updateBComActivityEntry(BComActivityEntryEntity bComActivityEntry) {
+
+	    // 判断是不是已经签到了，不能重复签到
+
+
 		int count = bComActivityEntryManager.updateBComActivityEntry(bComActivityEntry);
+
+		if(count>0){
+
+		    // 签到成功加积分
+            BUserEntity user = bUserManager.getBUserById(bComActivityEntry.getUid());
+
+            // 更新用户的分数
+            user.setPoints(user.getPoints()+10);
+            bUserManager.updateBUser(user);
+        }
+
 		return CommonUtils.msg(count);
 	}
 

@@ -35,11 +35,11 @@ public class BUserManagerImpl implements BUserManager {
 			}else if(bu.getStatus().intValue() == 2) {
 				bu.setStatusStr("禁用");
 			}
-			if(bu.getSex().intValue() == 1) {
-				bu.setSexStr("男");
-			}else if(bu.getSex().intValue() == 0) {
-				bu.setSexStr("女");
-			}
+//			if(bu.getSex().intValue() == 1) {
+//				bu.setSexStr("男");
+//			}else if(bu.getSex().intValue() == 0) {
+//				bu.setSexStr("女");
+//			}
 		}
 		return lists;
 	}

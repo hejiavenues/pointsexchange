@@ -55,7 +55,7 @@ public class BExchangeRecordServiceImpl implements BExchangeRecordService {
 		int count = bExchangeRecordManager.saveBExchangeRecord(role);
 
         // 更新用户的分数
-        user.setPoints(user.getPoints()+Integer.valueOf(role.getPoints()));
+        user.setPoints(user.getPoints()-Integer.valueOf(role.getPoints()));
         bUserManager.updateBUser(user);
 
 		return CommonUtils.msg(count);
