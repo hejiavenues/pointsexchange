@@ -94,6 +94,7 @@ public class BUserEntity implements Serializable {
 	
 	private Integer points;
 
+	private String license_url;
 
 	public String getCommitteeName() {
 		return committeeName;

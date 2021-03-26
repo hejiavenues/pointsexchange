@@ -91,7 +91,7 @@ public class ApiBUserController extends AbstractController {
      */
     @RequestMapping("/companyRegister")
     public Map<String, Object> uerRegister(String uname,String mobile, String openId,String iconUrl,
-                                           String companyName,String address){
+                                           String companyName,String address,String licenseUrl){
 
         System.out.println("-----------------"+companyName);
 
@@ -101,7 +101,7 @@ public class ApiBUserController extends AbstractController {
         bUser.setUname(uname);
         bUser.setMobile(mobile);
         bUser.setUserRole(2);
-        bUser.setStatus(1);
+        bUser.setStatus(0);  // 0 审核中，1 是正常
         String uuid = CommonUtils.createUUID();
         bUser.setUid(uuid);
         bUser.setOpenId(openId);
@@ -110,6 +110,7 @@ public class ApiBUserController extends AbstractController {
         bUser.setPoints(0);
         bUser.setCompanyName(companyName);
         bUser.setAddress(address);
+        bUser.setIconUrl(licenseUrl);
         Result r1 =   bUserService.saveBUser(bUser);
 
         if(r1.get("code").toString().equals("0")){

@@ -110,13 +110,13 @@ public class BUserServiceImpl implements BUserService {
 	@Override
 	public Result loginUser(String code){
 
-		// 静波的小程序
-		String appId="wx3a6796d91e05c5bf";
-		String appSecret="dbf8c4107af70b407c9230705a4b126f";
+//		// 静波的小程序
+//		String appId="wx3a6796d91e05c5bf";
+//		String appSecret="dbf8c4107af70b407c9230705a4b126f";
 
-//		// 金顶街的小程序
-//		String appId="wx2d9d1a4c8beb93ab";
-//		String appSecret="499110e6ad602f46f89f689cfd3d0087";
+		// 金顶街的小程序
+		String appId="wxddad91318561f741";
+		String appSecret="ab18ee8a424ec47c88e2f31f6ec478d6";
 
 		String requestUrl = "https://api.weixin.qq.com/sns/jscode2session?grant_type=authorization_code&appid="
 				+ appId + "&secret=" + appSecret + "&js_code=" + code;

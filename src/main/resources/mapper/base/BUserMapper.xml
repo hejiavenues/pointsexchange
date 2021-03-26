@@ -21,6 +21,7 @@
 			bu.`points`,
 			bu.`address`,
 			bu.openId,
+            bu.license_url,
 			bu.`create_time`, 
 			bu.`update_time`
 		FROM
@@ -57,6 +58,7 @@
 			 `company_name`,
 			`points`,
 			`address`,
+			license_url,
 			`create_time`,
 			`update_time`
 		)
@@ -76,6 +78,7 @@
 			#{companyName},
 			#{points},
 			#{address},
+			#{licenseUrl},
 			#{createTime}, 
 			#{updateTime}
 		)
@@ -99,6 +102,7 @@
 				bu.`company_name`,
 			bu.`points`,
 			bu.`address`,
+			bu.license_url,
 			`create_time`, 
 			`update_time`
 		FROM
@@ -124,6 +128,7 @@
 			`company_name`,
 			`points`,
 			`address`,
+			license_url,
 		`create_time`,
 		`update_time`
 		FROM
@@ -149,6 +154,7 @@
             <if test="openId != null">`company_name` = #{companyName}, </if>
             <if test="points != null">`points` = #{points}, </if>
             <if test="address != null">`address` = #{address}, </if>
+            <if test="address != null">`license_url` = #{licenseUrl}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
 			<if test="updateTime != null">`update_time` = #{updateTime}</if>
 		</set>
