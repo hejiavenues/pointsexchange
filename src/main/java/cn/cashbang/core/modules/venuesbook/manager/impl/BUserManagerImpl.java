@@ -34,6 +34,16 @@ public class BUserManagerImpl implements BUserManager {
 				bu.setStatusStr("正常");
 			}else if(bu.getStatus().intValue() == 2) {
 				bu.setStatusStr("禁用");
+			}else if(bu.getStatus().intValue() == 0) {
+				bu.setStatusStr("待审核");
+			}else if(bu.getStatus().intValue() == 4) {
+				bu.setStatusStr("审核拒绝");
+			}
+			
+			if(bu.getUserRole().intValue() == 1) {
+				bu.setUserRoleStr("普通用户");
+			}else if(bu.getUserRole().intValue() == 2) {
+				bu.setUserRoleStr("企业用户");
 			}
 //			if(bu.getSex().intValue() == 1) {
 //				bu.setSexStr("男");

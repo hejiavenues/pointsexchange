@@ -1,5 +1,6 @@
 package cn.cashbang.core.modules.venuesbook.service.impl;
 
+import java.util.Date;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import cn.cashbang.core.common.entity.Page;
 import cn.cashbang.core.common.entity.Query;
 import cn.cashbang.core.common.entity.Result;
 import cn.cashbang.core.common.utils.CommonUtils;
+import cn.cashbang.core.common.utils.StringUtils;
 import cn.cashbang.core.modules.venuesbook.entity.BPointsRecordEntity;
 import cn.cashbang.core.modules.venuesbook.manager.BPointsRecordManager;
 import cn.cashbang.core.modules.venuesbook.service.BPointsRecordService;
@@ -37,6 +39,14 @@ public class BPointsRecordServiceImpl implements BPointsRecordService {
 
 	@Override
 	public Result saveBPointsRecord(BPointsRecordEntity role) {
+		role.setPid(CommonUtils.createUUID());
+		if(role.getAccessType().intValue() == 4) {
+			if(StringUtils.isEmpty(role.getUid())) {
+				return Result.error("发放失败，用户信息为空");
+			}
+		}
+		role.setCreateTime(new Date());
+		role.setUpdateTime(new Date());
 		int count = bPointsRecordManager.saveBPointsRecord(role);
 		return CommonUtils.msg(count);
 	}
