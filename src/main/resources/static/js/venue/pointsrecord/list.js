@@ -64,6 +64,9 @@ var vm = new Vue({
 						else if(r.rows[i].accessType == 3){
                         r.rows[i].accessType = '兑换商品';
                     	}
+						else if(r.rows[i].accessType == 4){
+                        r.rows[i].accessType = '管理员奖励';
+                    	}
 					}
 					th.table.data=r.rows;
 					th.table.total=r.total;
@@ -72,14 +75,20 @@ var vm = new Vue({
 		},
 		save: function() {
 			dialogOpen({
-				title: '新增积分增减记录表',
+				title: '给用户发放积分',
 				url: 'venue/pointsrecord/add.html?_' + $.now(),
-				width: '40%',
-				height: '80%',
+				width: '20%',
+				height: '40%',
 				success: function(iframeId){
+					//alert("vm.param.uid"+vm.param.uid);
+					top.frames[iframeId].vm.bPointsRecord.uid = vm.param.uid;
 				},
 				yes : function(iframeId) {
 					top.frames[iframeId].vm.acceptClick();
+					setTimeout(function(){
+						location.reload();
+					},1200)
+					
 				},
 			});
 		},

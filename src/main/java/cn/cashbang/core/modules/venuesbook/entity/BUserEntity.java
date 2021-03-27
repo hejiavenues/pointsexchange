@@ -53,6 +53,10 @@ public class BUserEntity implements Serializable {
 	 * 角色id （1.普通用户 2.召集人）
 	 */
 	private Integer userRole;
+	/**
+	 * 角色id （1.普通用户 2.召集人）
+	 */
+	private String userRoleStr;
 	
 	/**
 	 * 用户年龄
@@ -271,6 +275,22 @@ public class BUserEntity implements Serializable {
 
 	public void setPoints(Integer points) {
 		this.points = points;
+	}
+
+	public String getLicenseUrl() {
+		return licenseUrl;
+	}
+
+	public void setLicenseUrl(String licenseUrl) {
+		this.licenseUrl = licenseUrl;
+	}
+
+	public String getUserRoleStr() {
+		return userRoleStr;
+	}
+
+	public void setUserRoleStr(String userRoleStr) {
+		this.userRoleStr = userRoleStr;
 	}
 	
 }

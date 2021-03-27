@@ -19,7 +19,7 @@ var vm = new Vue({
 					{field : "birthday", title : "出生日期", width : "110px"}, */
 					{field : "mobile", title : "手机号", width : "110px"}, 
 					{field : "committeeName", title : "居委会", width : "150px"},
-					{field : "userRole", title : "用户性质", width : "100px"},
+					{field : "userRoleStr", title : "用户性质", width : "100px"},
 					/*（1.正常 2.禁用 3.删除） */
 					{field : "statusStr", title : "用户状态", width : ""}, 
 					{field : "points", title : "用户积分", width : ""}, 
@@ -90,12 +90,6 @@ var vm = new Vue({
                     	else if(r.rows[i].status == 2){
                         r.rows[i].statusStr = '禁用';
                     	}
-						if(r.rows[i].userRole == 1){
-                        r.rows[i].userRole = '普通用户';
-						}
-                    	else if(r.rows[i].userRole == 2){
-                        r.rows[i].userRole = '企业用户';
-                    	}
 					}
 					th.table.data=r.rows;
 					th.table.total=r.total;
@@ -134,26 +128,51 @@ var vm = new Vue({
 			}
 		},
 		updateStatus: function(row) {
-            var ck =[row];
-            var msg = '';
-			
-            if(row.status == 2){
-                msg = '您确定要放开此用户吗？';
-                ck[0].status=1;
-            }else{
-                msg = '您确定要禁用此用户吗？';
-                ck[0].status=2;
-            }
-            if(checkedRow(ck)){
-                $.ConfirmForm({
-					msg:msg,
-                    url: '../../venuesbook/user/update?_' + $.now(),
-                    param: ck[0],
-                    success: function(data) {
-                        $.currentIframe().vm.load();
-                    }
-                });
-            }
+			var ck =[row];
+			 this.$confirm('您确定审核通过此用户吗？', '提示', {
+            		confirmButtonText: '确定',
+            		cancelButtonText: '取消',
+            		type: 'warning'
+          	}).then(() => {
+           		 //点击确定的操作(调用接口)
+				var ck =[row];
+				if(row.status == 0){
+                	ck[0].status=1
+            	}
+				zs_post({
+				url: '../../venuesbook/user/update',
+				param:ck[0],
+				success:function(r){
+					console.log(r);
+					}
+				})
+          	}).catch(() => {
+            	//几点取消的提示
+				//alert("123123123");
+          	});
+        },
+	    updateStatus1: function(row) {
+			 this.$confirm('您确定审核拒绝此用户吗？', '提示', {
+            		confirmButtonText: '确定',
+            		cancelButtonText: '取消',
+            		type: 'warning'
+          	}).then(() => {
+           		 //点击确定的操作(调用接口)
+				var ck =[row];
+				if(row.status == 0){
+                	ck[0].status=4;
+            	}
+				zs_post({
+				url: '../../venuesbook/user/update',
+				param:ck[0],
+				success:function(r){
+					console.log(r);
+					}
+				})
+          	}).catch(() => {
+            	//几点取消的提示
+				//alert("123123123");
+          	});
         },
 		remove: function(row) {
 			var ck = [row], ids = [];	
