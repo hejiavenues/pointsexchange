@@ -30,6 +30,10 @@ public class BPointsRecordEntity implements Serializable {
 	 * 用户id
 	 */
 	private String uname;
+	/**
+	 * 用户id
+	 */
+	private String remark;
 	
 	/**
 	 * 获得的积分数量
@@ -110,6 +114,14 @@ public class BPointsRecordEntity implements Serializable {
 
 	public void setUname(String uname) {
 		this.uname = uname;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	
 }

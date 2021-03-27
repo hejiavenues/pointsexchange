@@ -47,6 +47,8 @@ body ,html{
     <el-table :data="table.data" border  style="width: 100%"   :height="$(window).height()*0.7" highlight-current-row size="small" @selection-change="selectCases" >
        <el-table-column   type="index"  width="50" label="序号"></el-table-column>
        <!-- <el-table-column type="selection"  width="40"> </el-table-column> --> <!-- 选择框 -->
+      
+      <el-table-column  v-for="col in table.col" :prop="col.field" :label="col.title"  :width="col.width" ></el-table-column>
       <el-table-column
                 prop="picture"
                 header-align="center"
@@ -63,20 +65,6 @@ body ,html{
                 </el-popover>
             </template>
         </el-table-column>
-      <el-table-column  v-for="col in table.col" :prop="col.field" :label="col.title"  :width="col.width" ></el-table-column>
-      <el-table-column  :label="col.title"      :width="col.width"  v-for="col in table.col"    >
-	       <template slot-scope="scope"  >
-	       		<div v-if="col.formatter==undefined"> {{scope.row[col.field]}}</div>
-	       		<div v-if="col.formatter!=undefined && typeof(col.formatter(scope.row[col.field],scope.row))=='string'"> 
-	       			{{col.formatter(scope.row[col.field],scope.row)}}
-	       	   </div>
-	       	    <div v-if="col.formatter!=undefined && typeof(col.formatter(scope.row[col.field],scope.row))=='object'"> 
-	       			 <el-tag :type="col.formatter(scope.row[col.field],scope.row).type"   effect="dark" style="width:100%" >
-	       				{{col.formatter(scope.row[col.field],scope.row).value}}
-	       			</el-tag>
-	       	   </div>
-	      </template>
-       </el-table-column>
        
        <el-table-column   label="操作"  fixed="right"  width="480px">
               <template scope="scope" >

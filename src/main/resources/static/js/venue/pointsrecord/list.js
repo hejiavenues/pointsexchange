@@ -14,10 +14,11 @@ var vm = new Vue({
 		},
 		table:{//表格数据
 			  "col":[
-					{field : "uname", title : "姓名", width : ""}, 
-					{field : "points", title : "获得的积分数量", width : ""}, 
-					{field : "accessType", title : "获取或消耗方式", width : ""}, 
-					{field : "createTime", title : "记录时间", width : ""}, 
+					{field : "uname", title : "姓名", width : "80px"}, 
+					{field : "points", title : "获得的积分数量", width : "80px"}, 
+					{field : "accessType", title : "获取或消耗方式", width : "120px"}, 
+					{field : "remark", title : "描述/备注", width : ""}, 
+					{field : "createTime", title : "记录时间", width : "150px"}, 
 					/*{field : "updateTime", title : "修改时间", width : ""}*/
 			  ],
 			  "pagesizes":[1,10, 20, 30, 100],//size选择器
@@ -77,8 +78,8 @@ var vm = new Vue({
 			dialogOpen({
 				title: '给用户发放积分',
 				url: 'venue/pointsrecord/add.html?_' + $.now(),
-				width: '20%',
-				height: '40%',
+				width: '30%',
+				height: '50%',
 				success: function(iframeId){
 					//alert("vm.param.uid"+vm.param.uid);
 					top.frames[iframeId].vm.bPointsRecord.uid = vm.param.uid;

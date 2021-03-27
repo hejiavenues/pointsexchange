@@ -9,6 +9,7 @@
 			ber.`uid`, 
 			(select bc.uname from b_user bc where bc.uid = ber.uid) as uname,
 			ber.`points`, 
+			ber.`remark`, 
 			ber.`access_type`, 
 			ber.`create_time`, 
 			ber.`update_time`
@@ -32,6 +33,7 @@
 			`uid`, 
 			`points`, 
 			`access_type`, 
+			`remark`, 
 			`create_time`, 
 			`update_time`
 		)
@@ -40,6 +42,7 @@
 			#{uid}, 
 			#{points}, 
 			#{accessType}, 
+			#{remark}, 
 			#{createTime}, 
 			#{updateTime}
 		)
@@ -51,6 +54,7 @@
 			`uid`, 
 			`points`, 
 			`access_type`, 
+			`remark`, 
 			`create_time`, 
 			`update_time`
 		FROM
@@ -65,6 +69,7 @@
 			<if test="uid != null">`uid` = #{uid}, </if>
 			<if test="points != null">`points` = #{points}, </if>
 			<if test="accessType != null">`access_type` = #{accessType}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
 			<if test="updateTime != null">`update_time` = #{updateTime}</if>
 		</set>

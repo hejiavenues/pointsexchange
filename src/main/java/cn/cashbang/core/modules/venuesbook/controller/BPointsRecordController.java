@@ -44,7 +44,6 @@ public class BPointsRecordController extends AbstractController {
 	 * @param bPointsRecord
 	 * @return
 	 */
-	@SysLog("新增积分增减记录表")
 	@RequestMapping("/save")
 	public Result save(@RequestBody BPointsRecordEntity bPointsRecord) {
 		return bPointsRecordService.saveBPointsRecord(bPointsRecord);
@@ -65,7 +64,6 @@ public class BPointsRecordController extends AbstractController {
 	 * @param bPointsRecord
 	 * @return
 	 */
-	@SysLog("修改积分增减记录表")
 	@RequestMapping("/update")
 	public Result update(@RequestBody BPointsRecordEntity bPointsRecord) {
 		return bPointsRecordService.updateBPointsRecord(bPointsRecord);
@@ -76,7 +74,6 @@ public class BPointsRecordController extends AbstractController {
 	 * @param id
 	 * @return
 	 */
-	@SysLog("删除积分增减记录表")
 	@RequestMapping("/remove")
 	public Result batchRemove(@RequestBody Long[] id) {
 		return bPointsRecordService.batchRemove(id);

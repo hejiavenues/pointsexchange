@@ -19,6 +19,9 @@ padding-right:5%" >
 			 <el-form-item label="发放积分数" prop="points">
 			    <el-input onkeyup="value=value.replace(/[^\d]/g,'')" style="width:8em" v-model="bPointsRecord.points"></el-input>
 			  </el-form-item>
+			  <el-form-item label="发放备注" prop="remark" >
+			    <el-input type="textarea" :rows="5" style="width:14em" v-model="bPointsRecord.remark"></el-input>
+			  </el-form-item>
 			
 </el-form>
 </dev>	
