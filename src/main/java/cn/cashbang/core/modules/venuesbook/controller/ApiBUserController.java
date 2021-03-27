@@ -110,7 +110,7 @@ public class ApiBUserController extends AbstractController {
         bUser.setPoints(0);
         bUser.setCompanyName(companyName);
         bUser.setAddress(address);
-        bUser.setIconUrl(licenseUrl);
+        bUser.setLicenseUrl(licenseUrl);
         Result r1 =   bUserService.saveBUser(bUser);
 
         if(r1.get("code").toString().equals("0")){
