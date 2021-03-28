@@ -44,7 +44,7 @@ public class ApiBCommunityActivitiesController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/list")
-	public Map<String, Object> list(int page,String queryAcName) {
+	public Map<String, Object> list(int page,String queryAcName,String queryUid) {
 		//return bCommunityActivitiesService.listBCommunityActivities(params);
 
         Map<String, Object> params = new HashMap<>();
@@ -55,6 +55,8 @@ public class ApiBCommunityActivitiesController extends AbstractController {
         params.put("aStatus",1);  // 只有公开的活动才需要报名
         params.put("sortOrde","asc");
         params.put("queryAcName",queryAcName);
+        params.put("queryUid",queryUid);
+
 //        params.put("queryComId",queryComId);
 //        params.put("queryActType",queryActType);
 //        params.put("queryCount",queryCount);
@@ -116,6 +118,7 @@ public class ApiBCommunityActivitiesController extends AbstractController {
         String uuid = CommonUtils.createUUID();
         bActivityEntry.setEid(uuid);
         bActivityEntry.setCreateTime(new Date());
+        bActivityEntry.setIspresent(Integer.valueOf(0));
         
         return bComActivityEntryService.saveBComActivityEntry(bActivityEntry);
     }

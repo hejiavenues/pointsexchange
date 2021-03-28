@@ -56,6 +56,7 @@ public class BExchangeRecordServiceImpl implements BExchangeRecordService {
 
         // 更新用户的分数
         user.setPoints(user.getPoints()-Integer.valueOf(role.getPoints()));
+        System.out.println("这次扣除的分数是"+ role.getPoints());
         bUserManager.updateBUser(user);
 
 		return CommonUtils.msg(count);

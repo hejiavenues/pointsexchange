@@ -48,7 +48,7 @@ public class BComActivityEntryManagerImpl implements BComActivityEntryManager {
 	}
 
 	@Override
-	public int batchRemove(Long[] id) {
+	public int batchRemove(String[] id) {
 		int count = bComActivityEntryMapper.batchRemove(id);
 		return count;
 	}

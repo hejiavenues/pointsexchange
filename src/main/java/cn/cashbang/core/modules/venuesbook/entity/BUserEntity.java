@@ -100,6 +100,14 @@ public class BUserEntity implements Serializable {
 
 	private String licenseUrl;
 
+    public String getLicenseUrl() {
+        return licenseUrl;
+    }
+
+    public void setLicenseUrl(String licenseUrl) {
+        this.licenseUrl = licenseUrl;
+    }
+
     public String getCommitteeName() {
 		return committeeName;
 	}

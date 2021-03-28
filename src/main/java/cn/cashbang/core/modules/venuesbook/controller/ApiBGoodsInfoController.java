@@ -120,6 +120,7 @@ public class ApiBGoodsInfoController extends AbstractController {
         params.put("pageSize",10);
         params.put("sortOrde","asc");
         params.put("goodsName",queryGName);
+        params.put("goodsStatus",1);  // 1，上架 2 下架
 
         Page<BGoodsInfoEntity> list =  bGoodsInfoService.listBGoodsInfo(params);
         if(list.getTotal()>0){

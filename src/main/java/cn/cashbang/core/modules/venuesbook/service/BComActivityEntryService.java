@@ -24,7 +24,7 @@ public interface BComActivityEntryService {
 	
 	Result updateBComActivityEntry(BComActivityEntryEntity bComActivityEntry);
 	
-	Result batchRemove(Long[] id);
+	Result batchRemove(String[] id);
 
     Result getUserListById(String actId,String uid);
 }

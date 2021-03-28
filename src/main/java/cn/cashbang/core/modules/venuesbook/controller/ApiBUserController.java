@@ -151,13 +151,14 @@ public class ApiBUserController extends AbstractController {
 	 */
 	@RequestMapping("/updateUser")
 	public Result updateUser(String uid,String uname,Integer sex,String birthday
-			,String iconUrl){
+			,String iconUrl,String address){
 
 		BUserEntity bUser = new BUserEntity();
 		bUser.setBirthday(birthday);
 		bUser.setUid(uid);
 		bUser.setSex(sex);
 		bUser.setUname(uname);
+        bUser.setAddress(address);
 
 		if(StringUtils.isNotBlank(iconUrl)){
 			bUser.setIconUrl(iconUrl);

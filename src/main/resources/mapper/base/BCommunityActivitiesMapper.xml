@@ -26,6 +26,9 @@
 			<if test="queryAcName != null and queryAcName != ''">
 				and	ba.`activity_name` like concat('%',#{queryAcName},'%') 
 			</if>
+            <if test="queryUid != null and queryUid != ''">
+                and	ba.`uid` = #{queryUid}
+            </if>
 			</where>
 			
 		ORDER BY

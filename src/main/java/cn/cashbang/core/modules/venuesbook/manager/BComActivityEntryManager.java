@@ -25,7 +25,7 @@ public interface BComActivityEntryManager {
 	
 	int updateBComActivityEntry(BComActivityEntryEntity bComActivityEntry);
 	
-	int batchRemove(Long[] id);
+	int batchRemove(String[] id);
 
     List<BComActivityEntryEntity> getUserListById(String actId, String uid);
 }
