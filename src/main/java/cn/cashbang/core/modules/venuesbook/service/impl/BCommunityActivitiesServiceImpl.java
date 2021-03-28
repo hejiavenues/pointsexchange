@@ -77,6 +77,9 @@ public class BCommunityActivitiesServiceImpl implements BCommunityActivitiesServ
 				}  
             }  
         }
+        else {
+            fileName = role.getPicUrl();
+        }
 		role.setCreateTime(new Date());
 		role.setUpdateTime(new Date());
 		role.setPicUrl("/picture/"+fileName);
