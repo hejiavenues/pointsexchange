@@ -144,6 +144,7 @@ var vm = new Vue({
 				param:ck[0],
 				success:function(r){
 					console.log(r);
+					vm.load();
 					}
 				})
           	}).catch(() => {
@@ -167,6 +168,7 @@ var vm = new Vue({
 				param:ck[0],
 				success:function(r){
 					console.log(r);
+					vm.load();
 					}
 				})
           	}).catch(() => {
