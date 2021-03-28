@@ -269,14 +269,6 @@ public class BUserEntity implements Serializable {
 		this.points = points;
 	}
 
-	public String getLicenseUrl() {
-		return licenseUrl;
-	}
-
-	public void setLicenseUrl(String licenseUrl) {
-		this.licenseUrl = licenseUrl;
-	}
-
 	public String getUserRoleStr() {
 		return userRoleStr;
 	}
