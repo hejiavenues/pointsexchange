@@ -38,7 +38,7 @@
 			</if>
 			</where>
 		ORDER BY
-			uid DESC
+			create_time DESC
 	</select>
 	
 	<insert id="save">

@@ -21,7 +21,7 @@
 			</if>
 			</where>
 		ORDER BY
-			teid DESC
+			create_time DESC
 	</select>
 	
 	<insert id="save">

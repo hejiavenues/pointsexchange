@@ -38,7 +38,7 @@
             </if>
 			</where>
 		ORDER BY
-			tid DESC
+			create_time DESC
 	</select>
 
 	<select id="listTeamByUserId" resultType="cn.cashbang.core.modules.venuesbook.entity.BTeamEntity">

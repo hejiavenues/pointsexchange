@@ -29,7 +29,7 @@
 			</where>
 			
 		ORDER BY
-			com_activity_id DESC
+			ba.create_time DESC
 	</select>
 	
 	<insert id="save">

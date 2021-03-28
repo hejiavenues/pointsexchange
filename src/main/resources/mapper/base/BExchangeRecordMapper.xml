@@ -43,7 +43,7 @@
 				
 			</where>
 		ORDER BY
-			ber.id DESC
+			ber.create_time DESC
 	</select>
 	
 	<insert id="save">

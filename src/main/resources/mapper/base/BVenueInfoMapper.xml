@@ -37,7 +37,7 @@
 				
 			</where>
 		ORDER BY
-			venue_id DESC
+			update_time desc,create_time DESC
 	</select>
 	
 	<insert id="save">

@@ -24,7 +24,7 @@
 			</if>
 			</where>
 		ORDER BY
-			gid DESC
+			create_time DESC
 	</select>
 	
 	<insert id="save">

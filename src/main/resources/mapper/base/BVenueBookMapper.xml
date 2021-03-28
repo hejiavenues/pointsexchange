@@ -16,7 +16,7 @@
 		FROM
 			venuesbooking.b_venue_book
 		ORDER BY
-			id DESC
+			create_time DESC
 	</select>
 	
 	<select id="getVenueBookById" resultType="cn.cashbang.core.modules.venuesbook.entity.BVenueBookEntity">

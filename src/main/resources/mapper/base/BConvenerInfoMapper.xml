@@ -29,7 +29,7 @@
 			</if>
 			</where>
 		ORDER BY
-			bci.uid DESC
+			bci.create_time DESC
 	</select>
 	
 	<insert id="save">

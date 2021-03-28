@@ -17,7 +17,7 @@
 		FROM
 			b_com_activity_entry
 		ORDER BY
-			eid DESC
+			create_time DESC
 	</select>
 	
 	<insert id="save">
