@@ -71,6 +71,19 @@ public class BCommunityActivitiesEntity implements Serializable {
      */
     private String userName;
 
+    /**
+     * 场馆id
+     */
+    private String venueId;
+
+    public String getVenueId() {
+        return venueId;
+    }
+
+    public void setVenueId(String venueId) {
+        this.venueId = venueId;
+    }
+
     public String getUserName() {
         return userName;
     }

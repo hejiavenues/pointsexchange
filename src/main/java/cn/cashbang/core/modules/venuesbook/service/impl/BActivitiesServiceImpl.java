@@ -9,12 +9,8 @@ import java.util.Map;
 
 import cn.cashbang.core.common.utils.SpringContextUtils;
 import cn.cashbang.core.common.utils.WebUtils;
-import cn.cashbang.core.modules.venuesbook.entity.BAccessTokenEntity;
-import cn.cashbang.core.modules.venuesbook.entity.BUserEntity;
-import cn.cashbang.core.modules.venuesbook.entity.BVenueBookEntity;
-import cn.cashbang.core.modules.venuesbook.manager.BAccessTokenManager;
-import cn.cashbang.core.modules.venuesbook.manager.BActivityEntryManager;
-import cn.cashbang.core.modules.venuesbook.manager.BVenueBookManager;
+import cn.cashbang.core.modules.venuesbook.entity.*;
+import cn.cashbang.core.modules.venuesbook.manager.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +20,6 @@ import cn.cashbang.core.common.entity.Page;
 import cn.cashbang.core.common.entity.Query;
 import cn.cashbang.core.common.entity.Result;
 import cn.cashbang.core.common.utils.CommonUtils;
-import cn.cashbang.core.modules.venuesbook.entity.BActivitiesEntity;
-import cn.cashbang.core.modules.venuesbook.manager.BActivitiesManager;
 import cn.cashbang.core.modules.venuesbook.service.BActivitiesService;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -52,6 +46,11 @@ public class BActivitiesServiceImpl implements BActivitiesService {
     @Autowired
     private BActivityEntryManager bActivityEntryManager;
 
+    @Autowired
+    private BCommunityActivitiesManager bCommunityActivitiesManager;
+
+    @Autowired
+    private BVenueInfoManager bVenueInfoManager;
 
     @Override
 	public Page<BActivitiesEntity> listBActivities(Map<String, Object> params) {
@@ -83,8 +82,28 @@ public class BActivitiesServiceImpl implements BActivitiesService {
         }
         if("0".equals(code)){
             
-            int r2 = bActivitiesManager.saveBActivities(role);
+            //int r2 = bActivitiesManager.saveBActivities(role);
 
+            BCommunityActivitiesEntity bActivities = new BCommunityActivitiesEntity();
+
+            bActivities.setActivityContent(role.getActivityContent());
+            bActivities.setActivityName(role.getActivityIdName());
+            bActivities.setPicUrl(role.getActivityIconUrl());
+            bActivities.setActivityTime(bookDate +"  "+bookTime);
+            bActivities.setActivityType(role.getActivityType());
+            bActivities.setVenueId(role.getVenueId());
+            bActivities.setUid(role.getUid());
+            //bActivities.(status);     // 1 公开
+            bActivities.setActivityCount(role.getActivityCount());
+            String uuid2 = CommonUtils.createUUID();
+            bActivities.setComActivityId(uuid2);
+            bActivities.setCreateTime(new Date());
+
+            BVenueInfoEntity venueInfo = bVenueInfoManager.getBVenueInfoById(role.getVenueId());
+            bActivities.setAddress(venueInfo.getAddress()+" "+venueInfo.getVenueName());
+
+            int r2 = bCommunityActivitiesManager.saveBCommunityActivities(bActivities);
+            
             // 生成一条预约记录
             BVenueBookEntity bVenueBook = new BVenueBookEntity();
             bVenueBook.setBookStatus(2); // 已预约
