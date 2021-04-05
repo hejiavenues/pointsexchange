@@ -23,7 +23,7 @@ import cn.cashbang.core.modules.venuesbook.service.BComActivityEntryService;
  * @date 2021年2月28日 PM2:16:50
  */
 @RestController
-@RequestMapping("/venuesbook")
+@RequestMapping("/venuesbook/comactivityentry")
 public class BComActivityEntryController extends AbstractController {
 	
 	@Autowired
@@ -78,8 +78,8 @@ public class BComActivityEntryController extends AbstractController {
 	 */
 	@SysLog("删除活动报名记录表")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
+	public Result batchRemove(@RequestBody String[] id) {
 		return bComActivityEntryService.batchRemove(id);
 	}
-	
+
 }

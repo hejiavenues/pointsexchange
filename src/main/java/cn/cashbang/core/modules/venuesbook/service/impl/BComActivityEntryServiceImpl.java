@@ -42,6 +42,9 @@ public class BComActivityEntryServiceImpl implements BComActivityEntryService {
 
 	@Override
 	public Page<BComActivityEntryEntity> listBComActivityEntry(Map<String, Object> params) {
+        if(!com.alibaba.druid.util.StringUtils.isEmpty((String)params.get("activityId"))) {
+            params.put("activityId", ((String)params.get("activityId")).replace("\"", ""));
+        }
 		Query query = new Query(params);
 		Page<BComActivityEntryEntity> page = new Page<>(query);
 		bComActivityEntryManager.listBComActivityEntry(page, query);

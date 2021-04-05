@@ -58,6 +58,22 @@ body ,html{
                 </el-popover>
             </template>
         </el-table-column>
+        <el-table-column
+                prop="picture"
+                header-align="center"
+                align="center"
+                width="100px"
+                label="二维码">
+            <template slot-scope="scope">
+                <el-popover
+                        placement="right"
+                        title=""
+                        trigger="hover">
+                    <img :src="scope.row.qrcode"/>
+                    <img slot="reference" :src="scope.row.qrcode" :alt="scope.row.qrcode" style="max-height: 33px;max-width: 130px">
+                </el-popover>
+            </template>
+        </el-table-column>
       <el-table-column  :label="col.title"      :width="col.width"  v-for="col in table.col"    >
 	       <template slot-scope="scope"  >
 	       		<div v-if="col.formatter==undefined"> {{scope.row[col.field]}}</div>
@@ -78,6 +94,8 @@ body ,html{
                   icon="el-icon-edit" @click="edit(scope.row)" >修改</el-button>
                   <el-button :plain="true" type="danger" size="mini" icon="el-icon-delete" @click="remove(scope.row)"
                   v-if="true||hasPermission('venuesbook:remove')"  >删除</el-button>
+                  <el-button :plain="true" v-if="true||hasPermission('venuesbook:edit')" type="success" size="mini"
+                             icon="el-icon-edit" @click="orgTree(scope.row)" >报名列表</el-button>
               </template>
          </el-table-column>
     </el-table>

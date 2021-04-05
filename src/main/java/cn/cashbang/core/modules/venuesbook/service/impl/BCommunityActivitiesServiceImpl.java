@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import cn.cashbang.core.common.utils.QRCodeUtils;
 import cn.cashbang.core.common.utils.StringUtils;
 import cn.cashbang.core.modules.venuesbook.entity.BVenueBookEntity;
 import cn.cashbang.core.modules.venuesbook.manager.BVenueBookManager;
@@ -56,6 +57,7 @@ public class BCommunityActivitiesServiceImpl implements BCommunityActivitiesServ
 		String uuid = CommonUtils.createUUID();
 		role.setComActivityId(uuid);
 		String fileName = "";
+        String uploadUrl = SpringContextUtils.getApplicationProperties().getUploadInfo().get("imageurl");
 		if(file != null){
             //取得当前上传文件的文件名称  
             String myFileName = file.getOriginalFilename();
@@ -63,7 +65,7 @@ public class BCommunityActivitiesServiceImpl implements BCommunityActivitiesServ
             String suffix = myFileName.substring(myFileName.lastIndexOf(".") + 1);
             String middle = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss_SSS").format(new Date());
             //如果名称不为“”,说明该文件存在，否则说明该文件不存在  
-            String uploadUrl = SpringContextUtils.getApplicationProperties().getUploadInfo().get("imageurl");
+
             if(myFileName.trim() !=""){  
                 //重命名上传后的文件名  
                 fileName = uuid.substring(0, 8)+"-"+middle+"."+suffix;
@@ -108,7 +110,20 @@ public class BCommunityActivitiesServiceImpl implements BCommunityActivitiesServ
            int r1= bVenueBookManager.saveBVenueBook(bVenueBook);
        }
 
-		int count = bCommunityActivitiesManager.saveBCommunityActivities(role);
+        try {
+            // 生成活动二维码
+            String text = "activityId="+role.getComActivityId();  //这里设置自定义网站url或文字
+           // String logoPath = uploadUrl +"1.jpg"; //二维码图片
+            String destPath = uploadUrl;		//保存地址
+            //调用工具类
+           String name = QRCodeUtils.encode(text, null, destPath, true,role.getComActivityId());
+            System.out.println("二维码图片名称："+name);
+            role.setQrcode("/picture/"+name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        int count = bCommunityActivitiesManager.saveBCommunityActivities(role);
 		return CommonUtils.msg(count);
 	}
 

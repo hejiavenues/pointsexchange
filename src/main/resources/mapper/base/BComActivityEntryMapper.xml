@@ -16,6 +16,11 @@
 			`update_time`
 		FROM
 			b_com_activity_entry
+        <where>
+            <if test="activityId != null and activityId != ''">
+                and	`com_activity_id` = #{activityId}
+            </if>
+        </where>
 		ORDER BY
 			create_time DESC
 	</select>

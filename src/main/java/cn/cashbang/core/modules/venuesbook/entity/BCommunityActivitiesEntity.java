@@ -92,6 +92,16 @@ public class BCommunityActivitiesEntity implements Serializable {
      */
     private String bookTime;
 
+    private String qrcode;
+
+    public String getQrcode() {
+        return qrcode;
+    }
+
+    public void setQrcode(String qrcode) {
+        this.qrcode = qrcode;
+    }
+
     public String getBookDate() {
         return bookDate;
     }

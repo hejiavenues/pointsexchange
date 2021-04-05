@@ -34,6 +34,29 @@ var vm = new Vue({
 		  },
 	},
 	methods : {
+        orgTree: function(row) {
+            console.log(row.comActivityId);
+            var ck =[row];
+            dialogOpen({
+                id: 'layerOrgTree',
+                title: '报名人列表',
+                url: 'venue/comactivityentry/list.html?activityId=' + row.comActivityId,
+                scroll : true,
+                width: "1000px",
+                height: "550px",
+                success: function(iframeId){
+                    console.log("2222222222222222"+row.comActivityId);
+                    top.frames[iframeId].vm.param.activityId = ck[0].comActivityId;
+                    top.frames[iframeId].vm.load();
+                },
+                yes : function(iframeId) {
+                    console.log("2222222222222222"+row.activityId);
+                    top.frames[iframeId].vm.param.activityId = ck[0].comActivityId;
+                    top.frames[iframeId].vm.load();
+                    //top.frames[iframeId].vm.acceptClick();
+                }
+            })
+        },
 	    selectCases:function(selects){
 			this.table.selects=selects;
 	    },

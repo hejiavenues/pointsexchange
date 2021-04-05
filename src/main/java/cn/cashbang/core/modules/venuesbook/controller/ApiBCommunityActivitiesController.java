@@ -4,6 +4,7 @@ import cn.cashbang.core.common.annotation.SysLog;
 import cn.cashbang.core.common.entity.Page;
 import cn.cashbang.core.common.entity.Result;
 import cn.cashbang.core.common.utils.CommonUtils;
+import cn.cashbang.core.common.utils.QRCodeUtils;
 import cn.cashbang.core.modules.sys.controller.AbstractController;
 import cn.cashbang.core.modules.venuesbook.entity.BActivitiesEntity;
 import cn.cashbang.core.modules.venuesbook.entity.BActivityEntryEntity;
@@ -185,5 +186,15 @@ public class ApiBCommunityActivitiesController extends AbstractController {
     {
 		return bCommunityActivitiesService.getBCommunityActivitiesById(activityId);
 	}
-	
+
+//    @RequestMapping("/creatQRCode")
+//    public Result creatQRCode(String activityId)  throws  Exception {
+//
+//        String text = "activityId="+activityId;  //这里设置自定义网站url或文字
+//        String logoPath = "D:\\picture\\1.jpg"; //二维码图片
+//        String destPath = "D:\\picture\\";		//保存地址
+//        //调用工具类
+//        System.out.println(QRCodeUtils.encode(text, logoPath, destPath, true,"123"));
+//        return Result.ok("生成成功");
+//    }
 }
