@@ -18,11 +18,12 @@ var vm = new Vue({
 					{field : "userName", title : "发起人昵称", width : ""},
 					{field : "activityName", title : "活动名称", width : ""}, 
 					{field : "activityCount", title : "活动人数", width : ""}, 
-					{field : "activityType", title : "活动类型", width : ""}, 
-					{field : "activityContent", title : "活动内容", width : ""}, 
+					{field : "activityType", title : "活动类型", width : ""},
+                    {field : "activityHour", title : "活动时长", width : ""},
+                    {field : "activityContent", title : "活动内容", width : "180%"},
 					{field : "activityTime", title : "活动时段", width : ""}, 
-					{field : "createTime", title : "创建时间", width : ""}, 
-					{field : "updateTime", title : "更新时间", width : ""}
+					{field : "createTime", title : "创建时间", width : ""}
+					// {field : "updateTime", title : "更新时间", width : ""}
 			  ],
 			  "pagesizes":[1,10, 20, 30, 100],//size选择器
 			  "pagesize ":10,

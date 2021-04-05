@@ -1,6 +1,7 @@
 package cn.cashbang.core.modules.venuesbook.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 
@@ -51,11 +52,11 @@ public class BExchangeRecordEntity implements Serializable {
 	 */
 	private String gname;
 	
-	private Integer gpoints;
+	private BigDecimal gpoints;
 	/**
 	 * 消耗的积分
 	 */
-	private String points;
+	private BigDecimal points;
 	
 	/**
 	 * 兑换状态（1、成功 2、取消），备用字段
@@ -105,11 +106,11 @@ public class BExchangeRecordEntity implements Serializable {
 		return gid;
 	}
 	
-	public void setPoints(String points) {
+	public void setPoints(BigDecimal points) {
 		this.points = points;
 	}
 	
-	public String getPoints() {
+	public BigDecimal getPoints() {
 		return points;
 	}
 	
@@ -177,11 +178,11 @@ public class BExchangeRecordEntity implements Serializable {
 		this.gname = gname;
 	}
 
-	public Integer getGpoints() {
+	public BigDecimal getGpoints() {
 		return gpoints;
 	}
 
-	public void setGpoints(Integer gpoints) {
+	public void setGpoints(BigDecimal gpoints) {
 		this.gpoints = gpoints;
 	}
 

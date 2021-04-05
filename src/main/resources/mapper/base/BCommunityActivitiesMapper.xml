@@ -7,7 +7,8 @@
 		SELECT
 			`com_activity_id`, 
 			`uid`,
-			(select uname from b_user bu1 where bu1.`uid` = ba.`uid`) as userName,
+        `venue_id`,
+        (select uname from b_user bu1 where bu1.`uid` = ba.`uid`) as userName,
 			`activity_name`, 
 			`activity_count`, 
 			`activity_type`, 
@@ -15,6 +16,7 @@
 			`pic_url`,
 			`activity_time`,
 			address,
+            activity_hour,
 			`create_time`, 
 			`update_time`
 		FROM
@@ -44,8 +46,10 @@
 			`activity_type`, 
 			`activity_content`, 
 			`activity_time`,
+			 activity_hour,
 			`pic_url`,
 			address,
+			`venue_id`,
 			`create_time`, 
 			`update_time`
 		)
@@ -57,8 +61,10 @@
 			#{activityType}, 
 			#{activityContent}, 
 			#{activityTime},
+			#{activityHour},
 			#{picUrl},
 			#{address},
+			#{venueId},
 			#{createTime}, 
 			#{updateTime}
 		)
@@ -75,6 +81,8 @@
 			`activity_time`,
 			`pic_url`,
 			address,
+			activity_hour,
+			`venue_id`,
 			`create_time`, 
 			`update_time`
 		FROM
@@ -93,6 +101,8 @@
         ba.`activity_content`,
         ba.`address`,
         ba.`pic_url`,
+        ba.activity_hour,
+        `venue_id`,
         ba.`activity_time`
         FROM
         b_com_activity_entry bae left join b_community_activities ba
@@ -113,6 +123,8 @@
         `activity_time`,
         address,
         `pic_url`,
+        activity_hour,
+        `venue_id`,
         `create_time`,
         `update_time`
         FROM
@@ -132,6 +144,9 @@
 			<if test="activityContent != null">`activity_content` = #{activityContent}, </if>
 			<if test="activityTime != null">`activity_time` = #{activityTime}, </if>
 			<if test="picUrl != null">`pic_url` = #{picUrl}, </if>
+            <if test="activityHour != null">`activity_hour` = #{activityHour}, </if>
+            <if test="venueId != null">`venue_id` = #{venueId}, </if>
+            <if test="address != null">`address` = #{address}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
 			<if test="updateTime != null">`update_time` = #{updateTime}</if>
 		</set>

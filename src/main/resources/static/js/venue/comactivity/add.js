@@ -9,14 +9,17 @@ var vm = new Vue({
 			imgFile: null,
 		},
 		committees:[],
+        avaTimes:[],
+        venueinfos: [],
 		imageUrl: '',
 		rules:{//form 规则
 
 		    activityName: [ {  required: true, message: '活动名称', trigger: 'blur' } ], 
 		    activityCount: [ {  required: true, message: '活动人数', trigger: 'blur' } ], 
 		    activityType: [ {  required: true, message: '活动类型', trigger: 'blur' } ], 
-		    activityContent: [ {  required: true, message: '活动内容', trigger: 'blur' } ], 
-		    activityTime: [ {  required: true, message: '活动时段', trigger: 'blur' } ]
+		    activityContent: [ {  required: true, message: '活动内容', trigger: 'blur' } ],
+            activityHour: [ {  required: true, message: '活动时长', trigger: 'blur' } ],
+            activityTime: [ {  required: true, message: '活动时段', trigger: 'blur' } ]
 			
 		},
         pickerOptions1: {
@@ -27,6 +30,7 @@ var vm = new Vue({
 	},
 	created:function(){
 		this.getAllTimes();
+        this.getVenueinfo();
 	},
 	methods : {
 		acceptClick: function() {
@@ -57,15 +61,33 @@ var vm = new Vue({
 				 
 			 });
 		},
-		getAllTimes:function(){
-			var th=this;
-		    zs_post({
-		    	url:'../../venuesbook/dic/getDicsByCode?typeCode=activityType',
-		    	success:function(r){
-		    		th.committees=r.bDics;
-		    	}
-		    })
-		},
+        getAllTimes:function(){
+            var th=this;
+            zs_post({
+                url:'../../venuesbook/dic/getDicsByCode?typeCode=avaTime',
+                success:function(r){
+                    th.avaTimes=r.bDics;
+                }
+            })
+        },
+        getVenueinfo:function(){
+            var th=this;
+            zs_post({
+                url:'../../venuesbook/venueinfo/list?_' + $.now(),
+                success:function(r){
+                    th.venueinfos=r.rows;
+                }
+            })
+        },
+		// getAllTimes:function(){
+		// 	var th=this;
+		//     zs_post({
+		//     	url:'../../venuesbook/dic/getDicsByCode?typeCode=activityType',
+		//     	success:function(r){
+		//     		th.committees=r.bDics;
+		//     	}
+		//     })
+		// },
 		handleAvatarSuccess(res, file) {
             this.imageUrl = URL.createObjectURL(file.raw);
         },

@@ -170,8 +170,8 @@ public class BUserServiceImpl implements BUserService {
         Page<BExchangeRecordEntity> page = new Page<>(query);
         List<BExchangeRecordEntity>  exList = bExchangeRecordManager.listBExchangeRecord(page, query);
 
-        Map<String, Integer> counts = new HashMap<>();
-        counts.put("points",bUser.getPoints());
+        Map<String, Object> counts = new HashMap<>();
+        counts.put("points",bUser.getPoints().toString());
         counts.put("actCount",actList.size());
         counts.put("exCount",exList.size());
 

@@ -11,9 +11,11 @@ var vm = new Vue({
 		imageUrl: '',
 		rules:{//form 规则
 		    goodsName: [ {  required: true, message: '商品名称', trigger: 'blur' } ], 
-		    points: [ {  required: true, message: '所需积分', trigger: 'blur' } ], 
-		    price: [ {  required: true, message: '市场价（元）', trigger: 'blur' } ], 
-		    goodsStatus: [ {  required: true, message: '上架状态', trigger: 'blur' } ], 
+		    points: [ {  required: true, message: '所需时长（小时）', trigger: 'blur' } ],
+		    price: [ {  required: true, message: '市场价（元）', trigger: 'blur' } ],
+            goodsCount: [ {  required: true, message: '库存总数', trigger: 'blur' } ],
+            remark: [ {  required: true, message: '描述', trigger: 'blur' } ],
+		    goodsStatus: [ {  required: true, message: '上架状态', trigger: 'blur' } ]
 		}
 			
 	},

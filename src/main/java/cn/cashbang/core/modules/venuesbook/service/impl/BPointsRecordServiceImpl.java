@@ -3,6 +3,8 @@ package cn.cashbang.core.modules.venuesbook.service.impl;
 import java.util.Date;
 import java.util.Map;
 
+import cn.cashbang.core.modules.venuesbook.entity.BUserEntity;
+import cn.cashbang.core.modules.venuesbook.manager.BUserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,9 @@ public class BPointsRecordServiceImpl implements BPointsRecordService {
 	@Autowired
 	private BPointsRecordManager bPointsRecordManager;
 
+    @Autowired
+    private BUserManager bUserManager;
+
 	@Override
 	public Page<BPointsRecordEntity> listBPointsRecord(Map<String, Object> params) {
 		Query query = new Query(params);
@@ -48,6 +53,14 @@ public class BPointsRecordServiceImpl implements BPointsRecordService {
 		role.setCreateTime(new Date());
 		role.setUpdateTime(new Date());
 		int count = bPointsRecordManager.saveBPointsRecord(role);
+
+		// 同时更新用户的积分
+        BUserEntity user = bUserManager.getBUserById(role.getUid());
+        // 更新用户的分数
+        user.setPoints(user.getPoints().subtract(role.getPoints()));
+        System.out.println("这次奖励的分数是"+ role.getPoints());
+
+        bUserManager.updateBUser(user);
 		return CommonUtils.msg(count);
 	}
 

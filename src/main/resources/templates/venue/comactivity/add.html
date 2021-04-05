@@ -21,19 +21,35 @@ padding-right:5%" ><br><br>
 			 <el-form-item label="活动类型" prop="activityType">
 			    <el-input style="width:14em" v-model="bCommunityActivities.activityType"></el-input>
 			  </el-form-item>
+            <el-form-item label="活动时长" prop="activityHour">
+                <el-input style="width:14em" v-model="bCommunityActivities.activityHour"></el-input>
+            </el-form-item>
 			 <el-form-item label="活动内容" prop="activityContent">
 			    <el-input style="width:30em" v-model="bCommunityActivities.activityContent"></el-input>
 			  </el-form-item>
-			 <el-form-item label="活动时段" prop="activityTime">
+            <el-form-item label="选择场馆（有场馆才选）" prop="venueId">
+                <el-select v-model="bCommunityActivities.venueId" placeholder="请选择" style="width:14em" filterable>
+                    <el-option v-for="us in venueinfos" :label="us.venueName" :value="us.venueId"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="活动地址" prop="address">
+                <el-input style="width:30em" v-model="bCommunityActivities.address"></el-input>
+            </el-form-item>
+			 <el-form-item label="活动日期" prop="bookDate">
                  <el-date-picker
-                         v-model="bCommunityActivities.activityTime"
+                         v-model="bCommunityActivities.bookDate"
                          :picker-options="pickerOptions1"
                          type="datetime"
-                         format="yyyy-MM-dd HH:mm:ss"
-                         value-format="yyyy-MM-dd HH:mm:ss"
+                         format="yyyy-MM-dd"
+                         value-format="yyyy-MM-dd"
                          placeholder="选择日期">
                  </el-date-picker>
 			  </el-form-item>
+            <el-form-item label="选择时段" prop="bookTime">
+                <el-select v-model="bCommunityActivities.bookTime" placeholder="请选择" style="width:14em" filterable>
+                    <el-option v-for="us in avaTimes " :label="us.name" :value="us.name"></el-option>
+                </el-select>
+            </el-form-item>
 			<el-form-item label="图片："  prop="picUrl">
 					<el-upload
 						class="avatar-uploader"

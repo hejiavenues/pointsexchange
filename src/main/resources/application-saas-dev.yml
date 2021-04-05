@@ -98,8 +98,8 @@ application-properties:
         userMobileInfoEncryptFlag: true #案件详情关于用户联系人和通话记录手机号是否加密标识
         
     uploadInfo: 
-        imageurl: E:/piture/
-        venuesimageurl: E:/piture/
+        imageurl: D:/piture/
+        venuesimageurl: D:/piture/
     ins:
         ytUrl: http://218.17.200.232:66/NetPersonServlet
         USER_CODE: MA000198 # 保险公司提供的系统对接用户名

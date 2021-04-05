@@ -1,6 +1,7 @@
 package cn.cashbang.core.modules.venuesbook.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 
@@ -96,7 +97,7 @@ public class BUserEntity implements Serializable {
 	
 	private String address;
 	
-	private Integer points;
+	private BigDecimal points;
 
 	private String licenseUrl;
 
@@ -269,11 +270,11 @@ public class BUserEntity implements Serializable {
 		this.address = address;
 	}
 
-	public Integer getPoints() {
+	public BigDecimal getPoints() {
 		return points;
 	}
 
-	public void setPoints(Integer points) {
+	public void setPoints(BigDecimal points) {
 		this.points = points;
 	}
 

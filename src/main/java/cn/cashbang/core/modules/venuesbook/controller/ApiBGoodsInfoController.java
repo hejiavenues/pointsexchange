@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -161,7 +162,7 @@ public class ApiBGoodsInfoController extends AbstractController {
         BExchangeRecordEntity bExchangeRecord = new BExchangeRecordEntity();
         bExchangeRecord.setGid(gid);
         bExchangeRecord.setUid(uid);
-        bExchangeRecord.setPoints(point);
+        bExchangeRecord.setPoints(new BigDecimal(point));
         bExchangeRecord.setExStatus(1);
         return bExchangeRecordService.saveBExchangeRecord(bExchangeRecord);
     }

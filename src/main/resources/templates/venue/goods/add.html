@@ -28,12 +28,21 @@ padding-right:5%" >
 					<div slot="tip" class="el-upload__tip">仅支持jpg、png格式的图片</div>
 					</el-upload>
 			</el-form-item>
-			 <el-form-item label="所需积分" prop="points">
-			    <el-input onkeyup="value=value.replace(/[^\d]/g,'');this.dispatchEvent(new Event('input'))" style="width:8em" v-model="bGoodsInfo.points"></el-input>
+			 <el-form-item label="所需时长" prop="points">
+			    <el-input onkeyup="this.value=this.value.match(/\d+\.?\d{0,1}/);this.dispatchEvent(new Event('input'))"
+                          style="width:8em"
+                          v-model="bGoodsInfo.points">(小时,最多一位小数)</el-input>
 			  </el-form-item>
-			 <el-form-item label="市场价（元）" prop="price">
-			    <el-input onkeyup="this.value=this.value.match(/\d+\.?\d{0,2}/);this.dispatchEvent(new Event('input'))" style="width:8em" v-model="bGoodsInfo.price" ></el-input>
+			 <el-form-item label="市场价" prop="price">
+			    <el-input onkeyup="this.value=this.value.match(/\d+\.?\d{0,2}/);this.dispatchEvent(new Event('input'))"
+                          style="width:8em" v-model="bGoodsInfo.price" >（元，最多两位小数）</el-input>
 			  </el-form-item>
+            <el-form-item label="库存总数" prop="goodsCount">
+                <el-input style="width:14em" v-model="bGoodsInfo.goodsCount"></el-input>
+            </el-form-item>
+            <el-form-item label="描述" prop="remark">
+                <el-input style="width:30em" v-model="bGoodsInfo.remark"></el-input>
+            </el-form-item>
 			  <el-form-item label="上架状态"  prop="goodsStatus" class="divHeight-54">
 				<el-select style="width:8em" v-model="bGoodsInfo.goodsStatus" placeholder="请选择">
 				<el-option label="上架" value="1"></el-option>

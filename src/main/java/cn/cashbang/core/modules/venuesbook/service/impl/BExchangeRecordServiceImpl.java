@@ -3,7 +3,9 @@ package cn.cashbang.core.modules.venuesbook.service.impl;
 import java.util.Date;
 import java.util.Map;
 
+import cn.cashbang.core.modules.venuesbook.entity.BGoodsInfoEntity;
 import cn.cashbang.core.modules.venuesbook.entity.BUserEntity;
+import cn.cashbang.core.modules.venuesbook.manager.BGoodsInfoManager;
 import cn.cashbang.core.modules.venuesbook.manager.BUserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,8 @@ public class BExchangeRecordServiceImpl implements BExchangeRecordService {
 	private BExchangeRecordManager bExchangeRecordManager;
     @Autowired
     private BUserManager bUserManager;
+    @Autowired
+    private BGoodsInfoManager bGoodsInfoManager;
 
 	@Override
 	public Page<BExchangeRecordEntity> listBExchangeRecord(Map<String, Object> params) {
@@ -45,7 +49,7 @@ public class BExchangeRecordServiceImpl implements BExchangeRecordService {
 
         BUserEntity user = bUserManager.getBUserById(role.getUid());
 
-        if(user.getPoints()<Integer.valueOf(role.getPoints())){
+        if(user.getPoints().compareTo(role.getPoints())<0){
               return Result.error("分数不够不能兑换,快去攒积分吧。");
         }
 
@@ -55,9 +59,15 @@ public class BExchangeRecordServiceImpl implements BExchangeRecordService {
 		int count = bExchangeRecordManager.saveBExchangeRecord(role);
 
         // 更新用户的分数
-        user.setPoints(user.getPoints()-Integer.valueOf(role.getPoints()));
+        user.setPoints(user.getPoints().subtract(role.getPoints()));
         System.out.println("这次扣除的分数是"+ role.getPoints());
+
         bUserManager.updateBUser(user);
+        
+        // 更新库存
+        BGoodsInfoEntity goods = bGoodsInfoManager.getBGoodsInfoById(role.getGid());
+        goods.setGoodsCount(goods.getGoodsCount()-1);
+        bGoodsInfoManager.updateBGoodsInfo(goods);
 
 		return CommonUtils.msg(count);
 	}

@@ -7,6 +7,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import cn.cashbang.core.common.utils.StringUtils;
+import cn.cashbang.core.modules.venuesbook.entity.BVenueBookEntity;
+import cn.cashbang.core.modules.venuesbook.manager.BVenueBookManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,6 +36,9 @@ public class BCommunityActivitiesServiceImpl implements BCommunityActivitiesServ
 
 	@Autowired
 	private BCommunityActivitiesManager bCommunityActivitiesManager;
+
+    @Autowired
+    private BVenueBookManager bVenueBookManager;
 
 	@Override
 	public Page<BCommunityActivitiesEntity> listBCommunityActivities(Map<String, Object> params) {
@@ -83,6 +89,25 @@ public class BCommunityActivitiesServiceImpl implements BCommunityActivitiesServ
 		role.setCreateTime(new Date());
 		role.setUpdateTime(new Date());
 		role.setPicUrl("/picture/"+fileName);
+		role.setActivityTime(role.getBookDate()+" "+role.getBookTime());
+
+       if(StringUtils.isNotBlank(role.getVenueId())) {
+
+           // 生成一条预约记录
+           BVenueBookEntity bVenueBook = new BVenueBookEntity();
+           bVenueBook.setBookStatus(2); // 已预约
+           bVenueBook.setBookTime(role.getBookTime());
+           bVenueBook.setBookDate(role.getBookDate());
+           bVenueBook.setUserId(role.getUid());
+           bVenueBook.setVenueId(role.getVenueId());
+           bVenueBook.setActivityId(role.getComActivityId());
+           bVenueBook.setActivityContent(role.getActivityContent());
+           String uuid2 = CommonUtils.createUUID();
+           bVenueBook.setId(uuid2);
+           bVenueBook.setCreateTime(new Date());
+           int r1= bVenueBookManager.saveBVenueBook(bVenueBook);
+       }
+
 		int count = bCommunityActivitiesManager.saveBCommunityActivities(role);
 		return CommonUtils.msg(count);
 	}

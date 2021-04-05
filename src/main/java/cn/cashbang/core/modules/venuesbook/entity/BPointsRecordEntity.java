@@ -1,6 +1,7 @@
 package cn.cashbang.core.modules.venuesbook.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 
@@ -38,7 +39,7 @@ public class BPointsRecordEntity implements Serializable {
 	/**
 	 * 获得的积分数量
 	 */
-	private Integer points;
+	private BigDecimal points;
 	
 	/**
 	 * 获取或消耗方式（1、参加活动 2、发布随拍 3、兑换商品）
@@ -76,11 +77,11 @@ public class BPointsRecordEntity implements Serializable {
 		return uid;
 	}
 	
-	public void setPoints(Integer points) {
+	public void setPoints(BigDecimal points) {
 		this.points = points;
 	}
 	
-	public Integer getPoints() {
+	public BigDecimal getPoints() {
 		return points;
 	}
 	

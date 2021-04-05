@@ -11,13 +11,15 @@ var vm = new Vue({
 		imageUrl: '',
 		rules:{//form 规则
 		
-			    gid: [ {  required: true, message: '主键ID', trigger: 'blur' } ], 
+			    // gid: [ {  required: true, message: '主键ID', trigger: 'blur' } ],
 		    goodsName: [ {  required: true, message: '商品名称', trigger: 'blur' } ], 
-		    points: [ {  required: true, message: '请输入整数数字', trigger: 'blur' } ], 
-		    price: [ {  required: true, message: '请输入最多两位小数的数字', trigger: 'blur' } ], 
-		    goodsStatus: [ {  required: true, message: '请选择是否上架', trigger: 'blur' } ], 
-		    createTime: [ {  required: true, message: '上架时间（创建时间）', trigger: 'blur' } ], 
-		    updateTime: [ {  required: true, message: '更新时间', trigger: 'blur' } ]
+		    points: [ {  required: true, message: '所需时长（小时）', trigger: 'blur' } ],
+		    price: [ {  required: true, message: '商品价格', trigger: 'blur' } ],
+            goodsCount: [ {  required: true, message: '库存总数', trigger: 'blur' } ],
+            remark: [ {  required: true, message: '描述', trigger: 'blur' } ],
+            goodsStatus: [ {  required: true, message: '请选择是否上架', trigger: 'blur' } ],
+		    // createTime: [ {  required: true, message: '上架时间（创建时间）', trigger: 'blur' } ],
+		    // updateTime: [ {  required: true, message: '更新时间', trigger: 'blur' } ]
 			
 		}
 	},

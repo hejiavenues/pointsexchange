@@ -9,6 +9,8 @@ var vm = new Vue({
 			imgFile: null,
 		},
 		imageUrl: '',
+        avaTimes:[],
+        venueinfos: [],
 		rules:{//form 规则
 
 		    activityName: [ {  required: true, message: '活动名称', trigger: 'blur' } ], 
@@ -25,6 +27,10 @@ var vm = new Vue({
         }
 			
 	},
+    created:function(){
+        this.getAllTimes();
+        this.getVenueinfo();
+    },
 	methods : {
 	   setForm: function() {
 			$.SetForm({
@@ -36,6 +42,24 @@ var vm = new Vue({
 		    	}
 			});
 		},
+        getAllTimes:function(){
+            var th=this;
+            zs_post({
+                url:'../../venuesbook/dic/getDicsByCode?typeCode=avaTime',
+                success:function(r){
+                    th.avaTimes=r.bDics;
+                }
+            })
+        },
+        getVenueinfo:function(){
+            var th=this;
+            zs_post({
+                url:'../../venuesbook/venueinfo/list?_' + $.now(),
+                success:function(r){
+                    th.venueinfos=r.rows;
+                }
+            })
+        },
 		acceptClick: function() {
 		
 		  this.$refs

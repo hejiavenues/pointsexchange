@@ -1,6 +1,7 @@
 package cn.cashbang.core.modules.venuesbook.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 
@@ -75,6 +76,45 @@ public class BCommunityActivitiesEntity implements Serializable {
      * 场馆id
      */
     private String venueId;
+
+    /**
+     * 活动时长
+     */
+    private BigDecimal activityHour;
+
+    /**
+     * 预约日期
+     */
+    private String bookDate;
+
+    /**
+     * 预约时段
+     */
+    private String bookTime;
+
+    public String getBookDate() {
+        return bookDate;
+    }
+
+    public void setBookDate(String bookDate) {
+        this.bookDate = bookDate;
+    }
+
+    public String getBookTime() {
+        return bookTime;
+    }
+
+    public void setBookTime(String bookTime) {
+        this.bookTime = bookTime;
+    }
+
+    public BigDecimal getActivityHour() {
+        return activityHour;
+    }
+
+    public void setActivityHour(BigDecimal activityHour) {
+        this.activityHour = activityHour;
+    }
 
     public String getVenueId() {
         return venueId;

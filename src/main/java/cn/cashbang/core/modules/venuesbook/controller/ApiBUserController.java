@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -62,7 +63,7 @@ public class ApiBUserController extends AbstractController {
 		bUser.setMobile(mobile);
 		bUser.setUserRole(1);
 		bUser.setStatus(1);
-        bUser.setPoints(0);
+        bUser.setPoints(new BigDecimal(0));
 		String uuid = CommonUtils.createUUID();
 		bUser.setUid(uuid);
 		bUser.setOpenId(openId);
@@ -107,7 +108,7 @@ public class ApiBUserController extends AbstractController {
         bUser.setOpenId(openId);
         bUser.setCreateTime(new Date());
         bUser.setIconUrl(iconUrl);
-        bUser.setPoints(0);
+        bUser.setPoints(new BigDecimal(0));
         bUser.setCompanyName(companyName);
         bUser.setAddress(address);
         bUser.setLicenseUrl("/picture/"+licenseUrl);
@@ -151,7 +152,7 @@ public class ApiBUserController extends AbstractController {
 	 */
 	@RequestMapping("/updateUser")
 	public Result updateUser(String uid,String uname,Integer sex,String birthday
-			,String iconUrl,String address){
+			,String iconUrl,String address,String mobile){
 
 		BUserEntity bUser = new BUserEntity();
 		bUser.setBirthday(birthday);
@@ -159,6 +160,7 @@ public class ApiBUserController extends AbstractController {
 		bUser.setSex(sex);
 		bUser.setUname(uname);
         bUser.setAddress(address);
+        bUser.setMobile(mobile);
 
 		if(StringUtils.isNotBlank(iconUrl)){
 			bUser.setIconUrl(iconUrl);

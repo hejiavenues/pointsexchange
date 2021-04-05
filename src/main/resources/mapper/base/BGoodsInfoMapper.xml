@@ -10,7 +10,9 @@
 			`goods_picurl`, 
 			`points`, 
 			`price`, 
-			`goods_status`, 
+			`goods_status`,
+            remark,
+            goods_count,
 			`create_time`, 
 			`update_time`
 		FROM
@@ -34,7 +36,9 @@
 			`goods_picurl`, 
 			`points`, 
 			`price`, 
-			`goods_status`, 
+			`goods_status`,
+			remark,
+            goods_count,
 			`create_time`, 
 			`update_time`
 		)
@@ -44,7 +48,9 @@
 			#{goodsPicurl}, 
 			#{points}, 
 			#{price}, 
-			#{goodsStatus}, 
+			#{goodsStatus},
+			#{remark},
+            #{goodsCount},
 			#{createTime}, 
 			#{updateTime}
 		)
@@ -57,7 +63,9 @@
 			`goods_picurl`, 
 			`points`, 
 			`price`, 
-			`goods_status`, 
+			`goods_status`,
+			remark,
+            goods_count,
 			`create_time`, 
 			`update_time`
 		FROM
@@ -73,7 +81,9 @@
 			`goods_picurl`, 
 			`points`, 
 			`price`, 
-			`goods_status`, 
+			`goods_status`,
+			remark,
+            goods_count,
 			`create_time`, 
 			`update_time`
 		FROM
@@ -90,6 +100,8 @@
 			<if test="points != null">`points` = #{points}, </if>
 			<if test="price != null">`price` = #{price}, </if>
 			<if test="goodsStatus != null">`goods_status` = #{goodsStatus}, </if>
+            <if test="remark != null">`remark` = #{remark}, </if>
+            <if test="goodsCount != null">`goods_count` = #{goodsCount}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
 			<if test="updateTime != null">`update_time` = #{updateTime}</if>
 		</set>

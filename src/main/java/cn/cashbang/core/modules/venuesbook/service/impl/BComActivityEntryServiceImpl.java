@@ -108,7 +108,9 @@ public class BComActivityEntryServiceImpl implements BComActivityEntryService {
             BUserEntity user = bUserManager.getBUserById(bComActivityEntry.getUid());
 
             // 更新用户的分数
-            user.setPoints(user.getPoints()+10);   // TODO 暂定奖励十分
+            BCommunityActivitiesEntity act =bCommunityActivitiesManager
+                    .getBCommunityActivitiesById(bComActivityEntry.getComActivityId());
+            user.setPoints(user.getPoints().add(act.getActivityHour()));   // TODO 暂定奖励的是活动的时长
             bUserManager.updateBUser(user);
 
             // 新增积分记录
@@ -118,7 +120,7 @@ public class BComActivityEntryServiceImpl implements BComActivityEntryService {
             role.setCreateTime(new Date());
             role.setUpdateTime(new Date());
             role.setUid(bComActivityEntry.getUid());
-            role.setPoints(10);   // TODO 暂定奖励十分
+            role.setPoints(act.getActivityHour());   // TODO  暂定奖励的是活动的时长
             BCommunityActivitiesEntity ca = bCommunityActivitiesManager
                     .getBCommunityActivitiesById(bComActivityEntry.getComActivityId());
             if(ca!=null){

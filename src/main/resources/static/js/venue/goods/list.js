@@ -15,9 +15,11 @@ var vm = new Vue({
 		table:{//表格数据
 			  "col":[
 					{field : "goodsName", title : "商品名称", width : ""}, 
-					{field : "points", title : "所需积分", width : ""}, 
-					{field : "price", title : "市场价（元）", width : ""}, 
-					{field : "goodsStatusStr", title : "上架状态", width : ""}, 
+					{field : "points", title : "所需时长（小时）", width : ""},
+					{field : "price", title : "市场价（元）", width : ""},
+                  {field : "goodsCount", title : "库存总量", width : ""},
+                  {field : "remark", title : "描述", width : ""},
+                  {field : "goodsStatusStr", title : "上架状态", width : ""},
 					{field : "createTime", title : "商品创建时间", width : "150px"}, 
 					/*{field : "updateTime", title : "更新时间", width : "150px"}*/
 			  ],

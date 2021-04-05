@@ -36,7 +36,7 @@ public class BGoodsDtoEntity implements Serializable {
 	/**
 	 * 所需积分
 	 */
-	private Integer points;
+	private BigDecimal points;
 	
 	/**
 	 * 市场价
@@ -47,6 +47,25 @@ public class BGoodsDtoEntity implements Serializable {
 	 * 上架状态（1，上架 2 下架）
 	 */
 	private Integer goodsStatus;
+
+    private String remark;
+    private Integer goodsCount;
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public Integer getGoodsCount() {
+        return goodsCount;
+    }
+
+    public void setGoodsCount(Integer goodsCount) {
+        this.goodsCount = goodsCount;
+    }
 	
 	public BGoodsDtoEntity() {
 		super();
@@ -76,11 +95,11 @@ public class BGoodsDtoEntity implements Serializable {
 		return goodsPicurl;
 	}
 	
-	public void setPoints(Integer points) {
+	public void setPoints(BigDecimal points) {
 		this.points = points;
 	}
 	
-	public Integer getPoints() {
+	public BigDecimal getPoints() {
 		return points;
 	}
 	
