@@ -58,14 +58,14 @@ var vm = new Vue({
 				param:th.param,
 				success:function(r){
 					console.log(r);
-					for(var i=0;i<r.rows.length;i++){
-						if(r.rows[i].userRole == 1){
-                        r.rows[i].userRole = '普通用户';
-						}
-                    	else if(r.rows[i].userRole == 2){
-                        r.rows[i].userRole = '企业用户';
-                    	}
-					}
+					// for(var i=0;i<r.rows.length;i++){
+					// 	if(r.rows[i].userRole == 1){
+                     //    r.rows[i].userRole = '普通用户';
+					// 	}
+                    	// else if(r.rows[i].userRole == 2){
+                     //    r.rows[i].userRole = '企业用户';
+                    	// }
+					// }
 					th.table.data=r.rows;
 					th.table.total=r.total;
 				}
@@ -102,6 +102,31 @@ var vm = new Vue({
 				});
 			}
 		},
+        updateStatus: function(row) {
+            this.$confirm('您确定要代客户确认领取吗，此操作不可撤回？', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                //点击确定的操作(调用接口)
+                var ck =[row];
+            if(row.exStatus == 1){
+                ck[0].exStatus=2;
+                //ck[0].userRole=1;
+            }
+            zs_post({
+                url: '../../venuesbook/exchrecord/update',
+                param:ck[0],
+                success:function(r){
+                    console.log(r);
+                    vm.load();
+                }
+            })
+        }).catch(() => {
+                //几点取消的提示
+                //alert("123123123");
+            });
+        },
 		remove: function(row) {
 			var ck = [row], ids = [];	
 			if(checkedArray(ck)){

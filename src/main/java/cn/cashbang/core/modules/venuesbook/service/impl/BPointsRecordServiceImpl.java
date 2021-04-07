@@ -57,7 +57,7 @@ public class BPointsRecordServiceImpl implements BPointsRecordService {
 		// 同时更新用户的积分
         BUserEntity user = bUserManager.getBUserById(role.getUid());
         // 更新用户的分数
-        user.setPoints(user.getPoints().subtract(role.getPoints()));
+        user.setPoints(user.getPoints().add(role.getPoints()));
         System.out.println("这次奖励的分数是"+ role.getPoints());
 
         bUserManager.updateBUser(user);
