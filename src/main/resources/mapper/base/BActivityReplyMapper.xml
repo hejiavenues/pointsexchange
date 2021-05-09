@@ -5,16 +5,23 @@
 	
 	<select id="listForPage" resultType="cn.cashbang.core.modules.venuesbook.entity.BActivityReplyEntity">
 		SELECT
-			`reply_id`, 
-			`activity_id`, 
-			`uid`, 
-			`content`, 
-			`create_time`, 
-			`update_time`
+			bar.`reply_id`, 
+			bar.`activity_id`, 
+			(select ba.activity_id_name from b_activities ba where ba.activity_id = bar.activity_id) as activityName,
+			bar.`uid`, 
+			(select bu.uname from b_user bu where bu.uid = bar.uid) as uName,
+			bar.`content`, 
+			bar.`create_time`, 
+			bar.`update_time`
 		FROM
-			b_activity_reply
+			b_activity_reply bar 
+			<where>
+			<if test="activityId != null and activityId != ''">
+				and	`activity_id` = #{activityId} 
+			</if>
+			</where>
 		ORDER BY
-			reply_id DESC
+			bar.create_time DESC
 	</select>
 	
 	<insert id="save">

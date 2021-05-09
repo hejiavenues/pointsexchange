@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="include/header_element::header('外部场馆信息表')"></head>
+<style>
+html,body
+{
+    margin: 0;
+    height: 100%;
+}
+</style>
+<body>
+  <dev id="zsvm"  style="height:100%;">
+<el-form :model="bVenueInfoOut" size=" small"  status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm"  style="overflow-y:auto;height:95%;
+padding-right:5%" >
+			 <el-form-item label="场馆名称" prop="venueName">
+			    <el-input v-model="bVenueInfoOut.venueName"></el-input>
+			  </el-form-item>
+			 <el-form-item label="最大容纳人数" prop="maxPeople">
+			    <el-input v-model="bVenueInfoOut.maxPeople"></el-input>
+			  </el-form-item>
+			 <el-form-item label="场馆地址" prop="address">
+			    <el-input v-model="bVenueInfoOut.address"></el-input>
+			  </el-form-item>
+			 <el-form-item label="所属企业用户Id" prop="userId">
+			    <el-input v-model="bVenueInfoOut.userId"></el-input>
+			  </el-form-item>
+			 <el-form-item label="支持的活动类型，字符串" prop="supportActiveType">
+			    <el-input v-model="bVenueInfoOut.supportActiveType"></el-input>
+			  </el-form-item>
+			 <el-form-item label="图片地址" prop="iconUrl">
+			    <el-input v-model="bVenueInfoOut.iconUrl"></el-input>
+			  </el-form-item>
+			 <el-form-item label="0可用1隐藏" prop="status">
+			    <el-input v-model="bVenueInfoOut.status"></el-input>
+			  </el-form-item>
+			 <el-form-item label="开放时间" prop="openTime">
+			    <el-input v-model="bVenueInfoOut.openTime"></el-input>
+			  </el-form-item>
+			 <el-form-item label="支持活动内容" prop="activityRemark">
+			    <el-input v-model="bVenueInfoOut.activityRemark"></el-input>
+			  </el-form-item>
+			 <el-form-item label="创建时间" prop="createTime">
+			    <el-input v-model="bVenueInfoOut.createTime"></el-input>
+			  </el-form-item>
+			 <el-form-item label="修改时间" prop="updateTime">
+			    <el-input v-model="bVenueInfoOut.updateTime"></el-input>
+			  </el-form-item>
+</el-form>
+</dev>	
+	<div th:include="include/footer_element::footer"></div>
+	<script th:src="@{/js/venue/outvenueinfo/add.js}"></script>
+</body>
+</html>

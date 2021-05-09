@@ -27,10 +27,14 @@ public class BActivityReplyEntity implements Serializable {
 	 */
 	private String activityId;
 	
+	private String activityName;
+	
 	/**
 	 * 用户id
 	 */
 	private String uid;
+	
+	private String uName;
 	
 	/**
 	 * 评论内容
@@ -98,6 +102,22 @@ public class BActivityReplyEntity implements Serializable {
 	
 	public Date getUpdateTime() {
 		return updateTime;
+	}
+
+	public String getActivityName() {
+		return activityName;
+	}
+
+	public void setActivityName(String activityName) {
+		this.activityName = activityName;
+	}
+
+	public String getuName() {
+		return uName;
+	}
+
+	public void setuName(String uName) {
+		this.uName = uName;
 	}
 	
 }

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.cashbang.core.modules.venuesbook.dao.BVenueInfoOutMapper">
+	
+	<select id="listForPage" resultType="cn.cashbang.core.modules.venuesbook.entity.BVenueInfoOutEntity">
+		SELECT
+			bvo.`venue_id`, 
+			bvo.`venue_name`, 
+			bvo.`max_people`, 
+			bvo.`address`, 
+			bvo.`user_id`, 
+			(select bu.uname from b_user bu where bu.uid = bvo.user_id) as userName,
+			bvo.`support_active_type`, 
+			bvo.`icon_url`, 
+			bvo.`status`, 
+			bvo.`open_time`, 
+			bvo.`activity_remark`, 
+			bvo.`create_time`, 
+			bvo.`update_time`
+		FROM
+			b_venue_info_out bvo
+			<where>
+			<if test="pAddress != null and pAddress != ''">
+				and	bvo.`address` like concat('%',#{pAddress},'%') 
+			</if>
+            <if test="pName != null and pName != ''">
+                and	bvo.`venue_name` like concat('%',#{pName},'%') 
+            </if>
+            <if test="pStatus != null and pStatus != ''">
+                and	bvo.`status` =  #{pStatus} 
+            </if>
+            </where>
+		ORDER BY
+			bvo.update_time DESC
+	</select>
+	
+	<insert id="save">
+		INSERT INTO b_venue_info_out (
+			`venue_id`, 
+			`venue_name`, 
+			`max_people`, 
+			`address`, 
+			`user_id`, 
+			`support_active_type`, 
+			`icon_url`, 
+			`status`, 
+			`open_time`, 
+			`activity_remark`, 
+			`create_time`, 
+			`update_time`
+		)
+		VALUES (
+			#{venueId}, 
+			#{venueName}, 
+			#{maxPeople}, 
+			#{address}, 
+			#{userId}, 
+			#{supportActiveType}, 
+			#{iconUrl}, 
+			#{status}, 
+			#{openTime}, 
+			#{activityRemark}, 
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+	
+	<select id="getObjectById" resultType="cn.cashbang.core.modules.venuesbook.entity.BVenueInfoOutEntity">
+		SELECT
+			`venue_id`, 
+			`venue_name`, 
+			`max_people`, 
+			`address`, 
+			`user_id`, 
+			`support_active_type`, 
+			`icon_url`, 
+			`status`, 
+			`open_time`, 
+			`activity_remark`, 
+			`create_time`, 
+			`update_time`
+		FROM
+			b_venue_info_out
+		WHERE
+			venue_id = #{venueId}
+	</select>
+	
+	<update id="update">
+		UPDATE b_venue_info_out
+	 	<set>
+			<if test="venueName != null">`venue_name` = #{venueName}, </if>
+			<if test="maxPeople != null">`max_people` = #{maxPeople}, </if>
+			<if test="address != null">`address` = #{address}, </if>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="supportActiveType != null">`support_active_type` = #{supportActiveType}, </if>
+			<if test="iconUrl != null">`icon_url` = #{iconUrl}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="openTime != null">`open_time` = #{openTime}, </if>
+			<if test="activityRemark != null">`activity_remark` = #{activityRemark}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		WHERE
+			venue_id = #{venueId}
+	</update>
+	
+	<delete id="batchRemove">
+		DELETE
+		FROM
+			b_venue_info_out
+		WHERE
+			venue_id IN
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

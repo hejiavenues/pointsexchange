@@ -58,6 +58,29 @@ var vm = new Vue({
 				}
 		    })
 		},
+		orgTree1: function(row) {
+			console.log(row.activityId);
+			var ck =[row];
+			dialogOpen({
+				id: 'layerOrgTree',
+				title: '评论列表',
+		        url: 'venue/activityreply/list.html?activityId=' + row.activityId,
+		        scroll : true,
+		        width: "1000px",
+		        height: "550px",
+				success: function(iframeId){
+					console.log("2222222222222222"+row.activityId);
+					top.frames[iframeId].vm.param.activityId = ck[0].activityId;
+					top.frames[iframeId].vm.load();
+					},
+		        yes : function(iframeId) {
+					console.log("2222222222222222"+row.activityId);
+					top.frames[iframeId].vm.param.activityId = ck[0].activityId;
+					top.frames[iframeId].vm.load();
+		        	//top.frames[iframeId].vm.acceptClick();
+				}
+		    })
+		},
 	    selectCases:function(selects){
 			this.table.selects=selects;
 	    },

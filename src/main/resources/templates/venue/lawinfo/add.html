@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="include/header_element::header('法律体检表')"></head>
+<style>
+html,body
+{
+    margin: 0;
+    height: 100%;
+}
+</style>
+<body>
+  <dev id="zsvm"  style="height:100%;">
+<el-form :model="bLawInfo" size=" small"  status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm"  style="overflow-y:auto;height:95%;
+padding-right:5%" >
+<br><br>
+			 <el-form-item label="事务所名称" prop="lawName">
+			    <el-input style="width:14em" v-model="bLawInfo.lawName"></el-input>
+			  </el-form-item>
+			 <el-form-item label="事务所地址" prop="address">
+			    <el-input style="width:24em" v-model="bLawInfo.address"></el-input>
+			  </el-form-item>
+			 <el-form-item label="联系方式" prop="phone">
+			    <el-input onkeyup="value=value.replace(/[^\d]/g,'')" style="width:14em" v-model="bLawInfo.phone"></el-input>
+			  </el-form-item>
+			 <el-form-item label="服务描述" prop="remark">
+			    <el-input style="width:24em" v-model="bLawInfo.remark"></el-input>
+			  </el-form-item>
+</el-form>
+</dev>	
+	<div th:include="include/footer_element::footer"></div>
+	<script th:src="@{/js/venue/lawinfo/add.js}"></script>
+</body>
+</html>
