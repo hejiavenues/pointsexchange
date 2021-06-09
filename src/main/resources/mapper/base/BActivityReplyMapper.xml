@@ -6,11 +6,13 @@
 	<select id="listForPage" resultType="cn.cashbang.core.modules.venuesbook.entity.BActivityReplyEntity">
 		SELECT
 			bar.`reply_id`, 
-			bar.`activity_id`, 
-			(select ba.activity_id_name from b_activities ba where ba.activity_id = bar.activity_id) as activityName,
+			bar.`activity_id`,
+        (select ba.activity_name from b_community_activities ba where ba.com_activity_id = bar.activity_id) as activityName,
 			bar.`uid`, 
 			(select bu.uname from b_user bu where bu.uid = bar.uid) as uName,
-			bar.`content`, 
+            (select bu.icon_url from b_user bu where bu.uid = bar.uid) as iconUrl,
+			bar.`content`,
+            bar.pic_url,
 			bar.`create_time`, 
 			bar.`update_time`
 		FROM
@@ -29,7 +31,8 @@
 			`reply_id`, 
 			`activity_id`, 
 			`uid`, 
-			`content`, 
+			`content`,
+			pic_url,
 			`create_time`, 
 			`update_time`
 		)
@@ -37,7 +40,8 @@
 			#{replyId}, 
 			#{activityId}, 
 			#{uid}, 
-			#{content}, 
+			#{content},
+			#{picUrl},
 			#{createTime}, 
 			#{updateTime}
 		)

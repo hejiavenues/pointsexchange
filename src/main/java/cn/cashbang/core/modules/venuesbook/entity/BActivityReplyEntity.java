@@ -50,9 +50,28 @@ public class BActivityReplyEntity implements Serializable {
 	 * 
 	 */
 	private Date updateTime;
-	
 
-	public BActivityReplyEntity() {
+	private String picUrl;
+
+	private String iconUrl;
+
+    public String getIconUrl() {
+        return iconUrl;
+    }
+
+    public void setIconUrl(String iconUrl) {
+        this.iconUrl = iconUrl;
+    }
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
+    }
+
+    public BActivityReplyEntity() {
 		super();
 	}
 

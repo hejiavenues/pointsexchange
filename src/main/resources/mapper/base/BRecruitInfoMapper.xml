@@ -6,8 +6,10 @@
 	<select id="listForPage" resultType="cn.cashbang.core.modules.venuesbook.entity.BRecruitInfoEntity">
 		SELECT
 			bri.`recruit_id`, 
-			bri.`user_id`, 
-			(select bu.uname from b_user bu where bu.uid = bri.user_id) as userName,
+			bri.`user_id`,
+            bu.uname as userName,
+            bu.address,
+            bu.company_name as companyName,
 			bri.`hr_name`, 
 			bri.`phone`, 
 			bri.`job_name`, 
@@ -17,7 +19,7 @@
 			bri.`create_time`, 
 			bri.`update_time`
 		FROM
-			b_recruit_info bri
+			b_recruit_info bri left join  b_user bu on bu.uid = bri.user_id
 			<where>
 			<!-- <if test="cgName != null and cgName != ''">
 				and	exists (select 1 from venuesbooking.b_venue_info bvi where bvi.`venue_id` = ba.`venue_id` and bvi.venue_name like concat('%',#{cgName},'%')) 

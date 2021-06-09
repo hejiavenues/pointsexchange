@@ -2,6 +2,11 @@ package cn.cashbang.core.modules.venuesbook.service.impl;
 
 import java.util.Map;
 
+import cn.cashbang.core.common.utils.StringUtils;
+import cn.cashbang.core.common.utils.WebUtils;
+import cn.cashbang.core.modules.venuesbook.entity.BAccessTokenEntity;
+import cn.cashbang.core.modules.venuesbook.entity.BUserEntity;
+import cn.cashbang.core.modules.venuesbook.manager.BAccessTokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +32,10 @@ public class BActivityReplyServiceImpl implements BActivityReplyService {
 	@Autowired
 	private BActivityReplyManager bActivityReplyManager;
 
+
+    @Autowired
+    private BAccessTokenManager bAccessTokenManager;
+
 	@Override
 	public Page<BActivityReplyEntity> listBActivityReply(Map<String, Object> params) {
 		Query query = new Query(params);
@@ -37,7 +46,31 @@ public class BActivityReplyServiceImpl implements BActivityReplyService {
 
 	@Override
 	public Result saveBActivityReply(BActivityReplyEntity role) {
-		int count = bActivityReplyManager.saveBActivityReply(role);
+
+        int count = 0;
+        BAccessTokenEntity token = bAccessTokenManager.getBAccessTokenById(1L);
+        String content = role.getContent();
+        String code = WebUtils.msgCheck(token.getAccessToken(),content);
+        System.out.println("content"+content);
+        if("40001".equals(code)||"42001".equals(code)){
+            String tokenString = WebUtils.getAccessToken();
+            if(StringUtils.isNotBlank(tokenString)){
+
+                BAccessTokenEntity bAccessToken = new BAccessTokenEntity();
+                bAccessToken.setId(1);
+                bAccessToken.setAccessToken(tokenString);
+                bAccessTokenManager.updateBAccessToken(bAccessToken);
+            }
+            code = WebUtils.msgCheck(tokenString,content);
+        }
+        if("0".equals(code)){
+
+            count = bActivityReplyManager.saveBActivityReply(role);
+        }
+        else {
+            return Result.error("上传的信息中含有敏感内容，请修改后再上传。");
+        }
+
 		return CommonUtils.msg(count);
 	}
 

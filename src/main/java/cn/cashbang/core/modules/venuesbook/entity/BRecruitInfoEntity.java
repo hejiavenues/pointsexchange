@@ -69,6 +69,11 @@ public class BRecruitInfoEntity implements Serializable {
 	 */
 	private Date updateTime;
 	
+    private String companyName;
+
+    private String address;
+
+
 
 	public BRecruitInfoEntity() {
 		super();
@@ -77,8 +82,24 @@ public class BRecruitInfoEntity implements Serializable {
 	public void setRecruitId(String recruitId) {
 		this.recruitId = recruitId;
 	}
-	
-	public String getRecruitId() {
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getRecruitId() {
 		return recruitId;
 	}
 	

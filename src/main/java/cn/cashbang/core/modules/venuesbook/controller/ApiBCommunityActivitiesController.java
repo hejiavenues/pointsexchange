@@ -45,7 +45,8 @@ public class ApiBCommunityActivitiesController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/list")
-	public Map<String, Object> list(int page,String queryAcName,String queryUid) {
+	public Map<String, Object> list(int page,String queryAcName,String queryUid,
+                                    String queryDate) {
 		//return bCommunityActivitiesService.listBCommunityActivities(params);
 
         Map<String, Object> params = new HashMap<>();
@@ -57,6 +58,7 @@ public class ApiBCommunityActivitiesController extends AbstractController {
         params.put("sortOrde","asc");
         params.put("queryAcName",queryAcName);
         params.put("queryUid",queryUid);
+        params.put("queryDate",queryDate);
 
 //        params.put("queryComId",queryComId);
 //        params.put("queryActType",queryActType);
@@ -83,7 +85,7 @@ public class ApiBCommunityActivitiesController extends AbstractController {
 	 * @return
 	 */
 	@SysLog("新增社区活动信息表")
-	@RequestMapping("/save")
+	@RequestMapping("/saveReply")
 	public Result save(String userId,String activityTime, String address,String activityIconUrl,
                        String activityName,String activityType,String activityContent,int activityCount) {
 

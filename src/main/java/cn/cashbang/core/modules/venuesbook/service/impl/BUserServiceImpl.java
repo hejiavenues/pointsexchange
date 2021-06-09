@@ -155,6 +155,53 @@ public class BUserServiceImpl implements BUserService {
 	}
 
     @Override
+    public Result loginCompanyUser(String code){
+
+		// 静波的小程序
+		String appId="wx3a6796d91e05c5bf";
+		String appSecret="dbf8c4107af70b407c9230705a4b126f";
+
+//        // 金顶街的小程序
+//        String appId="wxddad91318561f741";
+//        String appSecret="ab18ee8a424ec47c88e2f31f6ec478d6";
+
+        String requestUrl = "https://api.weixin.qq.com/sns/jscode2session?grant_type=authorization_code&appid="
+                + appId + "&secret=" + appSecret + "&js_code=" + code;
+        //HttpClientUtils.HttpPostParams httpPostParams = HttpClientUtils.createHttpPostParams(requestUrl);
+        String res = HttpClientUtils.doGet1(requestUrl);
+
+        JSONObject jsonObject = JSONObject.parseObject(res);
+        Object resO = jsonObject.get("openid") == null ? jsonObject.get("openId") : jsonObject.get("openid");
+        String openId = "";
+        if(resO!=null){
+            openId = resO.toString();
+
+            // 根据openId查询用户是否存在
+            BUserEntity bUser = bUserManager.getUserByOpenId(openId);
+
+            if(bUser==null) {
+
+                bUser = new  BUserEntity();
+                bUser.setOpenId(openId);
+            }
+
+            BConvenerInfoEntity con = bConvenerInfoManager.getBConvenerInfoById(bUser.getUid());
+            if(con!=null) {
+                if(con.getStatus()==0){
+                    bUser.setUserRole(0);  // 召集人审核中状态
+                }
+            }
+
+//			bUserManager.updateBUser(bUser);
+
+            return Result.ok().put("raws", bUser);
+        }
+        else {
+            return Result.error("登录失败");
+        }
+    }
+
+    @Override
     public Result getUserCount(String userId){
 
         BUserEntity bUser = bUserManager.getBUserById(userId);

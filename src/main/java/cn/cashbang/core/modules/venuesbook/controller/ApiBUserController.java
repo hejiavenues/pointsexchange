@@ -133,6 +133,12 @@ public class ApiBUserController extends AbstractController {
 
 		return bUserService.loginUser(code);
 	}
+
+    @RequestMapping("/uerLoginCompany")
+    public Result uerLoginCompany(String code){
+
+        return bUserService.loginCompanyUser(code);
+    }
 	
 	/**
 	 * 根据id查询用户详情
