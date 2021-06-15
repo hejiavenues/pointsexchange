@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="include/header_element::header('志愿者导师信息表')"></head>
+<style>
+html,body
+{
+    margin: 0;
+    height: 100%;
+}
+</style>
+<body>
+  <dev id="zsvm"  style="height:100%;">
+<el-form :model="bUserTutor" size=" small"  status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm"  style="overflow-y:auto;height:95%;
+padding-right:5%" >
+			 <el-form-item label="用户名称" prop="uname">
+			    <el-input style="width:14em" v-model="bUserTutor.uname"></el-input>
+			  </el-form-item>
+			  <el-form-item label="用户性别" prop="sex" class="divHeight-54">
+				<el-select v-model="bUserTutor.sex" placeholder="请选择">
+				<el-option label="男" value="1"></el-option>
+				<el-option label="女" value="0"></el-option>
+				</el-select>
+			</el-form-item>
+			 <el-form-item label="手机号" prop="mobile">
+			    <el-input style="width:12em" v-model="bUserTutor.mobile"></el-input>
+			  </el-form-item>
+			 <el-form-item label="个人特长" prop="skill">
+			    <el-input style="width:8em" v-model="bUserTutor.skill"></el-input>
+			  </el-form-item>
+			 <el-form-item label="特长说明" prop="skillDes">
+			    <el-input style="width:28em" v-model="bUserTutor.skillDes"></el-input>
+			  </el-form-item>
+			 <!-- <el-form-item label="头像地址" prop="iconUrl">
+			    <el-input v-model="bUserTutor.iconUrl"></el-input>
+			  </el-form-item>
+			 <el-form-item label="导师宣传图" prop="idcardBackUrl">
+			    <el-input v-model="bUserTutor.idcardBackUrl"></el-input>
+			  </el-form-item> -->
+			 <!-- <el-form-item label="所属居委会" prop="committeeId">
+			    <el-input v-model="bUserTutor.committeeId"></el-input>
+			  </el-form-item> -->
+			  <el-form-item label="居委会" prop="committeeId">
+			    <el-select v-model="bUserTutor.committeeId" placeholder="请选择" style="width:100%" filterable>
+				    <el-option v-for="u in committees " :label="u.cname" :value="u.cid"></el-option>
+				 </el-select>
+			  </el-form-item>
+			 <el-form-item label="状态" prop="statusStr">
+			    <el-input v-model="bUserTutor.statusStr" disabled></el-input>
+			  </el-form-item>
+</el-form>
+</dev>	
+	<div th:include="include/footer_element::footer"></div>
+	<script th:src="@{/js/venue/usertutor/edit.js}"></script>
+</body>
+</html>
