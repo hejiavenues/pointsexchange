@@ -60,6 +60,30 @@ public class ApiBRecruitInfoController extends AbstractController {
         }
         return result;
 	}
+
+
+    /**
+     * 列表
+     * @param recruitId
+     * @return
+     */
+    @RequestMapping("/anQuestion")
+    public Map<String, Object> anQuestion(String  recruitId,String question) {
+        Map<String, Object> params = new HashMap<>();
+        Map<String, Object> result = new HashMap<>();
+
+//        params.put("pageNumber",page);
+//        params.put("pageSize",5);
+//        params.put("sortOrde","asc");
+//        params.put("activityId",pJobName);
+
+
+            result.put("code",0);
+            result.put("data","我暂时无法回答您的问题，请联系管理员！");
+            result.put("msg","查询成功！");
+
+        return result;
+    }
 		
 	/**
 	 * 新增
