@@ -33,9 +33,9 @@ var vm = new Vue({
                         vm.bBannerInfo.isuse = '启用';
                     };
 					if(data.bizztype == 1){
-                        vm.bBannerInfo.bizztype = '首页';
+                        vm.bBannerInfo.bizztype = '志愿者端';
                     }else if(data.bizztype == 2){
-                        vm.bBannerInfo.bizztype = '轮播';
+                        vm.bBannerInfo.bizztype = '企业端';
                     };
 		    	}
 			});

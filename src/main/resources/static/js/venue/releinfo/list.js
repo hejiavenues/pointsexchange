@@ -1,5 +1,5 @@
 /**
- * banner图表js
+ * 企业上下游关系信息表js
  */
 
 var vm = new Vue({
@@ -14,18 +14,11 @@ var vm = new Vue({
 		},
 		table:{//表格数据
 			  "col":[
-					/*{field : "bid", title : "主键", width : ""}, */
-					{field : "bannerDesc", title : "banner图描述", width : ""}, 
-					/*{field : "bannerImgUrl", title : "图片", width : "150px",align: 'center',
-						formatter: function(value,row,index){
-                    	return '<img style="height:100px;width:150px" src='+value+'>';
-                		}
-					}, */
-					{field : "bizztype", title : "类型", width : ""}, 
-					{field : "sortid", title : "排序(大值优先轮播)", width : ""}, 
-					{field : "isuse", title : "禁用启用", width : ""}, 
-					{field : "createTime", title : "创建时间", width : "145px"}, 
-					{field : "updateTime", title : "更新时间", width : "145px"}
+					{field : "title", title : "标题", width : "120px"}, 
+					{field : "content", title : "信息内容", width : ""}, 
+					/*{field : "iconUrl", title : "图片地址", width : ""}, 
+					{field : "createTime", title : "创建时间", width : ""}, 
+					{field : "updateTime", title : "更新时间", width : ""}*/
 			  ],
 			  "pagesizes":[1,10, 20, 30, 100],//size选择器
 			  "pagesize ":10,
@@ -56,34 +49,19 @@ var vm = new Vue({
 				this.param.pageSize=size;
 			}
 			zs_post({
-				url: '../../venuesbook/banner/list?_' + $.now(),
+				url: '../../venuesbook/releinfo/list?_' + $.now(),
 				param:th.param,
 				success:function(r){
 					console.log(r);
-					for(var i=0;i<r.rows.length;i++){
-						if(r.rows[i].isuse == 0){
-                        r.rows[i].isuse = '禁用';
-						}
-                    	else if(r.rows[i].isuse == 1){
-                        r.rows[i].isuse = '启用';
-                    	}
-						if(r.rows[i].bizztype == 1){
-                        r.rows[i].bizztype = '志愿者端';
-						}
-                    	else if(r.rows[i].bizztype == 2){
-                        r.rows[i].bizztype = '企业端';
-                    	}
-					}
-					
 					th.table.data=r.rows;
 					th.table.total=r.total;
 				}
-			});
+			})
 		},
 		save: function() {
 			dialogOpen({
-				title: '新增轮播图',
-				url: 'venue/banner/add.html?_' + $.now(),
+				title: '新增企业上下游关系信息表',
+				url: 'venue/releinfo/add.html?_' + $.now(),
 				width: '40%',
 				height: '80%',
 				success: function(iframeId){
@@ -97,12 +75,12 @@ var vm = new Vue({
 			var ck =[row];
 			if(checkedRow(ck)){
 				dialogOpen({
-					title: '编辑轮播图',
-					url: 'venue/banner/edit.html?_' + $.now(),
+					title: '编辑企业上下游关系信息表',
+					url: 'venue/releinfo/edit.html?_' + $.now(),
 					width: '40%',
-					height: '80%',
+					height: '40%',
 					success: function(iframeId){
-						top.frames[iframeId].vm.bBannerInfo.bid = ck[0].bid;
+						top.frames[iframeId].vm.bReleInfo.id = ck[0].id;
 						top.frames[iframeId].vm.setForm();
 					},
 					yes: function(iframeId){
@@ -115,10 +93,10 @@ var vm = new Vue({
 			var ck = [row], ids = [];	
 			if(checkedArray(ck)){
 				$.each(ck, function(idx, item){
-					ids[idx] = item.bid;
+					ids[idx] = item.id;
 				});
 				$.RemoveForm({
-					url: '../../venuesbook/banner/remove?_' + $.now(),
+					url: '../../venuesbook/releinfo/remove?_' + $.now(),
 			    	param: ids,
 			    	success: function(data) {
 			    		vm.load();
