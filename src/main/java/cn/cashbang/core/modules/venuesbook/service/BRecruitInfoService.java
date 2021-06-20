@@ -20,10 +20,11 @@ public interface BRecruitInfoService {
 	
 	Result saveBRecruitInfo(BRecruitInfoEntity bRecruitInfo);
 	
-	Result getBRecruitInfoById(Long id);
+	Result getBRecruitInfoById(String id);
 	
 	Result updateBRecruitInfo(BRecruitInfoEntity bRecruitInfo);
 	
 	Result batchRemove(String[] id);
-	
+
+	String anQuestion(String  recruitId,String question);
 }

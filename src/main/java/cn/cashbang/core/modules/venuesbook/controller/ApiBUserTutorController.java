@@ -61,7 +61,7 @@ public class ApiBUserTutorController extends AbstractController {
                 bUserTutor.setSkill(skill);
         bUserTutor.setSkillDes(skillDes);
                 bUserTutor.setIconUrl(iconUrl);
-        bUserTutor.setIdcardBackUrl(idcardBackUrl);
+        bUserTutor.setIdcardBackUrl("/picture/"+idcardBackUrl);
                 bUserTutor.setCommitteeId(committeeId);
         bUserTutor.setCreateTime(new Date());
 
@@ -74,7 +74,7 @@ public class ApiBUserTutorController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/getusertutor")
-	public Result getById(@RequestBody String userId) {
+	public Result getById(String userId) {
 		if(!StringUtils.isEmpty(userId)) {
             userId = userId.replace("\"", "");
 		}

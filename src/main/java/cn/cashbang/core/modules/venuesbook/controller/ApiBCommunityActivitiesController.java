@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -60,6 +61,10 @@ public class ApiBCommunityActivitiesController extends AbstractController {
         params.put("queryUid",queryUid);
         params.put("queryDate",queryDate);
 
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String nowDate = simpleDateFormat.format(new Date()) ;
+        params.put("nowDate",nowDate);
+
 //        params.put("queryComId",queryComId);
 //        params.put("queryActType",queryActType);
 //        params.put("queryCount",queryCount);
@@ -78,6 +83,50 @@ public class ApiBCommunityActivitiesController extends AbstractController {
         }
         return result;
 	}
+
+    /**
+     * 列表
+     * @param page
+     * @return
+     */
+    @RequestMapping("/listBefore")
+    public Map<String, Object> listBefore(int page,String queryAcName,String queryUid,
+                                    String queryDate) {
+        //return bCommunityActivitiesService.listBCommunityActivities(params);
+
+        Map<String, Object> params = new HashMap<>();
+        Map<String, Object> result = new HashMap<>();
+
+        params.put("pageNumber",page);
+        params.put("pageSize",5);
+        params.put("aStatus",1);  // 只有公开的活动才需要报名
+        params.put("sortOrde","asc");
+        params.put("queryAcName",queryAcName);
+        params.put("queryUid",queryUid);
+        params.put("queryDate",queryDate);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String nowDate = simpleDateFormat.format(new Date()) ;
+        params.put("beforeDate",nowDate);
+
+//        params.put("queryComId",queryComId);
+//        params.put("queryActType",queryActType);
+//        params.put("queryCount",queryCount);
+
+        Page<BCommunityActivitiesEntity> list = bCommunityActivitiesService.listBCommunityActivities(params);
+        if(list.getTotal()>0){
+            result.put("code",0);
+            result.put("rows",list.getRows());
+            result.put("page",page);
+            result.put("msg","查询成功！");
+        }
+        else{
+            result.put("code",-1);
+            result.put("rows",null);
+            result.put("msg","没有查询到数据！");
+        }
+        return result;
+    }
 		
 	/**
 	 * 新增

@@ -20,7 +20,7 @@ public interface BRecruitInfoManager {
 	
 	int saveBRecruitInfo(BRecruitInfoEntity bRecruitInfo);
 	
-	BRecruitInfoEntity getBRecruitInfoById(Long id);
+	BRecruitInfoEntity getBRecruitInfoById(String id);
 	
 	int updateBRecruitInfo(BRecruitInfoEntity bRecruitInfo);
 	

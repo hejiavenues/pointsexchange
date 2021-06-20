@@ -35,8 +35,14 @@
             <if test="queryDate != null and queryDate != ''">
                 and left(ba.activity_time,10) = #{queryDate}
             </if>
+            <if test="nowDate != null and nowDate != ''">
+                <![CDATA[ and left(ba.activity_time,10) >= #{nowDate}    ]]>
+            </if>
+            <if test="beforeDate != null and beforeDate != ''">
+                <![CDATA[ and left(ba.activity_time,10) < #{beforeDate} ]]>
+            </if>
 
-			</where>
+            </where>
 			
 		ORDER BY
 			ba.create_time DESC

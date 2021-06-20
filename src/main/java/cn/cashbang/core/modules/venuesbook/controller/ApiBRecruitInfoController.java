@@ -42,7 +42,7 @@ public class ApiBRecruitInfoController extends AbstractController {
         Map<String, Object> result = new HashMap<>();
 
         params.put("pageNumber",page);
-        params.put("pageSize",5);
+        params.put("pageSize",10);
         params.put("sortOrde","asc");
         params.put("activityId",pJobName);
 
@@ -72,15 +72,11 @@ public class ApiBRecruitInfoController extends AbstractController {
         Map<String, Object> params = new HashMap<>();
         Map<String, Object> result = new HashMap<>();
 
-//        params.put("pageNumber",page);
-//        params.put("pageSize",5);
-//        params.put("sortOrde","asc");
-//        params.put("activityId",pJobName);
+        String  bRecruitInfo = bRecruitInfoService.anQuestion(recruitId,question);
 
-
-            result.put("code",0);
-            result.put("data","我暂时无法回答您的问题，请联系管理员！");
-            result.put("msg","查询成功！");
+        result.put("code",0);
+        result.put("data",bRecruitInfo);
+        result.put("msg","查询成功！");
 
         return result;
     }
@@ -115,7 +111,7 @@ public class ApiBRecruitInfoController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result getById(@RequestBody Long id) {
+	public Result getById(String id) {
 		return bRecruitInfoService.getBRecruitInfoById(id);
 	}
 	

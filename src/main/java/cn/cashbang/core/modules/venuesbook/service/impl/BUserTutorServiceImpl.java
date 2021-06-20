@@ -50,6 +50,9 @@ public class BUserTutorServiceImpl implements BUserTutorService {
 	@Override
 	public Result getBUserTutorById(String id) {
 		BUserTutorEntity bUserTutor = bUserTutorManager.getBUserTutorById(id);
+		if(bUserTutor==null){
+            return CommonUtils.msg("");
+        }
 		return CommonUtils.msg(bUserTutor);
 	}
 

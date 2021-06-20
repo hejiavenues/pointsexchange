@@ -42,7 +42,7 @@ public class BRecruitInfoServiceImpl implements BRecruitInfoService {
 	}
 
 	@Override
-	public Result getBRecruitInfoById(Long id) {
+	public Result getBRecruitInfoById(String id) {
 		BRecruitInfoEntity bRecruitInfo = bRecruitInfoManager.getBRecruitInfoById(id);
 		return CommonUtils.msg(bRecruitInfo);
 	}
@@ -58,5 +58,39 @@ public class BRecruitInfoServiceImpl implements BRecruitInfoService {
 		int count = bRecruitInfoManager.batchRemove(id);
 		return CommonUtils.msg(id, count);
 	}
+
+
+    @Override
+    public String anQuestion(String  recruitId,String question){
+	   String answer ="我暂时无法回答您的问题，请联系管理员！";
+	   BRecruitInfoEntity bRecruitInfo = bRecruitInfoManager.getBRecruitInfoById(recruitId);
+
+        if(question.contains("你好")|| question.contains("hi")|| question.contains("在吗") ||question.contains("hello")){
+
+            answer = "您好，有什么可以帮您?";
+        }
+
+	   if(question.contains("电话")|| question.contains("手机")|| question.contains("联系") ){
+
+           answer = "您好，联系电话是："+  bRecruitInfo.getPhone();
+       }
+
+        if(question.contains("地址")|| question.contains("地方")|| question.contains("哪里") ){
+
+            answer = "您好，公司地址是："+  bRecruitInfo.getAddress();
+        }
+
+        if(question.contains("薪水")|| question.contains("待遇")|| question.contains("工资") ){
+
+            answer = "您好，该职位的薪资是："+  bRecruitInfo.getSalary()+"每月";
+        }
+
+        if(question.contains("名字")|| question.contains("公司叫什么")|| question.contains("哪个公司") ){
+
+            answer = "您好，我们的公司名字是"+  bRecruitInfo.getCompanyName();
+        }
+        
+	   return  answer;
+    }
 
 }

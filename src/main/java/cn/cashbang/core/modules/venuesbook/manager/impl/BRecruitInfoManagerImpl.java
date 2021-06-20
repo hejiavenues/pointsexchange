@@ -37,7 +37,7 @@ public class BRecruitInfoManagerImpl implements BRecruitInfoManager {
 	}
 
 	@Override
-	public BRecruitInfoEntity getBRecruitInfoById(Long id) {
+	public BRecruitInfoEntity getBRecruitInfoById(String id) {
 		BRecruitInfoEntity bRecruitInfo = bRecruitInfoMapper.getObjectById(id);
 		return bRecruitInfo;
 	}
