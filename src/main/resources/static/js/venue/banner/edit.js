@@ -50,9 +50,9 @@ var vm = new Vue({
                     }else if(vm.bBannerInfo.isuse == '启用'){
                         vm.bBannerInfo.isuse = 1;
                     }
-					 if(vm.bBannerInfo.bizztype == '首页'){
+					 if(vm.bBannerInfo.bizztype == '志愿者端'){
                         vm.bBannerInfo.bizztype = 1;
-                    }else if(vm.bBannerInfo.bizztype == '轮播'){
+                    }else if(vm.bBannerInfo.bizztype == '企业端'){
                         vm.bBannerInfo.bizztype = 2;
                     }
 				zs_postFormA(vm,{
