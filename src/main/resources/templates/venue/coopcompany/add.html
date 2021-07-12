@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="include/header_element::header('合作企业列表信息')"></head>
+<style>
+html,body
+{
+    margin: 0;
+    height: 100%;
+}
+</style>
+<body>
+  <dev id="zsvm"  style="height:100%;">
+<el-form :model="bCoopCompany" size=" small"  status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm"  style="overflow-y:auto;height:95%;
+padding-right:5%" >
+			 <el-form-item label="公司图标" prop="companyLogo">
+			    <el-input v-model="bCoopCompany.companyLogo"></el-input>
+			  </el-form-item>
+			 <el-form-item label="公司名字" prop="companyName">
+			    <el-input v-model="bCoopCompany.companyName"></el-input>
+			  </el-form-item>
+			 <el-form-item label="是否可用（1.可用 0.不可用）" prop="isuse">
+			    <el-input v-model="bCoopCompany.isuse"></el-input>
+			  </el-form-item>
+			 <el-form-item label="" prop="createTime">
+			    <el-input v-model="bCoopCompany.createTime"></el-input>
+			  </el-form-item>
+			 <el-form-item label="" prop="updateTime">
+			    <el-input v-model="bCoopCompany.updateTime"></el-input>
+			  </el-form-item>
+</el-form>
+</dev>	
+	<div th:include="include/footer_element::footer"></div>
+	<script th:src="@{/js/venue/coopcompany/add.js}"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="include/header_element::header('文章列表信息')"></head>
+<style>
+html,body
+{
+    margin: 0;
+    height: 100%;
+}
+</style>
+<body>
+  <dev id="zsvm"  style="height:100%;">
+<el-form :model="bNews" size=" small"  status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm"  style="overflow-y:auto;height:95%;
+padding-right:5%" >
+			 <el-form-item label="文章标题" prop="title">
+			    <el-input v-model="bNews.title"></el-input>
+			  </el-form-item>
+			 <el-form-item label="文章图片" prop="newsImg">
+			    <el-input v-model="bNews.newsImg"></el-input>
+			  </el-form-item>
+			 <el-form-item label="文章内容" prop="newsContent">
+			    <el-input v-model="bNews.newsContent"></el-input>
+			  </el-form-item>
+			 <el-form-item label="是否可用（1.可用 0.不可用）" prop="isuse">
+			    <el-input v-model="bNews.isuse"></el-input>
+			  </el-form-item>
+			 <el-form-item label="" prop="createTime">
+			    <el-input v-model="bNews.createTime"></el-input>
+			  </el-form-item>
+			 <el-form-item label="" prop="updateTime">
+			    <el-input v-model="bNews.updateTime"></el-input>
+			  </el-form-item>
+</el-form>
+</dev>	
+	<div th:include="include/footer_element::footer"></div>
+	<script th:src="@{/js/venue/bnews/edit.js}"></script>
+</body>
+</html>
