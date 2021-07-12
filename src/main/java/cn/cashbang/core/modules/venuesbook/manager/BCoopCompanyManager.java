@@ -20,10 +20,10 @@ public interface BCoopCompanyManager {
 	
 	int saveBCoopCompany(BCoopCompanyEntity bCoopCompany);
 	
-	BCoopCompanyEntity getBCoopCompanyById(Long id);
+	BCoopCompanyEntity getBCoopCompanyById(String id);
 	
 	int updateBCoopCompany(BCoopCompanyEntity bCoopCompany);
 	
-	int batchRemove(Long[] id);
+	int batchRemove(String[] id);
 	
 }

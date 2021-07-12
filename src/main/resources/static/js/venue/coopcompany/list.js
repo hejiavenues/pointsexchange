@@ -14,12 +14,8 @@ var vm = new Vue({
 		},
 		table:{//表格数据
 			  "col":[
-										{field : "cid", title : "主键", width : ""}, 
-					{field : "companyLogo", title : "公司图标", width : ""}, 
+					/*{field : "companyLogo", title : "公司图标", width : ""}, */
 					{field : "companyName", title : "公司名字", width : ""}, 
-					{field : "isuse", title : "是否可用（1.可用 0.不可用）", width : ""}, 
-					{field : "createTime", title : "", width : ""}, 
-					{field : "updateTime", title : "", width : ""}
 			  ],
 			  "pagesizes":[1,10, 20, 30, 100],//size选择器
 			  "pagesize ":10,
@@ -61,10 +57,10 @@ var vm = new Vue({
 		},
 		save: function() {
 			dialogOpen({
-				title: '新增合作企业列表信息',
+				title: '新增合作企业信息',
 				url: 'venue/coopcompany/add.html?_' + $.now(),
 				width: '40%',
-				height: '80%',
+				height: '60%',
 				success: function(iframeId){
 				},
 				yes : function(iframeId) {
@@ -76,10 +72,10 @@ var vm = new Vue({
 			var ck =[row];
 			if(checkedRow(ck)){
 				dialogOpen({
-					title: '编辑合作企业列表信息',
+					title: '编辑合作企业信息',
 					url: 'venue/coopcompany/edit.html?_' + $.now(),
 					width: '40%',
-					height: '80%',
+					height: '60%',
 					success: function(iframeId){
 						top.frames[iframeId].vm.bCoopCompany.cid = ck[0].cid;
 						top.frames[iframeId].vm.setForm();

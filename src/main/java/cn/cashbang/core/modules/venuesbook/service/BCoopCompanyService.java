@@ -2,9 +2,13 @@ package cn.cashbang.core.modules.venuesbook.service;
 
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.multipart.MultipartFile;
+
 import cn.cashbang.core.common.entity.Page;
 import cn.cashbang.core.common.entity.Result;
 import cn.cashbang.core.modules.venuesbook.entity.BCoopCompanyEntity;
+import cn.cashbang.core.modules.venuesbook.entity.BCoopCompanyEntityDto;
 
 /**
  * 合作企业列表信息
@@ -18,12 +22,12 @@ public interface BCoopCompanyService {
 
 	Page<BCoopCompanyEntity> listBCoopCompany(Map<String, Object> params);
 	
-	Result saveBCoopCompany(BCoopCompanyEntity bCoopCompany);
+	Result saveBCoopCompany(MultipartFile imgFile,BCoopCompanyEntity bCoopCompany);
 	
-	Result getBCoopCompanyById(Long id);
+	Result getBCoopCompanyById(String id);
 	
-	Result updateBCoopCompany(BCoopCompanyEntity bCoopCompany);
+	Result updateBCoopCompany(MultipartFile imgFile,BCoopCompanyEntityDto bCoopCompany);
 	
-	Result batchRemove(Long[] id);
+	Result batchRemove(String[] id);
 	
 }

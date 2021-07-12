@@ -22,7 +22,7 @@ body ,html{
      
 	   <el-form ref="form"  :inline="true" label-width="80px" size="mini"><!-- 搜索框 -->
 		 <el-form-item label="" >
-		        <el-input v-model="param.keyword" placeholder="请输入查询关键字" @keyup.enter.native="load(0,0)"></el-input>
+		        <el-input v-model="param.keyword" placeholder="请输入文章标题" @keyup.enter.native="load(0,0)"></el-input>
 		  </el-form-item>
 		  
 		 <el-form-item>
@@ -37,8 +37,7 @@ body ,html{
 	
 	<!-- table -->
     <el-table :data="table.data" border  style="width: 100%"   :height="$(window).height()*0.7" highlight-current-row size="small" @selection-change="selectCases" >
-       <el-table-column   type="index"  width="40"></el-table-column>
-      <el-table-column type="selection"  width="40"> </el-table-column> 
+       <el-table-column   type="index"  width="50" label="序号"></el-table-column>
        <!-- <el-table-column type="selection"  width="40"> </el-table-column> --> <!-- 选择框 -->
       
       <el-table-column  :label="col.title"      :width="col.width"  v-for="col in table.col"    >
@@ -54,15 +53,40 @@ body ,html{
 	       	   </div>
 	      </template>
        </el-table-column>
-       
-    <!--    <el-table-column   label="操作"  fixed="right"  width="200">
+       <el-table-column
+                prop="picture"
+                header-align="center"
+                align="center"
+                width="480px"
+                label="文章图片">
+            <template slot-scope="scope">
+                <el-popover
+                        placement="right"
+                        title=""
+                        trigger="hover">
+                    <img :src="scope.row.newsImg"/>
+                    <img slot="reference" :src="scope.row.newsImg" :alt="scope.row.newsImg" style="max-height: 33px;max-width: 130px">
+                </el-popover>
+            </template>
+        </el-table-column>
+        <el-table-column   label="创建时间" type="text" width="270px">
+            <template   slot-scope="scope" >
+                <div v-html="scope.row.createTime"></div>
+            </template>
+        </el-table-column>
+         <el-table-column   label="更新时间" type="text" width="270px">
+            <template   slot-scope="scope" >
+                <div v-html="scope.row.updateTime"></div>
+            </template>
+        </el-table-column>
+        <el-table-column   label="操作"  fixed="right"  width="200">
               <template scope="scope" >
                   <el-button :plain="true" v-if="true||hasPermission('venuesbook:bnews:edit')" type="success" size="mini" 
-                  icon="el-icon-edit" @click="edit(scope.row)" ></el-button>修改
+                  icon="el-icon-edit" @click="edit(scope.row)" >修改</el-button>
                   <el-button :plain="true" type="danger" size="mini" icon="el-icon-delete" @click="remove(scope.row)"
-                  v-if="true||hasPermission('venuesbook:bnews:remove')"  ></el-button>删除
+                  v-if="true||hasPermission('venuesbook:bnews:remove')"  >删除</el-button>
               </template>
-         </el-table-column> -->
+         </el-table-column>
     </el-table>
 	 <div class="block"> <!-- 页码 -->
     <el-pagination

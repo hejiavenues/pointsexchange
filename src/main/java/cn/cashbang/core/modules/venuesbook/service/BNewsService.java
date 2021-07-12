@@ -2,9 +2,12 @@ package cn.cashbang.core.modules.venuesbook.service;
 
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import cn.cashbang.core.common.entity.Page;
 import cn.cashbang.core.common.entity.Result;
 import cn.cashbang.core.modules.venuesbook.entity.BNewsEntity;
+import cn.cashbang.core.modules.venuesbook.entity.BNewsEntityDto;
 
 /**
  * 文章列表信息
@@ -18,12 +21,12 @@ public interface BNewsService {
 
 	Page<BNewsEntity> listBNews(Map<String, Object> params);
 	
-	Result saveBNews(BNewsEntity bNews);
+	Result saveBNews(MultipartFile imgFile, BNewsEntity bNews);
 	
-	Result getBNewsById(Long id);
+	Result getBNewsById(String id);
 	
-	Result updateBNews(BNewsEntity bNews);
+	Result updateBNews(MultipartFile imgFile, BNewsEntityDto bNews);
 	
-	Result batchRemove(Long[] id);
+	Result batchRemove(String[] id);
 	
 }

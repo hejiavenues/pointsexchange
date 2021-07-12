@@ -37,7 +37,7 @@ public class BCoopCompanyManagerImpl implements BCoopCompanyManager {
 	}
 
 	@Override
-	public BCoopCompanyEntity getBCoopCompanyById(Long id) {
+	public BCoopCompanyEntity getBCoopCompanyById(String id) {
 		BCoopCompanyEntity bCoopCompany = bCoopCompanyMapper.getObjectById(id);
 		return bCoopCompany;
 	}
@@ -48,7 +48,7 @@ public class BCoopCompanyManagerImpl implements BCoopCompanyManager {
 	}
 
 	@Override
-	public int batchRemove(Long[] id) {
+	public int batchRemove(String[] id) {
 		int count = bCoopCompanyMapper.batchRemove(id);
 		return count;
 	}

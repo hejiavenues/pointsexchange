@@ -6,12 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.alibaba.druid.util.StringUtils;
 
 import cn.cashbang.core.common.annotation.SysLog;
 import cn.cashbang.core.modules.sys.controller.AbstractController;
 import cn.cashbang.core.common.entity.Page;
 import cn.cashbang.core.common.entity.Result;
 import cn.cashbang.core.modules.venuesbook.entity.BNewsEntity;
+import cn.cashbang.core.modules.venuesbook.entity.BNewsEntityDto;
 import cn.cashbang.core.modules.venuesbook.service.BNewsService;
 
 /**
@@ -44,10 +48,16 @@ public class BNewsController extends AbstractController {
 	 * @param bNews
 	 * @return
 	 */
-	@SysLog("新增文章列表信息")
 	@RequestMapping("/save")
-	public Result save(@RequestBody BNewsEntity bNews) {
-		return bNewsService.saveBNews(bNews);
+	public Result save(MultipartFile imgFile, BNewsEntity bNews) {
+		Result resultEntity = new Result();
+		if(imgFile == null){
+			logger.error("新增banner配置信息，imgFile为空");
+			resultEntity = Result.error(100, "banner配置信息图片为空");
+			return resultEntity;
+		}
+		return bNewsService.saveBNews(imgFile,bNews);
+		
 	}
 	
 	/**
@@ -56,7 +66,10 @@ public class BNewsController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result getById(@RequestBody Long id) {
+	public Result getById(@RequestBody String id) {
+		if(!StringUtils.isEmpty(id)) {
+			id = id.replace("\"", "");
+		}
 		return bNewsService.getBNewsById(id);
 	}
 	
@@ -65,10 +78,9 @@ public class BNewsController extends AbstractController {
 	 * @param bNews
 	 * @return
 	 */
-	@SysLog("修改文章列表信息")
 	@RequestMapping("/update")
-	public Result update(@RequestBody BNewsEntity bNews) {
-		return bNewsService.updateBNews(bNews);
+	public Result update(@RequestBody MultipartFile imgFile, BNewsEntityDto bNews) {
+		return bNewsService.updateBNews(imgFile,bNews);
 	}
 	
 	/**
@@ -76,9 +88,8 @@ public class BNewsController extends AbstractController {
 	 * @param id
 	 * @return
 	 */
-	@SysLog("删除文章列表信息")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
+	public Result batchRemove(@RequestBody String[] id) {
 		return bNewsService.batchRemove(id);
 	}
 	

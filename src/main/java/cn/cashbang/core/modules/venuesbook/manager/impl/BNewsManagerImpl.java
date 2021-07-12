@@ -37,7 +37,7 @@ public class BNewsManagerImpl implements BNewsManager {
 	}
 
 	@Override
-	public BNewsEntity getBNewsById(Long id) {
+	public BNewsEntity getBNewsById(String id) {
 		BNewsEntity bNews = bNewsMapper.getObjectById(id);
 		return bNews;
 	}
@@ -48,7 +48,7 @@ public class BNewsManagerImpl implements BNewsManager {
 	}
 
 	@Override
-	public int batchRemove(Long[] id) {
+	public int batchRemove(String[] id) {
 		int count = bNewsMapper.batchRemove(id);
 		return count;
 	}

@@ -13,6 +13,11 @@
 			`update_time`
 		FROM
 			b_coop_company
+			<where>
+			<if test="keyword != null and keyword != ''">
+				and	`company_name` like concat('%',#{keyword},'%') 
+			</if>
+			</where>
 		ORDER BY
 			cid DESC
 	</select>

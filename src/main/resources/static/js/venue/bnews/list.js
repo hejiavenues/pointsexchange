@@ -14,13 +14,7 @@ var vm = new Vue({
 		},
 		table:{//表格数据
 			  "col":[
-										{field : "nid", title : "主键", width : ""}, 
-					{field : "title", title : "文章标题", width : ""}, 
-					{field : "newsImg", title : "文章图片", width : ""}, 
-					{field : "newsContent", title : "文章内容", width : ""}, 
-					{field : "isuse", title : "是否可用（1.可用 0.不可用）", width : ""}, 
-					{field : "createTime", title : "", width : ""}, 
-					{field : "updateTime", title : "", width : ""}
+					{field : "title", title : "文章标题", width : "380px"}, 
 			  ],
 			  "pagesizes":[1,10, 20, 30, 100],//size选择器
 			  "pagesize ":10,
@@ -62,10 +56,10 @@ var vm = new Vue({
 		},
 		save: function() {
 			dialogOpen({
-				title: '新增文章列表信息',
+				title: '新增文章信息',
 				url: 'venue/bnews/add.html?_' + $.now(),
 				width: '40%',
-				height: '80%',
+				height: '60%',
 				success: function(iframeId){
 				},
 				yes : function(iframeId) {
@@ -77,10 +71,10 @@ var vm = new Vue({
 			var ck =[row];
 			if(checkedRow(ck)){
 				dialogOpen({
-					title: '编辑文章列表信息',
+					title: '编辑文章信息',
 					url: 'venue/bnews/edit.html?_' + $.now(),
 					width: '40%',
-					height: '80%',
+					height: '60%',
 					success: function(iframeId){
 						top.frames[iframeId].vm.bNews.nid = ck[0].nid;
 						top.frames[iframeId].vm.setForm();

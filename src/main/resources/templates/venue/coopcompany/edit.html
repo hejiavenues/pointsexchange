@@ -12,24 +12,27 @@ html,body
   <dev id="zsvm"  style="height:100%;">
 <el-form :model="bCoopCompany" size=" small"  status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm"  style="overflow-y:auto;height:95%;
 padding-right:5%" >
-			 <el-form-item label="公司图标" prop="companyLogo">
-			    <el-input v-model="bCoopCompany.companyLogo"></el-input>
-			  </el-form-item>
+<br><br><br><br>
 			 <el-form-item label="公司名字" prop="companyName">
 			    <el-input v-model="bCoopCompany.companyName"></el-input>
 			  </el-form-item>
-			 <el-form-item label="是否可用（1.可用 0.不可用）" prop="isuse">
-			    <el-input v-model="bCoopCompany.isuse"></el-input>
-			  </el-form-item>
-			 <el-form-item label="" prop="createTime">
-			    <el-input v-model="bCoopCompany.createTime"></el-input>
-			  </el-form-item>
-			 <el-form-item label="" prop="updateTime">
-			    <el-input v-model="bCoopCompany.updateTime"></el-input>
-			  </el-form-item>
+			 <el-form-item label="公司图标："  prop="companyLogo">
+					<el-upload
+						class="avatar-uploader"
+						action="/common/upload.do"
+						:show-file-list="false"
+						:on-success="handleAvatarSuccess"
+						:before-upload="beforeAvatarUpload">
+						<img v-if="imageUrl" :src="imageUrl" class="avatar">
+					<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+					<div slot="tip" class="el-upload__tip">仅支持jpg、png格式的图片</div>
+					</el-upload>
+			</el-form-item>
 </el-form>
 </dev>	
 	<div th:include="include/footer_element::footer"></div>
 	<script th:src="@{/js/venue/coopcompany/edit.js}"></script>
+	<script th:src="@{/js/compress.js}"></script>
+	<link th:href="@{../../css/image-avatar.css}" rel="stylesheet"/>
 </body>
 </html>

@@ -6,12 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.alibaba.druid.util.StringUtils;
 
 import cn.cashbang.core.common.annotation.SysLog;
 import cn.cashbang.core.modules.sys.controller.AbstractController;
 import cn.cashbang.core.common.entity.Page;
 import cn.cashbang.core.common.entity.Result;
 import cn.cashbang.core.modules.venuesbook.entity.BCoopCompanyEntity;
+import cn.cashbang.core.modules.venuesbook.entity.BCoopCompanyEntityDto;
 import cn.cashbang.core.modules.venuesbook.service.BCoopCompanyService;
 
 /**
@@ -44,10 +48,15 @@ public class BCoopCompanyController extends AbstractController {
 	 * @param bCoopCompany
 	 * @return
 	 */
-	@SysLog("新增合作企业列表信息")
 	@RequestMapping("/save")
-	public Result save(@RequestBody BCoopCompanyEntity bCoopCompany) {
-		return bCoopCompanyService.saveBCoopCompany(bCoopCompany);
+	public Result save(MultipartFile imgFile, BCoopCompanyEntity bCoopCompany) {
+		Result resultEntity = new Result();
+		if(imgFile == null){
+			logger.error("新增banner配置信息，imgFile为空");
+			resultEntity = Result.error(100, "banner配置信息图片为空");
+			return resultEntity;
+		}
+		return bCoopCompanyService.saveBCoopCompany(imgFile,bCoopCompany);
 	}
 	
 	/**
@@ -56,7 +65,10 @@ public class BCoopCompanyController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping("/info")
-	public Result getById(@RequestBody Long id) {
+	public Result getById(@RequestBody String id) {
+		if(!StringUtils.isEmpty(id)) {
+			id = id.replace("\"", "");
+		}
 		return bCoopCompanyService.getBCoopCompanyById(id);
 	}
 	
@@ -65,10 +77,9 @@ public class BCoopCompanyController extends AbstractController {
 	 * @param bCoopCompany
 	 * @return
 	 */
-	@SysLog("修改合作企业列表信息")
 	@RequestMapping("/update")
-	public Result update(@RequestBody BCoopCompanyEntity bCoopCompany) {
-		return bCoopCompanyService.updateBCoopCompany(bCoopCompany);
+	public Result update(@RequestBody MultipartFile imgFile, BCoopCompanyEntityDto bCoopCompany) {
+		return bCoopCompanyService.updateBCoopCompany(imgFile,bCoopCompany);
 	}
 	
 	/**
@@ -78,7 +89,7 @@ public class BCoopCompanyController extends AbstractController {
 	 */
 	@SysLog("删除合作企业列表信息")
 	@RequestMapping("/remove")
-	public Result batchRemove(@RequestBody Long[] id) {
+	public Result batchRemove(@RequestBody String[] id) {
 		return bCoopCompanyService.batchRemove(id);
 	}
 	

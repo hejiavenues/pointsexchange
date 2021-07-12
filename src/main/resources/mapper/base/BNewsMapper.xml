@@ -14,6 +14,11 @@
 			`update_time`
 		FROM
 			b_news
+			<where>
+			<if test="keyword != null and keyword != ''">
+				and	`title` like concat('%',#{keyword},'%') 
+			</if>
+			</where>
 		ORDER BY
 			nid DESC
 	</select>

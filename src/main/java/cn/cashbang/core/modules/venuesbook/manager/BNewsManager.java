@@ -20,10 +20,10 @@ public interface BNewsManager {
 	
 	int saveBNews(BNewsEntity bNews);
 	
-	BNewsEntity getBNewsById(Long id);
+	BNewsEntity getBNewsById(String id);
 	
 	int updateBNews(BNewsEntity bNews);
 	
-	int batchRemove(Long[] id);
+	int batchRemove(String[] id);
 	
 }
